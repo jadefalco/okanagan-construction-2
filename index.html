@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Okanagan Inspired Construction | Luxury Custom Homes</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -32,11 +36,91 @@
     </script>
 
     <style>
-        /* Logo Drop Animation - Synchronized with hero text */
+        /* Smooth scrolling body */
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
+        }
+
+        /* Film Grain Overlay */
+        .grain-overlay {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9998;
+            animation: grain 8s steps(10) infinite;
+        }
+
+        @keyframes grain {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-5%, -10%); }
+            20% { transform: translate(-15%, 5%); }
+            30% { transform: translate(7%, -25%); }
+            40% { transform: translate(-5%, 25%); }
+            50% { transform: translate(-15%, 10%); }
+            60% { transform: translate(15%, 0%); }
+            70% { transform: translate(0%, 15%); }
+            80% { transform: translate(3%, 35%); }
+            90% { transform: translate(-10%, 10%); }
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 1px solid white;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease-out, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            background: transparent;
+        }
+
+        .custom-cursor.expanded {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(2px);
+            border-color: transparent;
+        }
+
+        .custom-cursor-dot {
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+        }
+
+        /* Logo Drop Animation */
         #logo-img {
             transform: translateY(-100px);
             opacity: 0;
-            transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease-out;
+            transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease-out, filter 0.4s ease;
+            filter: none;
         }
         
         #logo-img.loaded {
@@ -44,48 +128,124 @@
             opacity: 1;
         }
 
-        /* Hero Text Rise Animation - Same timing as logo */
-        .hero-animate {
-            opacity: 0;
-            transform: translateY(60px);
-            transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease-out;
+        #navbar.scrolled #logo-img {
+            filter: invert(100%);
         }
-        
-        .hero-animate.loaded {
+
+        /* Text Mask Reveal Animation */
+        .reveal-text {
+            overflow: hidden;
+            display: block;
+            line-height: 1.1;
+        }
+
+        .reveal-text-inner {
+            display: block;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease;
+        }
+
+        .reveal-text-inner.loaded {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Hero Content Animation */
+        .hero-content-item {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero-content-item.loaded {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Stagger delays for hero elements only (logo starts with first element) */
-        .hero-animate:nth-child(1) { transition-delay: 0s; }
-        .hero-animate:nth-child(2) { transition-delay: 0.15s; }
-        .hero-animate:nth-child(3) { transition-delay: 0.3s; }
-        .hero-animate:nth-child(4) { transition-delay: 0.45s; }
-
         /* Cinematic Zoom Animation */
-        .hero-zoom img {
-            transform: scale(1.1);
-            transition: transform 6s ease-out;
+        .hero-zoom {
+            transform: scale(1.15);
+            transition: transform 8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .hero-zoom.loaded img {
+        .hero-zoom.loaded {
             transform: scale(1);
         }
-        
-        /* Scroll Reveal Base States for other sections */
+
+        /* Parallax Images */
+        .parallax-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .parallax-img {
+            will-change: transform;
+            transform: scale(1.2);
+            transition: transform 0.1s linear;
+        }
+
+        /* Magnetic Button Effect */
+        .magnetic {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Improved Project Card Hover (Shutter Effect) */
+        .project-card {
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .project-card img {
+            transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+            filter: grayscale(20%);
+        }
+
+        .project-card:hover img {
+            transform: scale(1.08);
+            filter: grayscale(0%);
+        }
+
+        .project-overlay {
+            background: linear-gradient(to top, rgba(28, 43, 36, 0.9) 0%, rgba(28, 43, 36, 0.4) 50%, transparent 100%);
+            transform: translateY(100%);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .project-card:hover .project-overlay {
+            transform: translateY(0);
+        }
+
+        .project-card .view-btn {
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+        }
+
+        .project-card:hover .view-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Scroll Reveal Base States */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s ease-out;
+            transform: translateY(60px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
+        /* Stagger delays */
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+
         /* Menu Animation */
         .menu-overlay {
-            transition: opacity 0.4s ease, visibility 0.4s ease;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
         }
         
         .menu-overlay.hidden-menu {
@@ -102,8 +262,8 @@
 
         .menu-item {
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
         .menu-overlay.visible-menu .menu-item {
@@ -118,7 +278,7 @@
 
         /* Hamburger Animation */
         .hamburger span {
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
         .hamburger.active span:nth-child(1) {
@@ -127,10 +287,38 @@
         
         .hamburger.active span:nth-child(2) {
             opacity: 0;
+            transform: translateX(-10px);
         }
         
         .hamburger.active span:nth-child(3) {
             transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Navigation Background Blur */
+        #navbar.scrolled {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Texture Background */
+        .texture-soft {
+            position: relative;
+            background: linear-gradient(to bottom, #F5F3EF, #F2EFEA);
+        }
+
+        .texture-soft::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+            z-index: 0;
+        }
+
+        .texture-soft > * {
+            position: relative;
+            z-index: 1;
         }
 
         /* Custom Scrollbar */
@@ -144,11 +332,12 @@
         
         ::-webkit-scrollbar-thumb {
             background: #1C2B24;
+            border-radius: 4px;
         }
 
         /* Lightbox */
         .lightbox {
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
         .lightbox.hidden {
@@ -161,31 +350,44 @@
             pointer-events: all;
         }
 
-        /* Image Hover */
-        .project-card:hover .project-overlay {
-            opacity: 1;
-        }
-        
-        .project-card:hover img {
-            transform: scale(1.05);
-        }
-        
-        .project-card img {
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Responsive cursor hiding on mobile */
+        @media (pointer: coarse) {
+            .custom-cursor, .custom-cursor-dot {
+                display: none;
+            }
         }
 
-        /* Logo Color Transition - includes transform transition */
-        #logo-img {
-            transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease-out, filter 0.4s ease;
-            filter: none;
+        /* Button hover enhancement */
+        .btn-luxury {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        #navbar.scrolled #logo-img {
-            filter: invert(100%);
+        
+        .btn-luxury::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+        
+        .btn-luxury:hover::before {
+            left: 100%;
         }
     </style>
 </head>
 <body class="font-sans text-charcoal bg-white antialiased selection:bg-forest selection:text-white">
+
+    <!-- Film Grain Overlay -->
+    <div class="grain-overlay"></div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="custom-cursor-dot" id="cursor-dot"></div>
 
     <!-- Navigation -->
     <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out bg-transparent">
@@ -199,7 +401,7 @@
             </a>
             
             <!-- Hamburger Menu Button -->
-            <button id="menu-toggle" class="hamburger relative w-8 h-6 flex flex-col justify-between items-end z-50 group">
+            <button id="menu-toggle" class="hamburger magnetic relative w-8 h-6 flex flex-col justify-between items-end z-50 group cursor-pointer">
                 <span class="block w-full h-0.5 bg-white transition-colors duration-300" id="hamburger-line"></span>
                 <span class="block w-6 h-0.5 bg-white transition-colors duration-300 group-hover:w-full" id="hamburger-line-2"></span>
                 <span class="block w-full h-0.5 bg-white transition-colors duration-300" id="hamburger-line-3"></span>
@@ -212,16 +414,16 @@
         <nav class="text-center">
             <ul class="space-y-8">
                 <li class="menu-item">
-                    <a href="#home" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Home</a>
+                    <a href="#home" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300 magnetic" onclick="closeMenu()">Home</a>
                 </li>
                 <li class="menu-item">
-                    <a href="#about" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">About</a>
+                    <a href="about.html" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300 magnetic" onclick="closeMenu()">About</a>
                 </li>
                 <li class="menu-item">
-                    <a href="#projects" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Projects</a>
+                    <a href="#projects" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300 magnetic" onclick="closeMenu()">Projects</a>
                 </li>
                 <li class="menu-item">
-                    <a href="#contact" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Contact</a>
+                    <a href="#contact" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300 magnetic" onclick="closeMenu()">Contact</a>
                 </li>
             </ul>
         </nav>
@@ -237,332 +439,347 @@
                      class="w-full h-full object-cover">
             </div>
             <!-- Dark Overlay -->
-            <div class="absolute inset-0 bg-black/40"></div>
+            <div class="absolute inset-0 bg-black/30"></div>
         </div>
 
         <!-- Hero Content -->
         <div class="relative z-10 h-full flex flex-col justify-center items-center text-center px-6">
-            <p class="hero-animate text-gold text-sm lg:text-base tracking-ultra-wide uppercase mb-6 font-medium">Okanagan Inspired Construction</p>
-            <h1 class="hero-animate font-serif text-5xl lg:text-7xl xl:text-8xl text-white font-medium leading-tight mb-6 max-w-5xl">
-                Built for Generations
-            </h1>
-            <p class="hero-animate text-white/90 text-lg lg:text-xl font-light max-w-2xl mb-12 leading-relaxed">
-                Custom homes and renovations in the Okanagan Valley. Uncompromising quality, thoughtful design.
+            <p class="hero-content-item text-gold text-xs lg:text-sm tracking-[0.3em] uppercase mb-8 font-medium" style="transition-delay: 0.2s;">
+                Okanagan Inspired Construction
             </p>
-            <a href="#projects" class="hero-animate inline-block px-10 py-4 border border-white text-white hover:bg-white hover:text-forest transition-all duration-300 text-sm tracking-widest uppercase">
+            
+            <h1 class="font-serif text-5xl lg:text-7xl xl:text-8xl text-white font-medium leading-[1.1] mb-8 max-w-5xl">
+                <span class="reveal-text">
+                    <span class="reveal-text-inner">Built for</span>
+                </span>
+                <br>
+                <span class="reveal-text">
+                    <span class="reveal-text-inner">Generations</span>
+                </span>
+            </h1>
+            
+            <p class="hero-content-item text-white/80 text-lg lg:text-xl font-light max-w-2xl mb-12 leading-relaxed" style="transition-delay: 0.6s;">
+                Okanagan Luxury Homes<br>
+                Crafted with Precision. Built Without Compromise.
+            </p>
+            
+            <a href="#projects" class="hero-content-item magnetic btn-luxury inline-block px-10 py-4 border border-white text-white hover:bg-white hover:text-forest transition-all duration-500 text-xs tracking-[0.2em] uppercase" style="transition-delay: 0.8s;">
                 View Our Work
             </a>
         </div>
 
         <!-- Scroll Indicator -->
-        <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce opacity-0 transition-opacity duration-1000 delay-1000" id="scroll-indicator">
             <svg class="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
             </svg>
         </div>
     </section>
 
-    <!-- Introduction -->
-    <section class="py-24 lg:py-32 bg-white">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <p class="reveal text-gold text-sm tracking-ultra-wide uppercase mb-8 font-medium">Since 2005</p>
-            <h2 class="reveal font-serif text-3xl lg:text-5xl text-forest font-medium leading-tight mb-8">
-                Crafting exceptional living spaces in British Columbia's most sought-after region.
-            </h2>
-            <p class="reveal text-charcoal/80 text-lg leading-relaxed font-light">
-                We are a boutique construction firm specializing in custom residential builds and high-end renovations. 
-                From lakeside estates to modern mountain retreats, we bring architectural vision to life with 
-                meticulous attention to detail and an unwavering commitment to craftsmanship.
-            </p>
-        </div>
-    </section>
-
     <!-- Featured Projects Preview -->
-    <section class="py-24 bg-cream">
+    <section class="py-32 lg:py-40 texture-soft">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col lg:flex-row justify-between items-end mb-16 reveal">
+            <div class="flex flex-col lg:flex-row justify-between items-end mb-20 reveal">
                 <div>
-                    <p class="text-gold text-sm tracking-ultra-wide uppercase mb-4 font-medium">Portfolio</p>
-                    <h2 class="font-serif text-4xl lg:text-5xl text-forest font-medium">Featured Projects</h2>
+                    <p class="text-gold text-xs tracking-[0.3em] uppercase mb-4 font-medium">Portfolio</p>
+                    <h2 class="font-serif text-4xl lg:text-6xl text-forest font-medium leading-tight">Featured Projects</h2>
                 </div>
-                <a href="#projects" class="mt-6 lg:mt-0 text-forest border-b border-forest pb-1 hover:text-gold hover:border-gold transition-colors duration-300 text-sm tracking-widest uppercase">
+                <a href="#projects" class="mt-6 lg:mt-0 text-forest border-b border-forest pb-1 hover:text-gold hover:border-gold transition-colors duration-500 text-xs tracking-[0.2em] uppercase magnetic">
                     View All Projects
                 </a>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Project 1 -->
-                <div class="reveal project-card group cursor-pointer overflow-hidden" onclick="openLightbox(0)">
-                    <div class="relative aspect-[4/3] overflow-hidden">
+                <div class="reveal stagger-1 project-card group" onclick="openLightbox(0)">
+                    <div class="parallax-container relative aspect-[4/3] overflow-hidden">
                         <img src="images/Okanagan-Ranch.jpg" 
                              alt="Okanagan Ranch Home" 
-                             class="w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 bg-forest/80 opacity-0 transition-opacity duration-300 flex items-center justify-center">
-                            <span class="text-white text-sm tracking-widest uppercase border border-white px-6 py-3">View Project</span>
+                             class="parallax-img w-full h-full object-cover">
+                        <div class="project-overlay absolute inset-0 flex flex-col items-center justify-end pb-12">
+                            <span class="view-btn text-white text-xs tracking-[0.2em] uppercase border border-white/50 px-8 py-3 backdrop-blur-sm hover:bg-white hover:text-forest transition-all duration-300">
+                                View Project
+                            </span>
                         </div>
                     </div>
-                    <div class="mt-6">
+                    <div class="mt-8">
                         <h3 class="font-serif text-2xl text-forest mb-2">Okanagan Ranch Home</h3>
-                        <p class="text-charcoal/60 font-light">New Construction • Lake View</p>
+                        <p class="text-charcoal/60 font-light text-sm tracking-wide">New Construction • Lake Country</p>
                     </div>
                 </div>
 
                 <!-- Project 2 -->
-                <div class="reveal project-card group cursor-pointer overflow-hidden lg:mt-24" onclick="openLightbox(1)">
-                    <div class="relative aspect-[4/3] overflow-hidden">
+                <div class="reveal stagger-2 project-card group lg:mt-32" onclick="openLightbox(1)">
+                    <div class="parallax-container relative aspect-[4/3] overflow-hidden">
                         <img src="images/outdoor-deck.jpg" 
                              alt="Scandinavian Lake House" 
-                             class="w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 bg-forest/80 opacity-0 transition-opacity duration-300 flex items-center justify-center">
-                            <span class="text-white text-sm tracking-widest uppercase border border-white px-6 py-3">View Project</span>
+                             class="parallax-img w-full h-full object-cover">
+                        <div class="project-overlay absolute inset-0 flex flex-col items-center justify-end pb-12">
+                            <span class="view-btn text-white text-xs tracking-[0.2em] uppercase border border-white/50 px-8 py-3 backdrop-blur-sm hover:bg-white hover:text-forest transition-all duration-300">
+                                View Project
+                            </span>
                         </div>
                     </div>
-                    <div class="mt-6">
+                    <div class="mt-8">
                         <h3 class="font-serif text-2xl text-forest mb-2">The Lakeside Retreat</h3>
-                        <p class="text-charcoal/60 font-light">Full Renovation • Scandinavian Design</p>
+                        <p class="text-charcoal/60 font-light text-sm tracking-wide">Full Renovation • Lake View</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="py-32 lg:py-40 bg-white">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <p class="reveal text-gold text-xs tracking-[0.3em] uppercase mb-8 font-medium">Since 2005</p>
+            <h2 class="reveal stagger-1 font-serif text-3xl lg:text-5xl xl:text-6xl text-forest font-medium leading-tight mb-8">
+                Crafting exceptional living spaces in British Columbia's most sought-after region.
+            </h2>
+            <p class="reveal stagger-2 text-charcoal/60 text-lg leading-relaxed font-light max-w-2xl mx-auto">
+                Custom homes. Thoughtfully built.
+            </p>
+        </div>
+    </section>
+
+    <!-- Projects Gallery -->
+    <section id="projects" class="py-32 lg:py-40 texture-soft">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-20 reveal">
+                <p class="text-gold text-xs tracking-[0.3em] uppercase mb-6 font-medium">Our Work</p>
+                <h2 class="font-serif text-4xl lg:text-6xl text-forest font-medium mb-6 leading-tight">Selected Projects</h2>
+                <p class="text-charcoal/60 font-light text-lg leading-relaxed">
+                    A curated selection of custom homes and renovations showcasing our commitment to architectural excellence and craftsmanship.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Gallery Item 1 -->
+                <div class="reveal project-card group" onclick="openLightbox(0)">
+                    <div class="parallax-container relative aspect-[4/5] overflow-hidden mb-6">
+                        <img src="images/Okanagan-Ranch.jpg" 
+                             alt="Okanagan Ranch Home" 
+                             class="parallax-img w-full h-full object-cover">
+                        <div class="project-overlay absolute inset-0 flex items-center justify-center">
+                            <span class="view-btn text-white text-xs tracking-[0.2em] uppercase border border-white/50 px-6 py-3 backdrop-blur-sm">View</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-xl text-forest mb-1">Okanagan Ranch Home</h3>
+                    <p class="text-sm text-charcoal/50 font-light tracking-wide">Custom Build • 2023</p>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="reveal stagger-1 project-card group" onclick="openLightbox(1)">
+                    <div class="parallax-container relative aspect-[4/5] overflow-hidden mb-6">
+                        <img src="images/outdoor-deck.jpg" 
+                             alt="Lakeside Retreat" 
+                             class="parallax-img w-full h-full object-cover">
+                        <div class="project-overlay absolute inset-0 flex items-center justify-center">
+                            <span class="view-btn text-white text-xs tracking-[0.2em] uppercase border border-white/50 px-6 py-3 backdrop-blur-sm">View</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-xl text-forest mb-1">Lakeside Retreat</h3>
+                    <p class="text-sm text-charcoal/50 font-light tracking-wide">Renovation • 2022</p>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="reveal stagger-2 project-card group" onclick="openLightbox(2)">
+                    <div class="parallax-container relative aspect-[4/5] overflow-hidden mb-6">
+                        <img src="images/westside.jpg" 
+                             alt="Minimalist Villa" 
+                             class="parallax-img w-full h-full object-cover">
+                        <div class="project-overlay absolute inset-0 flex items-center justify-center">
+                            <span class="view-btn text-white text-xs tracking-[0.2em] uppercase border border-white/50 px-6 py-3 backdrop-blur-sm">View</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-xl text-forest mb-1">Westside Contemporary</h3>
+                    <p class="text-sm text-charcoal/50 font-light tracking-wide">Custom Build • 2023</p>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="reveal project-card group" onclick="openLightbox(3)">
+                    <div class="parallax-container relative aspect-[4/5] overflow-hidden mb-6">
+                        <img src="images/wine_country.jpg" 
+                             alt="Modern Exterior" 
+                             class="parallax-img w-full h-full object-cover">
+                        <div class="project-overlay absolute inset-0 flex items-center justify-center">
+                            <span class="view-btn text-white text-xs tracking-[0.2em] uppercase border border-white/50 px-6 py-3 backdrop-blur-sm">View</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-xl text-forest mb-1">Lakeview Estate</h3>
+                    <p class="text-sm text-charcoal/50 font-light tracking-wide">Renovation • 2021</p>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="reveal stagger-1 project-card group" onclick="openLightbox(4)">
+                    <div class="parallax-container relative aspect-[4/5] overflow-hidden mb-6">
+                        <img src="images/log-home.jpg" 
+                             alt="Scandinavian Facade" 
+                             class="parallax-img w-full h-full object-cover">
+                        <div class="project-overlay absolute inset-0 flex items-center justify-center">
+                            <span class="view-btn text-white text-xs tracking-[0.2em] uppercase border border-white/50 px-6 py-3 backdrop-blur-sm">View</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-xl text-forest mb-1">Wine Country Retreat</h3>
+                    <p class="text-sm text-charcoal/50 font-light tracking-wide">Custom Build • 2022</p>
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div class="reveal stagger-2 project-card group" onclick="openLightbox(5)">
+                    <div class="parallax-container relative aspect-[4/5] overflow-hidden mb-6">
+                        <img src="images/penticton-home.jpg" 
+                             alt="Modern Architecture" 
+                             class="parallax-img w-full h-full object-cover">
+                        <div class="project-overlay absolute inset-0 flex items-center justify-center">
+                            <span class="view-btn text-white text-xs tracking-[0.2em] uppercase border border-white/50 px-6 py-3 backdrop-blur-sm">View</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-xl text-forest mb-1">Penticton Project</h3>
+                    <p class="text-sm text-charcoal/50 font-light tracking-wide">Addition • 2023</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-24 lg:py-32 bg-white">
+    <section id="about" class="py-32 lg:py-40 bg-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                
+                <!-- Text -->
                 <div class="reveal">
-                    <p class="text-gold text-sm tracking-ultra-wide uppercase mb-6 font-medium">About Us</p>
-                    <h2 class="font-serif text-4xl lg:text-5xl text-forest font-medium leading-tight mb-8">
-                        Building with intention in the heart of wine country.
+                    <p class="text-gold text-xs tracking-[0.3em] uppercase mb-6 font-medium">About Us</p>
+                    
+                    <h2 class="font-serif text-4xl lg:text-5xl xl:text-6xl text-forest font-medium leading-tight mb-10">
+                        Built on experience.<br>Driven by craftsmanship.
                     </h2>
-                    <div class="space-y-6 text-charcoal/80 font-light leading-relaxed">
+
+                    <div class="space-y-6 text-charcoal/70 font-light leading-relaxed text-lg">
                         <p>
-                            Based in the Okanagan Valley, we understand the unique character of this region. 
-                            From the arid landscapes of Osoyoos to the forested hills above Kelowna, we design 
-                            and build homes that respond to their environment.
+                            Based in the Okanagan Valley, we build custom homes that reflect both the landscape and the people who live in them.
                         </p>
+
                         <p>
-                            Our process is collaborative and transparent. We work closely with architects, 
-                            designers, and homeowners to ensure every detail aligns with the original vision. 
-                            No shortcuts. No surprises. Just exceptional craftsmanship delivered with integrity.
-                        </p>
-                        <p>
-                            As proud members of the Canadian Home Builders' Association, we adhere to the 
-                            highest standards of construction excellence and ethical business practices.
+                            Our approach is simple — clear communication, careful planning, and uncompromising attention to detail from start to finish.
                         </p>
                     </div>
-                    
-                    <div class="mt-12 pt-12 border-t border-gray-200 grid grid-cols-3 gap-8">
-                        <div>
-                            <p class="font-serif text-4xl text-forest mb-2">18+</p>
-                            <p class="text-sm text-charcoal/60 tracking-wide">Years Experience</p>
+
+                    <!-- CTA -->
+                    <div class="mt-12">
+                        <a href="about.html" 
+                           class="magnetic btn-luxury inline-block px-10 py-4 border border-forest text-forest hover:bg-forest hover:text-white transition-all duration-500 text-xs tracking-[0.2em] uppercase">
+                            Meet the Team
+                        </a>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="mt-16 pt-12 border-t border-gray-200 grid grid-cols-3 gap-8">
+                        <div class="reveal stagger-1">
+                            <p class="font-serif text-5xl text-forest mb-2">18+</p>
+                            <p class="text-sm text-charcoal/50 tracking-wide font-light">Years Experience</p>
                         </div>
-                        <div>
-                            <p class="font-serif text-4xl text-forest mb-2">150+</p>
-                            <p class="text-sm text-charcoal/60 tracking-wide">Projects Completed</p>
+                        <div class="reveal stagger-2">
+                            <p class="font-serif text-5xl text-forest mb-2">150+</p>
+                            <p class="text-sm text-charcoal/50 tracking-wide font-light">Projects Completed</p>
                         </div>
-                        <div>
-                            <p class="font-serif text-4xl text-forest mb-2">100%</p>
-                            <p class="text-sm text-charcoal/60 tracking-wide">Client Satisfaction</p>
+                        <div class="reveal stagger-3">
+                            <p class="font-serif text-5xl text-forest mb-2">100%</p>
+                            <p class="text-sm text-charcoal/50 tracking-wide font-light">Client Satisfaction</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="reveal relative">
-                    <div class="aspect-[3/4] overflow-hidden">
+                <!-- Image -->
+                <div class="reveal relative lg:pl-12">
+                    <div class="parallax-container aspect-[3/4] overflow-hidden">
                         <img src="images/log-home.jpg" 
-                             alt="Modern Architecture" 
-                             class="w-full h-full object-cover">
+                             alt="Custom Home Okanagan" 
+                             class="parallax-img w-full h-full object-cover">
                     </div>
-                    <div class="absolute -bottom-8 -left-8 w-48 h-48 bg-forest p-8 flex items-center justify-center hidden lg:flex">
-                        <p class="text-white font-serif text-xl text-center leading-relaxed">"Quality is never an accident"</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Projects Gallery -->
-    <section id="projects" class="py-24 lg:py-32 bg-cream">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-20 reveal">
-                <p class="text-gold text-sm tracking-ultra-wide uppercase mb-6 font-medium">Our Work</p>
-                <h2 class="font-serif text-4xl lg:text-5xl text-forest font-medium mb-6">Selected Projects</h2>
-                <p class="text-charcoal/70 font-light text-lg">
-                    A curated selection of custom homes and renovations showcasing our commitment to architectural excellence and craftsmanship.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Gallery Item 1 -->
-                <div class="reveal project-card cursor-pointer overflow-hidden" onclick="openLightbox(0)">
-                    <div class="relative aspect-square overflow-hidden">
-                        <img src="images/Okanagan-Ranch.jpg" 
-                             alt="Okanagan Ranch Home" 
-                             class="w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 bg-forest/80 opacity-0 transition-opacity duration-300 flex items-center justify-center">
-                            <span class="text-white text-sm tracking-widest uppercase">View</span>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="font-serif text-xl text-forest">Okanagan Ranch Home</h3>
-                        <p class="text-sm text-charcoal/60 mt-1">Custom Build • 2023</p>
+                    <div class="absolute -bottom-8 -left-8 w-56 h-56 bg-forest p-10 flex items-center justify-center hidden lg:flex reveal stagger-2">
+                        <p class="text-white font-serif text-2xl text-center leading-relaxed">
+                            Built to last.
+                        </p>
                     </div>
                 </div>
 
-                <!-- Gallery Item 2 -->
-                <div class="reveal project-card cursor-pointer overflow-hidden" style="transition-delay: 0.1s" onclick="openLightbox(1)">
-                    <div class="relative aspect-square overflow-hidden">
-                        <img src="images/outdoor-deck.jpg" 
-                             alt="Lakeside Retreat" 
-                             class="w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 bg-forest/80 opacity-0 transition-opacity duration-300 flex items-center justify-center">
-                            <span class="text-white text-sm tracking-widest uppercase">View</span>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="font-serif text-xl text-forest">Lakeside Retreat</h3>
-                        <p class="text-sm text-charcoal/60 mt-1">Renovation • 2022</p>
-                    </div>
-                </div>
-
-                <!-- Gallery Item 3 -->
-                <div class="reveal project-card cursor-pointer overflow-hidden" style="transition-delay: 0.2s" onclick="openLightbox(2)">
-                    <div class="relative aspect-square overflow-hidden">
-                        <img src="images/westside.jpg" 
-                             alt="Minimalist Villa" 
-                             class="w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 bg-forest/80 opacity-0 transition-opacity duration-300 flex items-center justify-center">
-                            <span class="text-white text-sm tracking-widest uppercase">View</span>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="font-serif text-xl text-forest">Westside Contemporary</h3>
-                        <p class="text-sm text-charcoal/60 mt-1">Custom Build • 2023</p>
-                    </div>
-                </div>
-
-                <!-- Gallery Item 4 -->
-                <div class="reveal project-card cursor-pointer overflow-hidden" onclick="openLightbox(3)">
-                    <div class="relative aspect-square overflow-hidden">
-                        <img src="https://kimi-web-img.moonshot.cn/img/keithconstruction.ca/64f2d0bc033f6de82c0ee2c5c11577da35d9440b.jpg" 
-                             alt="Modern Exterior" 
-                             class="w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 bg-forest/80 opacity-0 transition-opacity duration-300 flex items-center justify-center">
-                            <span class="text-white text-sm tracking-widest uppercase">View</span>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="font-serif text-xl text-forest">Lakeview Estate</h3>
-                        <p class="text-sm text-charcoal/60 mt-1">Renovation • 2021</p>
-                    </div>
-                </div>
-
-                <!-- Gallery Item 5 -->
-                <div class="reveal project-card cursor-pointer overflow-hidden" style="transition-delay: 0.1s" onclick="openLightbox(4)">
-                    <div class="relative aspect-square overflow-hidden">
-                        <img src="images/wine_country.jpg" 
-                             alt="Scandinavian Facade" 
-                             class="w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 bg-forest/80 opacity-0 transition-opacity duration-300 flex items-center justify-center">
-                            <span class="text-white text-sm tracking-widest uppercase">View</span>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="font-serif text-xl text-forest">Wine Country Retreat</h3>
-                        <p class="text-sm text-charcoal/60 mt-1">Custom Build • 2022</p>
-                    </div>
-                </div>
-
-                <!-- Gallery Item 6 -->
-                <div class="reveal project-card cursor-pointer overflow-hidden" style="transition-delay: 0.2s" onclick="openLightbox(5)">
-                    <div class="relative aspect-square overflow-hidden">
-                        <img src="images/penticton-home.jpg" 
-                             alt="Modern Architecture" 
-                             class="w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 bg-forest/80 opacity-0 transition-opacity duration-300 flex items-center justify-center">
-                            <span class="text-white text-sm tracking-widest uppercase">View</span>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="font-serif text-xl text-forest">Penticton Project</h3>
-                        <p class="text-sm text-charcoal/60 mt-1">Addition • 2023</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-24 lg:py-32 bg-forest text-white">
-        <div class="max-w-7xl mx-auto px-6">
+    <section id="contact" class="py-32 lg:py-40 bg-forest text-white relative overflow-hidden">
+        <!-- Subtle background texture -->
+        <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
                 <div class="reveal">
-                    <p class="text-gold text-sm tracking-ultra-wide uppercase mb-6 font-medium">Start Your Project</p>
-                    <h2 class="font-serif text-4xl lg:text-5xl font-medium leading-tight mb-8">
+                    <p class="text-gold text-xs tracking-[0.3em] uppercase mb-6 font-medium">Start Your Project</p>
+                    <h2 class="font-serif text-4xl lg:text-5xl xl:text-6xl font-medium leading-tight mb-10">
                         Let's discuss your vision.
                     </h2>
-                    <p class="text-white/70 font-light text-lg mb-12 leading-relaxed">
-                        Every great build starts with a conversation. Whether you have detailed plans or just a rough idea, 
-                        we'd love to hear about your project.
+                    <p class="text-white/60 font-light text-lg mb-12 leading-relaxed max-w-md">
+                        Every great build starts with a conversation. Whether you have detailed plans or just a rough idea, we'd love to hear about your project.
                     </p>
                     
-                    <div class="space-y-6">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 border border-white/20 flex items-center justify-center">
+                    <div class="space-y-8">
+                        <div class="flex items-center space-x-6 group cursor-pointer magnetic">
+                            <div class="w-14 h-14 border border-white/20 flex items-center justify-center group-hover:border-gold transition-colors duration-300">
                                 <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-white/50 text-sm mb-1">Phone</p>
-                                <a href="tel:250-864-5774" class="text-xl hover:text-gold transition-colors duration-300">250-864-5774</a>
+                                <p class="text-white/40 text-xs mb-1 uppercase tracking-wider">Phone</p>
+                                <a href="tel:250-864-5774" class="text-xl hover:text-gold transition-colors duration-300 font-light">250-864-5774</a>
                             </div>
                         </div>
                         
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 border border-white/20 flex items-center justify-center">
+                        <div class="flex items-center space-x-6 group cursor-pointer magnetic">
+                            <div class="w-14 h-14 border border-white/20 flex items-center justify-center group-hover:border-gold transition-colors duration-300">
                                 <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-white/50 text-sm mb-1">Email</p>
-                                <a href="mailto:info@okanaganconstruction.ca" class="text-xl hover:text-gold transition-colors duration-300">info@okanaganconstruction.ca</a>
+                                <p class="text-white/40 text-xs mb-1 uppercase tracking-wider">Email</p>
+                                <a href="mailto:info@okanaganconstruction.ca" class="text-xl hover:text-gold transition-colors duration-300 font-light">info@okanaganconstruction.ca</a>
                             </div>
                         </div>
                         
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 border border-white/20 flex items-center justify-center">
+                        <div class="flex items-center space-x-6 group cursor-pointer magnetic">
+                            <div class="w-14 h-14 border border-white/20 flex items-center justify-center group-hover:border-gold transition-colors duration-300">
                                 <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-white/50 text-sm mb-1">Location</p>
-                                <p class="text-xl">Kelowna, BC • Serving the Okanagan</p>
+                                <p class="text-white/40 text-xs mb-1 uppercase tracking-wider">Location</p>
+                                <p class="text-xl font-light">Kelowna, BC • Serving the Okanagan</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="reveal" style="transition-delay: 0.2s">
+                <div class="reveal stagger-1">
                     <form class="space-y-6" onsubmit="event.preventDefault(); alert('Thank you for your message. We will be in touch shortly.');">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-white/50 text-sm mb-2 uppercase tracking-wide">Name</label>
-                                <input type="text" required class="w-full bg-white/5 border border-white/10 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-gold transition-colors duration-300" placeholder="Your name">
+                                <label class="block text-white/40 text-xs mb-3 uppercase tracking-wider">Name</label>
+                                <input type="text" required class="w-full bg-white/5 border border-white/10 px-5 py-4 text-white placeholder-white/20 focus:outline-none focus:border-gold transition-colors duration-300 font-light" placeholder="Your name">
                             </div>
                             <div>
-                                <label class="block text-white/50 text-sm mb-2 uppercase tracking-wide">Email</label>
-                                <input type="email" required class="w-full bg-white/5 border border-white/10 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-gold transition-colors duration-300" placeholder="your@email.com">
+                                <label class="block text-white/40 text-xs mb-3 uppercase tracking-wider">Email</label>
+                                <input type="email" required class="w-full bg-white/5 border border-white/10 px-5 py-4 text-white placeholder-white/20 focus:outline-none focus:border-gold transition-colors duration-300 font-light" placeholder="your@email.com">
                             </div>
                         </div>
                         
                         <div>
-                            <label class="block text-white/50 text-sm mb-2 uppercase tracking-wide">Project Type</label>
-                            <select class="w-full bg-white/5 border border-white/10 px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors duration-300">
+                            <label class="block text-white/40 text-xs mb-3 uppercase tracking-wider">Project Type</label>
+                            <select class="w-full bg-white/5 border border-white/10 px-5 py-4 text-white focus:outline-none focus:border-gold transition-colors duration-300 font-light cursor-pointer">
                                 <option value="" class="text-charcoal">Select a service</option>
                                 <option value="new-build" class="text-charcoal">New Custom Build</option>
                                 <option value="renovation" class="text-charcoal">Major Renovation</option>
@@ -572,11 +789,11 @@
                         </div>
                         
                         <div>
-                            <label class="block text-white/50 text-sm mb-2 uppercase tracking-wide">Message</label>
-                            <textarea rows="5" required class="w-full bg-white/5 border border-white/10 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-gold transition-colors duration-300" placeholder="Tell us about your project..."></textarea>
+                            <label class="block text-white/40 text-xs mb-3 uppercase tracking-wider">Message</label>
+                            <textarea rows="5" required class="w-full bg-white/5 border border-white/10 px-5 py-4 text-white placeholder-white/20 focus:outline-none focus:border-gold transition-colors duration-300 font-light resize-none" placeholder="Tell us about your project..."></textarea>
                         </div>
                         
-                        <button type="submit" class="w-full bg-gold text-forest py-4 text-sm tracking-widest uppercase font-medium hover:bg-white transition-colors duration-300">
+                        <button type="submit" class="magnetic w-full bg-gold text-forest py-5 text-xs tracking-[0.2em] uppercase font-medium hover:bg-white transition-all duration-500 mt-4">
                             Send Message
                         </button>
                     </form>
@@ -586,46 +803,65 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-charcoal text-white py-12 border-t border-white/10">
+    <footer class="bg-charcoal text-white py-16 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-6 md:mb-0">
-                <p class="font-serif text-2xl mb-2">Okanagan Construction</p>
-                <p class="text-white/50 text-sm">CHBA Member • Licensed • Insured</p>
+            <div class="mb-8 md:mb-0 text-center md:text-left">
+                <p class="font-serif text-3xl mb-3">Okanagan Construction</p>
+                <p class="text-white/40 text-sm font-light tracking-wide">CHBA Member • Licensed • Insured</p>
             </div>
             <div class="text-center md:text-right">
-                <p class="text-white/50 text-sm mb-2">250-864-5774 • info@okanaganconstruction.ca</p>
-                <p class="text-white/30 text-xs">&copy; 2026 Okanagan Construction. All rights reserved.</p>
+                <p class="text-white/40 text-sm mb-2 font-light">250-864-5774 • info@okanaganconstruction.ca</p>
+                <p class="text-white/20 text-xs font-light">&copy; 2026 Okanagan Construction. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- Lightbox -->
-    <div id="lightbox" class="lightbox hidden fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4">
-        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors duration-300">
+    <div id="lightbox" class="lightbox hidden fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm">
+        <button onclick="closeLightbox()" class="absolute top-8 right-8 text-white/50 hover:text-white transition-colors duration-300 magnetic">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
         
-        <button onclick="changeImage(-1)" class="absolute left-6 text-white/70 hover:text-white transition-colors duration-300 hidden md:block">
-            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button onclick="changeImage(-1)" class="absolute left-8 text-white/50 hover:text-white transition-colors duration-300 hidden md:block magnetic">
+            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path>
             </svg>
         </button>
         
-        <button onclick="changeImage(1)" class="absolute right-6 text-white/70 hover:text-white transition-colors duration-300 hidden md:block">
-            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button onclick="changeImage(1)" class="absolute right-8 text-white/50 hover:text-white transition-colors duration-300 hidden md:block magnetic">
+            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path>
             </svg>
         </button>
         
-        <div class="max-w-5xl max-h-[80vh]">
-            <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[80vh] object-contain">
-            <p id="lightbox-caption" class="text-center text-white/70 mt-4 font-light"></p>
+        <div class="max-w-6xl max-h-[85vh]">
+            <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[85vh] object-contain">
+            <p id="lightbox-caption" class="text-center text-white/60 mt-6 font-light tracking-wide"></p>
         </div>
     </div>
 
     <script>
+        // Initialize Lenis Smooth Scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
         // Project Images Array for Lightbox
         const projectImages = [
             { src: "images/Okanagan-Ranch.jpg", caption: "Okanagan Ranch Home • Custom Build" },
@@ -644,13 +880,13 @@
             updateLightbox();
             document.getElementById('lightbox').classList.remove('hidden');
             document.getElementById('lightbox').classList.add('visible');
-            document.body.style.overflow = 'hidden';
+            lenis.stop();
         }
 
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('visible');
             document.getElementById('lightbox').classList.add('hidden');
-            document.body.style.overflow = '';
+            lenis.start();
         }
 
         function changeImage(direction) {
@@ -679,9 +915,8 @@
             menuOverlay.classList.remove('hidden-menu');
             menuOverlay.classList.add('visible-menu');
             menuToggle.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            lenis.stop();
             
-            // Change hamburger color to white when menu is open
             hamburgerLines.forEach(line => line.classList.remove('bg-forest'));
             hamburgerLines.forEach(line => line.classList.add('bg-white'));
         }
@@ -690,9 +925,8 @@
             menuOverlay.classList.remove('visible-menu');
             menuOverlay.classList.add('hidden-menu');
             menuToggle.classList.remove('active');
-            document.body.style.overflow = '';
+            lenis.start();
             
-            // Reset hamburger color based on scroll position
             updateHeaderColor();
         }
 
@@ -712,7 +946,7 @@
             const currentScroll = window.pageYOffset;
             
             if (currentScroll > 100) {
-                navbar.classList.add('bg-white', 'shadow-sm', 'scrolled');
+                navbar.classList.add('bg-white/90', 'shadow-sm', 'scrolled');
                 navbar.classList.remove('bg-transparent');
                 logoText.classList.remove('text-white');
                 logoText.classList.add('text-forest');
@@ -724,7 +958,7 @@
                     });
                 }
             } else {
-                navbar.classList.remove('bg-white', 'shadow-sm', 'scrolled');
+                navbar.classList.remove('bg-white/90', 'shadow-sm', 'scrolled');
                 navbar.classList.add('bg-transparent');
                 logoText.classList.add('text-white');
                 logoText.classList.remove('text-forest');
@@ -740,9 +974,81 @@
             lastScroll = currentScroll;
         }
 
-        window.addEventListener('scroll', updateHeaderColor);
+        window.addEventListener('scroll', updateHeaderColor, { passive: true });
 
-        // Scroll Reveal Animation for sections below hero
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const cursorDot = document.getElementById('cursor-dot');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        let dotX = 0, dotY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            // Smooth follow for outer cursor
+            cursorX += (mouseX - cursorX) * 0.1;
+            cursorY += (mouseY - cursorY) * 0.1;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+
+            // Faster follow for dot
+            dotX += (mouseX - dotX) * 0.3;
+            dotY += (mouseY - dotY) * 0.3;
+            cursorDot.style.left = dotX + 'px';
+            cursorDot.style.top = dotY + 'px';
+
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Expand cursor on interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .project-card, .magnetic');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
+        });
+
+        // Magnetic Button Effect
+        const magneticBtns = document.querySelectorAll('.magnetic');
+
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0)';
+            });
+        });
+
+        // Parallax Effect on Scroll
+        function handleParallax() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax-img');
+            
+            parallaxElements.forEach(el => {
+                const container = el.closest('.parallax-container');
+                const rect = container.getBoundingClientRect();
+                const speed = 0.15;
+                
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const yPos = (rect.top * speed);
+                    el.style.transform = `translateY(${yPos}px) scale(1.2)`;
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleParallax, { passive: true });
+
+        // Scroll Reveal Animation
         const observerOptions = {
             root: null,
             rootMargin: '0px',
@@ -783,22 +1089,34 @@
             }
         });
 
-        // SYNCHRONIZED PAGE LOAD ANIMATIONS
+        // PAGE LOAD ANIMATIONS
         window.addEventListener('load', () => {
-            // Start hero zoom immediately
+            // Hero zoom effect
             document.querySelector('.hero-zoom').classList.add('loaded');
             
-            // Trigger logo AND hero text simultaneously after a brief initial delay
+            // Logo drop
             setTimeout(() => {
-                // Logo drops from top
                 document.getElementById('logo-img').classList.add('loaded');
-                
-                // Hero text rises from bottom (staggered within the group, but starting with logo)
-                const heroElements = document.querySelectorAll('.hero-animate');
-                heroElements.forEach((el) => {
+            }, 100);
+
+            // Text mask reveal for heading
+            setTimeout(() => {
+                document.querySelectorAll('.reveal-text-inner').forEach((el, i) => {
+                    setTimeout(() => el.classList.add('loaded'), i * 150);
+                });
+            }, 300);
+
+            // Hero content items
+            setTimeout(() => {
+                document.querySelectorAll('.hero-content-item').forEach((el) => {
                     el.classList.add('loaded');
                 });
-            }, 100);
+            }, 600);
+
+            // Show scroll indicator
+            setTimeout(() => {
+                document.getElementById('scroll-indicator').style.opacity = '1';
+            }, 1500);
         });
     </script>
 </body>

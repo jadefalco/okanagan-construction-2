@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Okanagan Inspired Construction</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                forest: '#1C2B24',
+                gold: '#C4B59D',
+                cream: '#F5F3EF',
+                charcoal: '#2C2C2C'
+            },
+            fontFamily: {
+                serif: ['Playfair Display', 'serif'],
+                sans: ['Inter', 'sans-serif'],
+            }
+        }
+    }
+}
+</script>
+
+<style>
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s ease-out;
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+#logo-img {
+    transition: filter 0.4s ease;
+}
+#navbar.scrolled #logo-img {
+    filter: invert(100%);
+}
+</style>
+</head>
+
+<body class="font-sans text-charcoal bg-white antialiased">
+
+<!-- NAVBAR (same as homepage) -->
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-transparent">
+    <div class="w-full px-6 lg:px-12 py-6 flex items-center justify-between">
+        
+        <a href="index.html">
+            <img id="logo-img" src="images/logo.png" class="h-12 lg:h-16 w-auto">
+        </a>
+
+        <a href="index.html#contact" class="text-sm tracking-widest uppercase border-b border-white text-white hover:text-gold transition">
+            Contact
+        </a>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="pt-32 pb-20 text-center px-6">
+    <h1 class="reveal font-serif text-5xl lg:text-7xl text-forest mb-6">
+        Built on Experience.<br>Defined by Craft.
+    </h1>
+    <p class="reveal text-lg text-charcoal/70 max-w-2xl mx-auto" style="transition-delay:0.2s;">
+        A Kelowna-based team dedicated to building exceptional homes across the Okanagan.
+    </p>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="py-20 px-6 max-w-3xl mx-auto text-center">
+    <p class="reveal text-xl leading-relaxed text-charcoal/80">
+        We believe great homes are built long before construction begins. Through thoughtful planning, strong relationships, and an uncompromising attention to detail, we deliver spaces designed to last for generations.
+    </p>
+</section>
+
+<!-- TEAM -->
+<section class="py-20 px-6 max-w-6xl mx-auto">
+    
+    <h2 class="reveal font-serif text-4xl text-forest mb-20 text-center">
+        Our Team
+    </h2>
+
+    <div class="space-y-16">
+
+        <!-- PERSON -->
+        <div class="reveal grid md:grid-cols-2 gap-10">
+            <div>
+                <h3 class="font-serif text-2xl text-forest mb-2">Bruce Paige</h3>
+                <p class="text-sm text-charcoal/50 mb-6">Owner & Project Manager</p>
+            </div>
+            <div class="space-y-5 text-charcoal/80 leading-relaxed">
+                <p>
+                    Born and raised in Kelowna, Bruce brings nearly two decades of hands-on experience across all aspects of residential construction. From framing and foundations to fine finishing, his work reflects a deep respect for craftsmanship and detail.
+                </p>
+                <p>
+                    As owner and project manager, Bruce is involved in every stage of the build — ensuring each project is executed with precision, transparency, and care.
+                </p>
+            </div>
+        </div>
+
+        <!-- PERSON -->
+        <div class="reveal grid md:grid-cols-2 gap-10">
+            <div>
+                <h3 class="font-serif text-2xl text-forest mb-2">Natalie Paige</h3>
+                <p class="text-sm text-charcoal/50 mb-6">Owner & Operations</p>
+            </div>
+            <div class="space-y-5 text-charcoal/80 leading-relaxed">
+                <p>
+                    Natalie oversees the operational side of the business, ensuring every project runs smoothly from planning through completion.
+                </p>
+                <p>
+                    She works closely with clients, trades, and suppliers to maintain clear communication and seamless execution at every stage.
+                </p>
+            </div>
+        </div>
+
+        <!-- PERSON -->
+        <div class="reveal grid md:grid-cols-2 gap-10">
+            <div>
+                <h3 class="font-serif text-2xl text-forest mb-2">Matt Despins</h3>
+                <p class="text-sm text-charcoal/50 mb-6">Lead Carpenter</p>
+            </div>
+            <div class="space-y-5 text-charcoal/80 leading-relaxed">
+                <p>
+                    A Kelowna local, Matt brings years of experience across renovations and new construction. His work spans concrete, painting, and finishing carpentry.
+                </p>
+                <p>
+                    Known for his attention to detail, he approaches every project with care and precision.
+                </p>
+            </div>
+        </div>
+
+        <!-- PERSON -->
+        <div class="reveal grid md:grid-cols-2 gap-10">
+            <div>
+                <h3 class="font-serif text-2xl text-forest mb-2">Ken Hughes</h3>
+                <p class="text-sm text-charcoal/50 mb-6">Senior Builder</p>
+            </div>
+            <div class="space-y-5 text-charcoal/80 leading-relaxed">
+                <p>
+                    With over 15 years of experience, Ken specializes in framing, foundations, exteriors, and detailed finishing work.
+                </p>
+                <p>
+                    His ability to translate vision into execution ensures every build is structurally sound and beautifully finished.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="py-20 bg-forest text-white text-center px-6">
+    <h2 class="font-serif text-4xl mb-6">Start Your Project</h2>
+    <p class="text-white/70 mb-10">Let’s build something exceptional together.</p>
+    <a href="index.html#contact" class="border border-white px-10 py-4 uppercase tracking-widest hover:bg-white hover:text-forest transition">
+        Contact Us
+    </a>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-charcoal text-white py-12 text-center">
+    <p class="text-white/50 text-sm">© 2026 Okanagan Construction</p>
+</footer>
+
+<script>
+// SCROLL HEADER
+const navbar = document.getElementById('navbar');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbar.classList.add('bg-white','shadow-sm','scrolled');
+    } else {
+        navbar.classList.remove('bg-white','shadow-sm','scrolled');
+    }
+});
+
+// REVEAL
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
