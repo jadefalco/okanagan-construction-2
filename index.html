@@ -133,11 +133,9 @@
         }
 
         /* Text Mask Reveal Animation */
-        .reveal-text {
-            overflow: hidden;
-            display: block;
-            line-height: 1.1;
-        }
+        .reveal-text:last-of-type {
+    padding-bottom: 0.15em;
+}
 
         .reveal-text-inner {
             display: block;
@@ -450,11 +448,11 @@
             
             <h1 class="font-serif text-5xl lg:text-7xl xl:text-8xl text-white font-medium leading-[1.1] mb-8 max-w-5xl">
                 <span class="reveal-text">
-                    <span class="reveal-text-inner">Built for</span>
+                    <span class="reveal-text-inner">From Vision</span>
                 </span>
                 <br>
                 <span class="reveal-text">
-                    <span class="reveal-text-inner">Generations</span>
+                    <span class="reveal-text-inner">To Reality</span>
                 </span>
             </h1>
             
@@ -1099,12 +1097,12 @@
                 document.getElementById('logo-img').classList.add('loaded');
             }, 100);
 
-            // Text mask reveal for heading
-            setTimeout(() => {
-                document.querySelectorAll('.reveal-text-inner').forEach((el, i) => {
-                    setTimeout(() => el.classList.add('loaded'), i * 150);
-                });
-            }, 300);
+            // Text mask reveal for heading - 1 second delay between lines
+setTimeout(() => {
+    document.querySelectorAll('.reveal-text-inner').forEach((el, i) => {
+        setTimeout(() => el.classList.add('loaded'), i * 1500); // 0s, then 1s delay
+    });
+}, 300);
 
             // Hero content items
             setTimeout(() => {
