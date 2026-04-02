@@ -80,41 +80,6 @@
             90% { transform: translate(-10%, 10%); }
         }
 
-        /* Custom Cursor */
-        .custom-cursor {
-            width: 20px;
-            height: 20px;
-            border: 1px solid white;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.15s ease-out, width 0.3s ease, height 0.3s ease, background 0.3s ease;
-            transform: translate(-50%, -50%);
-            mix-blend-mode: difference;
-            background: transparent;
-        }
-
-        .custom-cursor.expanded {
-            width: 80px;
-            height: 80px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(2px);
-            border-color: transparent;
-        }
-
-        .custom-cursor-dot {
-            width: 4px;
-            height: 4px;
-            background: white;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 10000;
-            transform: translate(-50%, -50%);
-            mix-blend-mode: difference;
-        }
-
         /* Logo Drop Animation */
         #logo-img {
             transform: translateY(-100px);
@@ -348,13 +313,6 @@
             pointer-events: all;
         }
 
-        /* Responsive cursor hiding on mobile */
-        @media (pointer: coarse) {
-            .custom-cursor, .custom-cursor-dot {
-                display: none;
-            }
-        }
-
         /* Button hover enhancement */
         .btn-luxury {
             position: relative;
@@ -382,10 +340,6 @@
 
     <!-- Film Grain Overlay -->
     <div class="grain-overlay"></div>
-
-    <!-- Custom Cursor -->
-    <div class="custom-cursor" id="cursor"></div>
-    <div class="custom-cursor-dot" id="cursor-dot"></div>
 
     <!-- Navigation -->
     <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out bg-transparent">
@@ -458,7 +412,7 @@
             
             <p class="hero-content-item text-white/80 text-lg lg:text-xl font-light max-w-2xl mb-12 leading-relaxed" style="transition-delay: 0.6s;">
                 Okanagan Luxury Homes<br>
-                Crafted with Precision. Built With Pride.
+                Crafted with Precision. Built To Perfection.
             </p>
             
             <a href="#projects" class="hero-content-item magnetic btn-luxury inline-block px-10 py-4 border border-white text-white hover:bg-white hover:text-forest transition-all duration-500 text-xs tracking-[0.2em] uppercase" style="transition-delay: 0.8s;">
@@ -973,42 +927,6 @@
         }
 
         window.addEventListener('scroll', updateHeaderColor, { passive: true });
-
-        // Custom Cursor
-        const cursor = document.getElementById('cursor');
-        const cursorDot = document.getElementById('cursor-dot');
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
-        let dotX = 0, dotY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        function animateCursor() {
-            // Smooth follow for outer cursor
-            cursorX += (mouseX - cursorX) * 0.1;
-            cursorY += (mouseY - cursorY) * 0.1;
-            cursor.style.left = cursorX + 'px';
-            cursor.style.top = cursorY + 'px';
-
-            // Faster follow for dot
-            dotX += (mouseX - dotX) * 0.3;
-            dotY += (mouseY - dotY) * 0.3;
-            cursorDot.style.left = dotX + 'px';
-            cursorDot.style.top = dotY + 'px';
-
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        // Expand cursor on interactive elements
-        const interactiveElements = document.querySelectorAll('a, button, .project-card, .magnetic');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
-        });
 
         // Magnetic Button Effect
         const magneticBtns = document.querySelectorAll('.magnetic');
