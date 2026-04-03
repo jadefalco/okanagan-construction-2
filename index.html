@@ -43,15 +43,16 @@
         .lenis.lenis-smooth {
             scroll-behavior: auto !important;
         }
-        .lenis.lenis-smooth [data-lenis-prevent] {
-            overscroll-behavior: contain;
-        }
+       .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;  /* was: overshoot-behavior */
+}
         .lenis.lenis-stopped {
             overflow: hidden;
         }
         .lenis.lenis-scrolling iframe {
             pointer-events: none;
         }
+
         /* Luxury Process Cards */
         .process-card {
             position: relative;
@@ -59,7 +60,6 @@
             background: linear-gradient(145deg, #F9F7F4, #F2EFEA);
         }
 
-        /* Soft glow on hover */
         .process-card::before {
             content: "";
             position: absolute;
@@ -73,17 +73,16 @@
             opacity: 1;
         }
 
-        /* Lift + depth */
         .process-card:hover {
             transform: translateY(-12px) scale(1.01);
             box-shadow: 0 25px 60px rgba(0,0,0,0.08);
             border-color: rgba(196,181,157,0.4);
         }
 
-        /* Subtle text polish */
         .process-card h3 {
             letter-spacing: 0.05em;
         }
+
         /* Logo Drop Animation */
         #logo-img {
             transform: translateY(-100px);
@@ -101,11 +100,26 @@
             filter: invert(100%);
         }
 
-        /* SLOWER Hero Content Animation - FROM TOP */
+        /* CINEMATIC SLOW ZOOM OUT - Volk Homes Style */
+        @keyframes heroZoomOut {
+            0% {
+                transform: scale(1.15);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .animate-hero-zoom {
+            animation: heroZoomOut 20s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            will-change: transform;
+        }
+
+        /* Hero Content Animations */
         .hero-from-top {
             opacity: 0;
             transform: translateY(-60px);
-            transition: all 2.2s cubic-bezier(0.16, 1, 0.3, 1); /* Slower as requested */
+            transition: all 2.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .hero-from-top.loaded {
@@ -113,7 +127,6 @@
             transform: translateY(0);
         }
 
-        /* Hero Content Animation - FROM BOTTOM */
         .hero-from-bottom {
             opacity: 0;
             transform: translateY(60px);
@@ -125,7 +138,6 @@
             transform: translateY(0);
         }
 
-        /* From Vision and To Reality close together */
         .hero-title-line {
             display: block;
             line-height: 1.0;
@@ -153,13 +165,7 @@
             max-height: 650px;
         }
 
-        /* Gentle Hero Image Movement (replaces old cinematic zoom) */
-        #hero-bg {
-            will-change: transform;
-            transition: transform 0.1s linear;
-        }
-
-        /* Parallax Images */
+        /* Parallax Images for other sections (NOT hero) */
         .parallax-container {
             overflow: hidden;
             position: relative;
@@ -219,7 +225,6 @@
             transform: translateY(0);
         }
 
-        /* Stagger delays */
         .stagger-1 { transition-delay: 0.1s; }
         .stagger-2 { transition-delay: 0.2s; }
         .stagger-3 { transition-delay: 0.3s; }
@@ -275,13 +280,11 @@
             transform: rotate(-45deg) translate(7px, -6px);
         }
 
-        /* Navigation Background Blur */
         #navbar.scrolled {
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
 
-        /* Texture Background */
         .texture-soft {
             position: relative;
             background: linear-gradient(to bottom, #F5F3EF, #F2EFEA);
@@ -302,7 +305,6 @@
             z-index: 1;
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -316,7 +318,6 @@
             border-radius: 4px;
         }
 
-        /* Lightbox */
         .lightbox {
             transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -331,7 +332,6 @@
             pointer-events: all;
         }
 
-        /* Button hover enhancement */
         .btn-luxury {
             position: relative;
             overflow: hidden;
@@ -394,13 +394,14 @@
         </nav>
     </div>
 
-    <!-- Hero Section with Gentle Movement -->
+    <!-- Hero Section with Cinematic Slow Zoom -->
     <section id="home" class="relative h-screen w-full overflow-hidden">
-        <div class="absolute inset-0 w-full h-full">
+        <!-- Background Image with Zoom Animation -->
+        <div class="absolute inset-0 w-full h-full overflow-hidden">
             <img id="hero-bg" 
                  src="images/hero-banner.jpg" 
                  alt="Luxury Okanagan Home" 
-                 class="w-full h-full object-cover scale-110">
+                 class="w-full h-full object-cover animate-hero-zoom">
             <div class="absolute inset-0 bg-black/30"></div>
         </div>
 
@@ -419,9 +420,9 @@
             </h1>
             
             <p class="hero-from-bottom text-white/80 text-lg lg:text-xl font-light max-w-2xl mb-12 leading-relaxed">
-    Custom Luxury Homes in the Okanagan<br>
-    Built with precision, transparency, and craftsmanship you can trust.
-</p>
+                Custom Luxury Homes in the Okanagan<br>
+                Built with precision, transparency, and craftsmanship you can trust.
+            </p>
             
             <a href="#projects" class="hero-from-bottom inline-block px-10 py-4 border border-white text-white hover:bg-white hover:text-forest transition-all duration-500 text-xs tracking-[0.2em] uppercase">
                 View Our Work
@@ -499,53 +500,49 @@
             </p>
         </div>
     </section>
-<!-- Process Section -->
-<!-- Process Section (Luxury Cards) -->
-<section class="py-24 lg:py-32 bg-white">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-        <p class="text-gold text-xs tracking-[0.3em] uppercase mb-6 font-medium">Our Process</p>
-        <h2 class="font-serif text-4xl lg:text-5xl text-forest font-medium mb-20">
-            A refined approach from concept to completion.
-        </h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+    <!-- Process Section -->
+    <section class="py-24 lg:py-32 bg-white">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <p class="text-gold text-xs tracking-[0.3em] uppercase mb-6 font-medium">Our Process</p>
+            <h2 class="font-serif text-4xl lg:text-5xl text-forest font-medium mb-20">
+                A refined approach from concept to completion.
+            </h2>
 
-            <!-- Card 1 -->
-            <div class="process-card reveal group p-10 rounded-2xl bg-[#F9F7F4] border border-black/5 transition-all duration-700">
-                <div class="mb-8">
-                    <p class="font-serif text-5xl text-forest/80 group-hover:text-forest transition-colors duration-500">01</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="process-card reveal group p-10 rounded-2xl bg-[#F9F7F4] border border-black/5 transition-all duration-700">
+                    <div class="mb-8">
+                        <p class="font-serif text-5xl text-forest/80 group-hover:text-forest transition-colors duration-500">01</p>
+                    </div>
+                    <h3 class="text-xl mb-4 tracking-wide">Consultation</h3>
+                    <p class="text-charcoal/60 font-light leading-relaxed">
+                        We begin with a detailed conversation to understand your vision, goals, and budget — laying the foundation for a successful build.
+                    </p>
                 </div>
-                <h3 class="text-xl mb-4 tracking-wide">Consultation</h3>
-                <p class="text-charcoal/60 font-light leading-relaxed">
-                    We begin with a detailed conversation to understand your vision, goals, and budget — laying the foundation for a successful build.
-                </p>
-            </div>
 
-            <!-- Card 2 -->
-            <div class="process-card reveal stagger-1 group p-10 rounded-2xl bg-[#F9F7F4] border border-black/5 transition-all duration-700">
-                <div class="mb-8">
-                    <p class="font-serif text-5xl text-forest/80 group-hover:text-forest transition-colors duration-500">02</p>
+                <div class="process-card reveal stagger-1 group p-10 rounded-2xl bg-[#F9F7F4] border border-black/5 transition-all duration-700">
+                    <div class="mb-8">
+                        <p class="font-serif text-5xl text-forest/80 group-hover:text-forest transition-colors duration-500">02</p>
+                    </div>
+                    <h3 class="text-xl mb-4 tracking-wide">Design & Planning</h3>
+                    <p class="text-charcoal/60 font-light leading-relaxed">
+                        Every detail is thoughtfully considered — from layout to materials — ensuring clarity, precision, and alignment before construction begins.
+                    </p>
                 </div>
-                <h3 class="text-xl mb-4 tracking-wide">Design & Planning</h3>
-                <p class="text-charcoal/60 font-light leading-relaxed">
-                    Every detail is thoughtfully considered — from layout to materials — ensuring clarity, precision, and alignment before construction begins.
-                </p>
-            </div>
 
-            <!-- Card 3 -->
-            <div class="process-card reveal stagger-2 group p-10 rounded-2xl bg-[#F9F7F4] border border-black/5 transition-all duration-700">
-                <div class="mb-8">
-                    <p class="font-serif text-5xl text-forest/80 group-hover:text-forest transition-colors duration-500">03</p>
+                <div class="process-card reveal stagger-2 group p-10 rounded-2xl bg-[#F9F7F4] border border-black/5 transition-all duration-700">
+                    <div class="mb-8">
+                        <p class="font-serif text-5xl text-forest/80 group-hover:text-forest transition-colors duration-500">03</p>
+                    </div>
+                    <h3 class="text-xl mb-4 tracking-wide">Build & Deliver</h3>
+                    <p class="text-charcoal/60 font-light leading-relaxed">
+                        Our team executes with craftsmanship and discipline, delivering a finished home that reflects your vision down to the finest detail.
+                    </p>
                 </div>
-                <h3 class="text-xl mb-4 tracking-wide">Build & Deliver</h3>
-                <p class="text-charcoal/60 font-light leading-relaxed">
-                    Our team executes with craftsmanship and discipline, delivering a finished home that reflects your vision down to the finest detail.
-                </p>
             </div>
-
         </div>
-    </div>
-</section>
+    </section>
+
     <!-- Projects Gallery -->
     <section id="projects" class="py-32 lg:py-40 texture-soft">
         <div class="max-w-7xl mx-auto px-6">
@@ -662,36 +659,37 @@
                     <div class="parallax-container aspect-[3/4] overflow-hidden">
                         <img src="images/general-construction.jpg" alt="Custom Home Okanagan" class="parallax-img w-full h-full object-cover">
                     </div>
-                  
                 </div>
             </div>
         </div>
     </section>
-<!-- Testimonials -->
-<section class="py-24 lg:py-32 texture-soft">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-        <p class="text-gold text-xs tracking-[0.3em] uppercase mb-6 font-medium">Client Experience</p>
-        <h2 class="font-serif text-4xl lg:text-5xl text-forest font-medium mb-16">
-            What our clients say
-        </h2>
 
-        <div class="space-y-12">
-            <div class="reveal">
-                <p class="text-xl text-charcoal/70 font-light leading-relaxed mb-6">
-                    "The entire process was seamless. Communication was clear, timelines were met, and the final result exceeded our expectations."
-                </p>
-                <p class="text-sm text-charcoal/50 tracking-wide">— Homeowner, Kelowna</p>
-            </div>
+    <!-- Testimonials -->
+    <section class="py-24 lg:py-32 texture-soft">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <p class="text-gold text-xs tracking-[0.3em] uppercase mb-6 font-medium">Client Experience</p>
+            <h2 class="font-serif text-4xl lg:text-5xl text-forest font-medium mb-16">
+                What our clients say
+            </h2>
 
-            <div class="reveal stagger-1">
-                <p class="text-xl text-charcoal/70 font-light leading-relaxed mb-6">
-                    "Attention to detail and craftsmanship stood out immediately. We couldn't be happier with our home."
-                </p>
-                <p class="text-sm text-charcoal/50 tracking-wide">— Client, Lake Country</p>
+            <div class="space-y-12">
+                <div class="reveal">
+                    <p class="text-xl text-charcoal/70 font-light leading-relaxed mb-6">
+                        "The entire process was seamless. Communication was clear, timelines were met, and the final result exceeded our expectations."
+                    </p>
+                    <p class="text-sm text-charcoal/50 tracking-wide">— Homeowner, Kelowna</p>
+                </div>
+
+                <div class="reveal stagger-1">
+                    <p class="text-xl text-charcoal/70 font-light leading-relaxed mb-6">
+                        "Attention to detail and craftsmanship stood out immediately. We couldn't be happier with our home."
+                    </p>
+                    <p class="text-sm text-charcoal/50 tracking-wide">— Client, Lake Country</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="py-32 lg:py-40 bg-forest text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
@@ -700,12 +698,13 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
                 <div class="reveal">
                     <p class="text-gold text-xs tracking-[0.3em] uppercase mb-6 font-medium">Start Your Project</p>
-<h2 class="font-serif text-4xl lg:text-5xl xl:text-6xl font-medium leading-tight mb-6">
-    Get a quote for your project.
-</h2>
-<p class="text-white/60 font-light text-lg mb-12 leading-relaxed max-w-md">
-    We typically respond within 24 hours. Tell us about your project and we'll take it from there.
-</p>                    <p class="text-white/60 font-light text-lg mb-12 leading-relaxed max-w-md">
+                    <h2 class="font-serif text-4xl lg:text-5xl xl:text-6xl font-medium leading-tight mb-6">
+                        Get a quote for your project.
+                    </h2>
+                    <p class="text-white/60 font-light text-lg mb-12 leading-relaxed max-w-md">
+                        We typically respond within 24 hours. Tell us about your project and we'll take it from there.
+                    </p>                    
+                    <p class="text-white/60 font-light text-lg mb-12 leading-relaxed max-w-md">
                         Every great build starts with a conversation. Whether you have detailed plans or just a rough idea, we'd love to hear about your project.
                     </p>
                     
@@ -844,21 +843,8 @@
         }
         requestAnimationFrame(raf);
 
-        // Register GSAP ScrollTrigger for hero movement
+        // Register GSAP ScrollTrigger (but NOT for hero background anymore)
         gsap.registerPlugin(ScrollTrigger);
-
-        // Gentle Hero Image Movement
-        gsap.to("#hero-bg", {
-            y: "-6%",
-            scale: 1.04,
-            ease: "none",
-            scrollTrigger: {
-                trigger: "#home",
-                start: "top top",
-                end: "bottom top",
-                scrub: 1.5
-            }
-        });
 
         // Project Images Array for Lightbox
         const projectImages = [
@@ -970,7 +956,7 @@
 
         window.addEventListener('scroll', updateHeaderColor, { passive: true });
 
-        // Parallax Effect
+        // Parallax Effect (only for project images, NOT hero)
         function handleParallax() {
             const parallaxElements = document.querySelectorAll('.parallax-img');
             parallaxElements.forEach(el => {
@@ -1027,7 +1013,7 @@
             }
         });
 
-        // PAGE LOAD ANIMATIONS - Slower "From Vision"
+        // PAGE LOAD ANIMATIONS
         window.addEventListener('load', () => {
             // GROUP 1: From Top (slower delay + duration)
             setTimeout(() => {
