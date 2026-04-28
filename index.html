@@ -52,7 +52,31 @@
         .lenis.lenis-scrolling iframe {
             pointer-events: none;
         }
+.before-after-slider {
+    position: relative;
+    
+    cursor: ew-resize;
+}
 
+
+.before-image {
+    width: 50%;
+}
+
+.slider-line {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.slider-handle {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: box-shadow 0.3s ease;
+}
+
+.slider-handle:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
         /* Luxury Process Cards */
         .process-card {
             position: relative;
@@ -424,9 +448,9 @@
     </h1>
     
     <p class="hero-from-bottom text-white/80 text-lg lg:text-xl font-light max-w-2xl mb-12 leading-relaxed">
-        Custom Luxury Homes in the Okanagan<br>
-        Built with precision, transparency, and craftsmanship you can trust.
-    </p>
+    Renovations & Additions in the Okanagan<br>
+    Transforming homes with craftsmanship, clarity, and a team you can trust.
+</p>
     
     <a href="#projects" class="hero-from-bottom inline-block px-10 py-4 border border-white text-white hover:bg-white hover:text-forest transition-all duration-500 text-xs tracking-[0.2em] uppercase">
         View Our Work
@@ -441,13 +465,61 @@
         </div>
     </section>
 
+    <!-- Before & After Slider -->
+<section class="py-32 lg:py-40 bg-white">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+        <p class="text-gold text-xs tracking-[0.3em] uppercase mb-6 font-medium">Transformations</p>
+        <h2 class="font-serif text-4xl lg:text-6xl text-forest font-medium mb-10">
+            Before & After
+        </h2>
+        <p class="text-charcoal/60 font-light text-lg max-w-2xl mx-auto mb-20">
+            Drag to explore the transformation.
+        </p>
+
+            <div class="before-after-slider reveal relative w-full max-w-4xl mx-auto overflow-hidden">
+    
+    <!-- AFTER (base image) -->
+    <img src="images/after1.jpg" class="w-full h-[450px] object-cover select-none">
+
+    <!-- BEFORE (overlay image) -->
+    <div class="before-image absolute inset-0 overflow-hidden">
+        <img src="images/before1.jpg" class="w-full h-[450px] object-cover select-none">
+    </div>
+
+    <!-- Labels -->
+    <div class="absolute top-4 left-4 text-white text-xs tracking-wider bg-black/40 px-3 py-1 backdrop-blur-sm">
+        Before
+    </div>
+    <div class="absolute top-4 right-4 text-white text-xs tracking-wider bg-black/40 px-3 py-1 backdrop-blur-sm">
+        After
+    </div>
+
+    <!-- Divider -->
+    <div class="slider-line absolute top-0 bottom-0 w-[2px] bg-white shadow-lg"></div>
+
+    <!-- Handle -->
+    <div class="slider-handle absolute top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-xl flex items-center justify-center cursor-ew-resize">
+        <div class="w-4 h-4 border-l-2 border-r-2 border-forest"></div>
+    </div>
+
+</div>
+<div class="mt-8 text-left max-w-2xl mx-auto">
+    <h3 class="font-serif text-2xl text-forest mb-2">
+        Full Home Renovation
+    </h3>
+    <p class="text-charcoal/60 font-light leading-relaxed">
+        Complete transformation of an outdated interior into a modern, functional living space — designed to better reflect the homeowner’s lifestyle and vision.
+    </p>
+</div>
+    </div>
+</section>
     <!-- Featured Projects Preview -->
     <section class="py-32 lg:py-40 texture-soft">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col lg:flex-row justify-between items-end mb-20 reveal">
                 <div>
-                    <p class="text-gold text-xs tracking-[0.3em] uppercase mb-4 font-medium">Portfolio</p>
-                    <h2 class="font-serif text-4xl lg:text-6xl text-forest font-medium leading-tight">Featured Projects</h2>
+                    <p class="text-gold text-xs tracking-[0.3em] uppercase mb-4 font-medium">Our Work</p>
+<h2>Renovations & Transformations</h2>
                 </div>
                 <a href="#projects" class="mt-6 lg:mt-0 text-forest border-b border-forest pb-1 hover:text-gold hover:border-gold transition-colors duration-500 text-xs tracking-[0.2em] uppercase">
                     View All Projects
@@ -468,7 +540,7 @@
                     </div>
                     <div class="mt-8">
                         <h3 class="font-serif text-2xl text-forest mb-2">Okanagan Ranch Home</h3>
-                        <p class="text-charcoal/60 font-light text-sm tracking-wide">New Construction • Lake Country</p>
+                        <p class="text-charcoal/60 font-light text-sm tracking-wide">Full Home Renovation • Lake Country</p>
                     </div>
                 </div>
 
@@ -497,11 +569,12 @@
         <div class="max-w-4xl mx-auto px-6 text-center">
             <p class="reveal text-gold text-sm tracking-[0.3em] uppercase mb-8 font-medium">Since 2005</p>
             <h2 class="reveal stagger-1 font-serif text-3xl lg:text-5xl xl:text-6xl text-forest font-medium leading-tight mb-8">
-                Crafting exceptional living spaces in British Columbia's most sought-after region.
-            </h2>
-            <p class="reveal stagger-2 text-charcoal/60 text-lg leading-relaxed font-light max-w-2xl mx-auto">
-                Custom homes. Thoughtfully built.
-            </p>
+    Renovations done right — with experience you can trust.
+</h2>
+
+<p class="reveal stagger-2 text-charcoal/60 text-lg leading-relaxed font-light max-w-2xl mx-auto">
+    From full remodels to complex additions, we specialize in transforming homes with precision, adaptability, and a deep understanding of what our clients truly want.
+</p>
         </div>
     </section>
 
@@ -638,9 +711,14 @@
                         Built on experience.<br>Driven by craftsmanship.
                     </h2>
                     <div class="space-y-6 text-charcoal/70 font-light leading-relaxed text-lg">
-                        <p>Based in the Okanagan Valley, we build custom homes that reflect both the landscape and the people who live in them.</p>
-                        <p>Our approach is simple — clear communication, careful planning, and uncompromising attention to detail from start to finish.</p>
-                    </div>
+    <p>
+        Our strength comes from experience — and the ability to adapt when things don’t go as planned.
+        With decades of combined construction knowledge, Bruce and our team are known for finding solutions others can’t.
+    </p>
+    <p>
+        Clients often tell us they feel relieved knowing their project is in the right hands. That trust is what leads many to expand their projects once work begins — confident that we’ll bring their vision to life the right way.
+    </p>
+</div>
                     <div class="mt-12">
                         <a href="about.html" class="inline-block px-10 py-4 border border-forest text-forest hover:bg-forest hover:text-white transition-all duration-500 text-xs tracking-[0.2em] uppercase">Meet the Team</a>
                     </div>
@@ -679,15 +757,15 @@
             <div class="space-y-12">
                 <div class="reveal">
                     <p class="text-xl text-charcoal/70 font-light leading-relaxed mb-6">
-                        "The entire process was seamless. Communication was clear, timelines were met, and the final result exceeded our expectations."
-                    </p>
+    "We felt incredibly fortunate to find Bruce and his team. Their experience and ability to adapt gave us total confidence throughout the entire renovation."
+</p>
                     <p class="text-sm text-charcoal/50 tracking-wide">— Homeowner, Kelowna</p>
                 </div>
 
                 <div class="reveal stagger-1">
                     <p class="text-xl text-charcoal/70 font-light leading-relaxed mb-6">
-                        "Attention to detail and craftsmanship stood out immediately. We couldn't be happier with our home."
-                    </p>
+    "What started as a small project turned into a full transformation — we trusted them completely and kept adding more."
+</p>
                     <p class="text-sm text-charcoal/50 tracking-wide">— Client, Lake Country</p>
                 </div>
             </div>
@@ -703,7 +781,7 @@
                 <div class="reveal">
                     <p class="text-gold text-xs tracking-[0.3em] uppercase mb-6 font-medium">Start Your Project</p>
                     <h2 class="font-serif text-4xl lg:text-5xl xl:text-6xl font-medium leading-tight mb-6">
-                        Get a quote for your project.
+                        Start your renovation or addition.
                     </h2>
                     <p class="text-white/60 font-light text-lg mb-12 leading-relaxed max-w-md">
                         We typically respond within 24 hours. Tell us about your project and we'll take it from there.
@@ -791,12 +869,12 @@
     <footer class="bg-charcoal text-white py-16 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
             <div class="mb-8 md:mb-0 text-center md:text-left">
-                <p class="font-serif text-3xl mb-3">Okanagan Construction</p>
+                <p class="font-serif text-3xl mb-3">Okanagan Inspired Construction</p>
                 <p class="text-white/40 text-sm font-light tracking-wide">CHBA Member • Licensed • Insured</p>
             </div>
             <div class="text-center md:text-right">
                 <p class="text-white/40 text-sm mb-2 font-light">250-864-5774 • info@okanaganconstruction.ca</p>
-                <p class="text-white/20 text-xs font-light">&copy; 2026 Okanagan Construction. All rights reserved.</p>
+                <p class="text-white/20 text-xs font-light">&copy; 2026 Okanagan Inspired Construction. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -888,7 +966,48 @@
             document.getElementById('lightbox-img').src = projectImages[currentImageIndex].src;
             document.getElementById('lightbox-caption').textContent = projectImages[currentImageIndex].caption;
         }
+// Before/After Slider
+document.querySelectorAll('.before-after-slider').forEach(slider => {
+    const before = slider.querySelector('.before-image');
+    const handle = slider.querySelector('.slider-handle');
+    const line = slider.querySelector('.slider-line');
+    
 
+    let isDragging = false;
+
+    const moveSlider = (x) => {
+        const rect = slider.getBoundingClientRect();
+        let position = (x - rect.left) / rect.width;
+
+        // Clamp between 0 and 1
+        position = Math.max(0, Math.min(1, position));
+
+        const percent = position * 100;
+
+        before.style.width = percent + "%";
+        handle.style.left = percent + "%";
+        line.style.left = percent + "%";
+    };
+
+    const startDrag = () => isDragging = true;
+    const stopDrag = () => isDragging = false;
+
+    slider.addEventListener('mousedown', startDrag);
+    window.addEventListener('mouseup', stopDrag);
+
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        moveSlider(e.clientX);
+    });
+
+    // Touch support
+    slider.addEventListener('touchstart', () => isDragging = true);
+    window.addEventListener('touchend', () => isDragging = false);
+
+    slider.addEventListener('touchmove', (e) => {
+        moveSlider(e.touches[0].clientX);
+    });
+});
         // Menu Functions
         const menuToggle = document.getElementById('menu-toggle');
         const menuOverlay = document.getElementById('menu-overlay');
