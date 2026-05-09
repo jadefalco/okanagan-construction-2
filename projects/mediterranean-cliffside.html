@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Mediterranean Cliffside | Okanagan Inspired Construction</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                forest: '#1C2B24',
+                gold: '#C4B59D',
+                cream: '#F5F3EF',
+                charcoal: '#2C2C2C'
+            },
+            fontFamily: {
+                serif: ['Playfair Display', 'serif'],
+                sans: ['Inter', 'sans-serif']
+            }
+        }
+    }
+}
+</script>
+
+<style>
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: #2C2C2C;
+}
+
+h1,h2,h3 {
+    font-family: 'Playfair Display', serif;
+}
+
+.section-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+}
+
+.fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s cubic-bezier(0.16,1,0.3,1);
+}
+
+.fade-up.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gallery-image {
+    overflow: hidden;
+    border-radius: 28px;
+}
+
+.gallery-image img {
+    transition: transform 1.2s cubic-bezier(0.16,1,0.3,1);
+}
+
+.gallery-image:hover img {
+    transform: scale(1.04);
+}
+
+.section-spacing {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+@media (min-width: 1024px) {
+    .section-spacing {
+        padding-top: 7rem;
+        padding-bottom: 7rem;
+    }
+}
+
+#logo-img {
+    transition: filter 0.35s ease;
+    will-change: filter;
+    filter: brightness(0) invert(1);
+}
+
+#navbar.scrolled .hamburger span {
+    background: #1C2B24;
+}
+
+.hamburger span {
+    background: white;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+#navbar.scrolled .hamburger span {
+    background: #1C2B24;
+}
+
+#navbar {
+    background: transparent;
+}
+
+#navbar.scrolled {
+    background: rgba(255,255,255,0.96);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    backdrop-filter: blur(14px);
+}
+
+.menu-overlay {
+    right: 0;
+    left: auto;
+    width: 25vw;
+    min-width: 320px;
+    max-width: 420px;
+    background: rgba(28, 43, 36, 0.9);
+    padding: 3rem 2rem;
+}
+
+@media (max-width: 640px) {
+    .menu-overlay {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+.menu-overlay.hidden-menu {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.menu-overlay.visible-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+
+
+</style>
+</head>
+
+<body class="bg-white">
+
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out">    <div class="w-full px-6 lg:px-12 py-6 flex items-center justify-between">
+        <a href="../index.html" class="block">
+            <img id="logo-img" src="../images/logo.png" alt="Okanagan Inspired Construction Logo" class="h-12 lg:h-16 w-auto">
+        </a>
+
+        <button id="menu-toggle" class="hamburger relative w-8 h-6 flex flex-col justify-between items-end z-50 group cursor-pointer">
+            <span class="block w-full h-0.5 transition-colors duration-300"></span>
+            <span class="block w-full h-0.5 transition-colors duration-300"></span>
+            <span class="block w-full h-0.5 transition-colors duration-300"></span>
+        </button>
+    </div>
+</header>
+
+<div id="menu-overlay" class="menu-overlay hidden-menu fixed top-0 right-0 bottom-0 z-40 bg-forest flex items-center justify-center">
+    <nav class="text-center">
+        <ul class="space-y-8">
+            <li class="menu-item">
+                <a href="../index.html" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Home</a>
+            </li>
+            <li class="menu-item">
+                <a href="../about.html" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">About</a>
+            </li>
+            <li class="menu-item">
+                <a href="../index.html#projects" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Projects</a>
+            </li>
+            <li class="menu-item">
+                <a href="../index.html#contact" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Contact</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<!-- HERO -->
+
+<section id="hero-section" class="relative h-screen overflow-hidden">
+
+    <img
+    src="../images/Med Cliffside/Interior/show3993445.png"
+    class="absolute inset-0 w-full h-full object-cover object-top"
+>
+
+    <div class="absolute inset-0 bg-gradient-to-b from-black/35 via-black/10 to-black/30"></div>
+
+<div class="relative z-10 h-full flex items-end justify-center text-center px-6 pb-16 lg:pb-20">
+        <div class="max-w-4xl">
+
+            <p class="text-white/70 uppercase tracking-[0.3em] text-sm mb-6">
+                Featured Project
+            </p>
+
+            <h1 class="text-white text-6xl lg:text-8xl font-medium leading-none mb-8">
+                Mediterranean<br>Cliffside
+            </h1>
+
+            <p class="text-white/75 text-lg lg:text-[1.35rem] font-light leading-relaxed max-w-2xl mx-auto">
+A custom cliffside estate overlooking Okanagan Lake, inspired by the warmth and timeless character of Mediterranean coastal architecture. </p>
+        </div>
+
+    </div>
+
+</section>
+<!-- PROJECT DETAILS -->
+
+<section class="py-24 bg-white">
+
+    <div class="max-w-6xl mx-auto px-6">
+
+        <div class="grid md:grid-cols-4 gap-12">
+
+            <div>
+                <p class="text-gold uppercase tracking-[0.3em] text-xs mb-3">
+                    Location
+                </p>
+                <p class="text-charcoal/70 text-base leading-relaxed font-light">
+                    Okanagan Lake
+                </p>
+            </div>
+
+            <div>
+                <p class="text-gold uppercase tracking-[0.3em] text-xs mb-3">
+                    Scope
+                </p>
+                <p class="text-charcoal/70 text-base leading-relaxed font-light">
+                    8,000 sq ft Custom Home
+                </p>
+            </div>
+
+            <div>
+                <p class="text-gold uppercase tracking-[0.3em] text-xs mb-3">
+                    Features
+                </p>
+                <p class="text-charcoal/70 text-base leading-relaxed font-light">
+                    Geothermal HVAC, cliffside integration, private beach access
+                </p>
+            </div>
+
+            <div>
+                <p class="text-gold uppercase tracking-[0.3em] text-xs mb-3">
+                    Style
+                </p>
+                <p class="text-charcoal/70 text-base leading-relaxed font-light">
+                    Mediterranean Contemporary
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- INTRO -->
+
+<section class="section-spacing">
+
+    <div class="max-w-5xl mx-auto px-6">
+
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+
+            <div class="fade-up">
+
+                <p class="text-gold uppercase tracking-[0.3em] text-xs mb-6">
+                    Project Overview
+                </p>
+
+                <h2 class="section-title text-forest">
+                    Inspired by Mediterranean architecture and relaxed lakefront living.
+                </h2>
+
+            </div>
+
+            <div class="fade-up">
+
+                <div class="space-y-6 text-lg text-charcoal/70 font-light leading-relaxed">
+
+                    <p>
+                        Built directly into the cliffs above Okanagan Lake, this five-level custom home was designed to balance dramatic architecture with warm, relaxed lakefront living.
+                    </p>
+
+                    <p>
+                        From exposed rock faces integrated into the interior to antiqued fir post-and-beam construction, every detail was designed to create the feeling of a private Mediterranean retreat rooted in the natural landscape.
+                    </p>
+
+                    <p>
+                        The home features geothermal heating and cooling, expansive outdoor living spaces, and multiple access points to the private beach below — including a custom walkway built into the cliff face and a private elevator connecting the home to the waterfront.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- EXTERIOR -->
+
+<section class="py-20 lg:py-28 bg-[#F8F6F2]">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="max-w-3xl mb-16 fade-up">
+
+            <p class="text-gold uppercase tracking-[0.3em] text-xs mb-4">
+                Exterior
+            </p>
+
+            <h2 class="section-title text-forest mb-6">
+Mediterranean architecture anchored into the Okanagan cliffs.
+            </h2>
+
+            <p class="text-charcoal/60 text-lg font-light leading-relaxed">
+                Natural stone, layered textures, and timeless architectural detailing create a striking exterior that feels both elevated and welcoming.
+            </p>
+
+        </div>
+
+        <!-- FEATURE IMAGE -->
+
+        <div class="gallery-image fade-up mb-8">
+            <img 
+                src="../images/Med Cliffside/Exterior/1231089_600424323342831_1242145905_n.jpg" 
+                class="w-full h-[700px] object-cover"
+            >
+        </div>
+
+        <!-- SUPPORTING IMAGES -->
+
+        <div class="grid lg:grid-cols-2 gap-8 mb-6 lg:mb-8">
+
+            <div class="gallery-image fade-up">
+                <img 
+                    src="../images/Med Cliffside/Exterior/20140505_131025.jpeg" 
+                    class="w-full h-full object-cover"
+                >
+            </div>
+
+            <div class="gallery-image fade-up">
+                <img 
+                    src="../images/Med Cliffside/Exterior/565038_600424443342819_831062533_n.jpg" 
+                    class="w-full h-full object-cover"
+                >
+            </div>
+
+        </div>
+
+        <p class="max-w-2xl text-sm text-charcoal/50 font-light leading-relaxed">
+            Elevator access to the private beach was integrated directly into the cliffside, connecting all levels of the home to the waterfront.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- LIVING SPACES -->
+
+<section class="py-24 lg:py-36">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="max-w-3xl mb-16 lg:mb-20 fade-up">
+
+            <p class="text-gold uppercase tracking-[0.3em] text-xs mb-4">
+                Living Spaces
+            </p>
+
+            <h2 class="section-title text-forest mb-6">
+                Refined interiors designed for gathering and connection.
+            </h2>
+
+            <p class="text-charcoal/60 text-lg font-light leading-relaxed">
+                Warm wood tones, custom detailing, and expansive lake views create spaces that feel luxurious, relaxed, and deeply inviting.
+            </p>
+
+        </div>
+
+        <!-- EDITORIAL GALLERY: ASYMMETRICAL LAYOUT -->
+
+        <div class="grid lg:grid-cols-12 gap-8">
+
+            <!-- TALL LEFT IMAGE -->
+            <div class="lg:col-span-7">
+                <div class="gallery-image fade-up h-[700px]">
+                    <img 
+                        src="../images/Med Cliffside/Interior/show3993469.jpg" 
+                        class="w-full h-full object-cover"
+                    >
+                </div>
+            </div>
+
+            <!-- STACKED RIGHT IMAGE -->
+            <div class="lg:col-span-5 flex flex-col justify-start">
+                <div class="gallery-image fade-up h-[700px]">
+                    <img 
+                        src="../images/Med Cliffside/Interior/1009930_600423936676203_1508538106_n.jpg" 
+                        class="w-full h-full object-cover"
+                    >
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- KITCHEN -->
+
+<section class="py-20 lg:py-28 bg-[#F8F6F2]">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="max-w-3xl mb-16 fade-up">
+
+            <p class="text-gold uppercase tracking-[0.3em] text-xs mb-4">
+                Kitchen
+            </p>
+
+            <h2 class="section-title text-forest mb-6">
+                Crafted for entertaining and everyday living.
+            </h2>
+
+            <p class="text-charcoal/60 text-lg font-light leading-relaxed">
+                Layered natural materials, artisan-inspired detailing, and warm textures create a kitchen that feels timeless and effortlessly functional.
+            </p>
+
+        </div>
+
+        <!-- FEATURE IMAGE -->
+
+        <div class="gallery-image fade-up mb-8">
+            <img 
+                src="../images/Med Cliffside/Interior/show3993447.jpg" 
+                class="w-full h-[700px] object-cover"
+            >
+        </div>
+
+        <!-- SUPPORTING IMAGES -->
+
+        <div class="grid lg:grid-cols-2 gap-8 mb-6 lg:mb-8">
+
+            <div class="gallery-image fade-up">
+                <img 
+                    src="../images/Med Cliffside/Interior/show3993459.jpg" 
+                    class="w-full h-full object-cover"
+                >
+            </div>
+
+            <div class="gallery-image fade-up">
+                <img 
+                    src="../images/Med Cliffside/Interior/show3993460.jpg" 
+                    class="w-full h-full object-cover"
+                >
+            </div>
+
+        </div>
+
+        <p class="max-w-2xl text-sm text-charcoal/50 font-light leading-relaxed">
+            Warm wood tones, artisan textures, and custom millwork bring timeless character to the heart of the home.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- CINEMATIC BREAK -->
+
+<section class="relative overflow-hidden" style="height: 80vh;">
+
+    <img
+        src="../images/Med Cliffside/Interior/show3993469.jpg"
+        class="absolute inset-0 w-full h-full object-cover"
+    >
+
+    <div class="absolute inset-0 bg-black/20"></div>
+
+</section>
+
+
+<!-- BATHROOMS -->
+
+<section class="section-spacing">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="max-w-3xl mb-16 fade-up">
+
+            <p class="text-gold uppercase tracking-[0.3em] text-xs mb-4">
+                Bathrooms
+            </p>
+
+            <h2 class="section-title text-forest mb-6">
+                Spa-inspired warmth and handcrafted detail.
+            </h2>
+
+            <p class="text-charcoal/60 text-lg font-light leading-relaxed">
+                Natural stone, custom millwork, and layered textures create luxurious spaces that feel refined, calming, and timeless.
+            </p>
+
+        </div>
+
+        <!-- FEATURE IMAGE -->
+
+        <div class="gallery-image fade-up mb-8">
+            <img 
+                src="../images/Med Cliffside/Interior/76820_600423746676222_1162567912_n.jpg" 
+                class="w-full h-[85vh] object-cover"
+            >
+        </div>
+
+        <!-- SUPPORTING IMAGES -->
+
+        <div class="grid lg:grid-cols-2 gap-8 mb-6 lg:mb-8">
+
+            <div class="gallery-image fade-up">
+                <img 
+                    src="../images/Med Cliffside/Interior/578474_600424783342785_1476461897_n.jpg" 
+                    class="w-full h-full object-cover"
+                >
+            </div>
+
+            <div class="gallery-image fade-up">
+                <img 
+                    src="../images/Med Cliffside/Interior/996824_600424070009523_1224111733_n.jpg" 
+                    class="w-full h-full object-cover"
+                >
+            </div>
+
+        </div>
+
+        <p class="max-w-2xl text-sm text-charcoal/50 font-light leading-relaxed">
+            Natural stone and warm textures create a calm, spa-inspired retreat.
+        </p>
+    </div>
+
+</section>
+
+<!-- BUILT INTO THE LANDSCAPE -->
+
+<section class="py-24 lg:py-32 bg-[#F8F6F2]">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="max-w-3xl mb-16 fade-up">
+
+            <p class="text-gold uppercase tracking-[0.3em] text-xs mb-4">
+                From the Top to the Bottom
+            </p>
+
+            <h2 class="section-title text-forest mb-6">
+                Built Into the Landscape
+            </h2>
+
+            <p class="text-charcoal/60 text-lg font-light leading-relaxed">
+                                Constructing directly into the cliffside required extensive structural coordination and careful integration with the natural rock face.
+Each level of the home was engineered to maximize lake views while preserving the dramatic terrain surrounding the property.
+            </p>
+
+        </div>
+
+        <div class="gallery-image fade-up mb-8">
+            <img
+                src="../images/Med Cliffside/Exterior/20140430_202853.jpg"
+                class="w-full h-[700px] object-cover"
+            >
+        </div>
+
+       <div class="grid lg:grid-cols-2 gap-8 mb-6 lg:mb-8 items-start">
+
+    <div class="gallery-image fade-up">
+        <img
+            src="../images/Med Cliffside/Exterior/img_0154.jpg"
+            class="w-full h-[520px] object-cover"
+        >
+    </div>
+
+    <div class="gallery-image fade-up">
+        <img
+            src="../images/Med Cliffside/Exterior/20140501_195428.jpeg"
+            class="w-full h-[320px] object-cover"
+        >
+    </div>
+
+</div>
+
+        <p class="max-w-2xl text-sm text-charcoal/50 font-light leading-relaxed">
+            Five levels engineered into the cliff face, each connected by carefully planned access and maximized for unobstructed lake views.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="py-20 lg:py-32 bg-forest text-white text-center">
+
+    <div class="max-w-3xl mx-auto px-6">
+
+        <p class="text-gold uppercase tracking-[0.3em] text-xs mb-6">
+            Start Your Project
+        </p>
+
+        <h2 class="text-5xl lg:text-6xl font-medium leading-tight mb-8">
+            Thinking about transforming your home?
+        </h2>
+
+        <p class="text-white/70 text-lg font-light leading-relaxed mb-12">
+            We specialize in renovations and additions that blend craftsmanship, clarity, and timeless design.
+        </p>
+
+        <a
+            href="../index.html#contact"
+            class="inline-block border border-white px-10 py-5 uppercase tracking-[0.2em] text-xs hover:bg-white hover:text-forest transition-all duration-500"
+        >
+            Contact Us
+        </a>
+
+    </div>
+
+</section>
+
+<script>
+
+/* REVEAL */
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+            entry.target.classList.add('active');
+        }
+
+    });
+
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-up').forEach(el => {
+    observer.observe(el);
+});
+
+const menuToggle = document.getElementById('menu-toggle');
+const menuOverlay = document.getElementById('menu-overlay');
+const hamburgerLines = Array.from(document.querySelectorAll('.hamburger span'));
+const navbar = document.getElementById('navbar');
+
+function openMenu() {
+    menuOverlay.classList.remove('hidden-menu');
+    menuOverlay.classList.add('visible-menu');
+    menuToggle.classList.add('active');
+    const color = navbar.classList.contains('scrolled') ? '#1C2B24' : 'white';
+    hamburgerLines.forEach(line => line.style.backgroundColor = color);
+}
+
+function closeMenu() {
+    menuOverlay.classList.remove('visible-menu');
+    menuOverlay.classList.add('hidden-menu');
+    menuToggle.classList.remove('active');
+    updateHeaderColor();
+}
+
+menuToggle.addEventListener('click', () => {
+    if (menuOverlay.classList.contains('hidden-menu')) {
+        openMenu();
+    } else {
+        closeMenu();
+    }
+});
+
+function updateHeaderColor() {
+
+    const hero = document.getElementById('hero-section');
+
+    if (!hero) return;
+
+    const passedHero = window.scrollY > (hero.offsetHeight - 120);
+
+    if (passedHero) {
+
+        navbar.classList.add('scrolled');
+
+    } else {
+
+        navbar.classList.remove('scrolled');
+
+    }
+
+    // LOGO COLOR
+const logo = document.getElementById('logo-img');
+
+if (passedHero) {
+
+    logo.style.filter = 'brightness(0)';
+
+} else {
+
+    logo.style.filter = 'brightness(0) invert(1)';
+
+}
+
+    // HAMBURGER COLOR
+    if (!menuOverlay.classList.contains('visible-menu')) {
+
+        hamburgerLines.forEach(line => {
+
+            line.style.backgroundColor = passedHero
+                ? '#1C2B24'
+                : 'white';
+
+        });
+
+    }
+}
+
+window.addEventListener('scroll', updateHeaderColor, { passive: true });
+window.addEventListener('load', updateHeaderColor);
+
+</script>
+
+</body>
+</html>

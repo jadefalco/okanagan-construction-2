@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Lakeside Getaway | Okanagan Inspired Construction</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                forest: '#1C2B24',
+                gold: '#C4B59D',
+                cream: '#F5F3EF',
+                charcoal: '#2C2C2C'
+            },
+            fontFamily: {
+                serif: ['Playfair Display', 'serif'],
+                sans: ['Inter', 'sans-serif']
+            }
+        }
+    }
+}
+</script>
+
+<style>
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: #2C2C2C;
+}
+
+h1,h2,h3 {
+    font-family: 'Playfair Display', serif;
+}
+
+.section-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+}
+
+.fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s cubic-bezier(0.16,1,0.3,1);
+}
+
+.fade-up.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gallery-image {
+    overflow: hidden;
+    border-radius: 28px;
+}
+
+.gallery-image img {
+    transition: transform 1.2s cubic-bezier(0.16,1,0.3,1);
+}
+
+.gallery-image:hover img {
+    transform: scale(1.04);
+}
+
+/* BEFORE AFTER */
+
+.before-after-slider {
+    position: relative;
+    overflow: hidden;
+    border-radius: 32px;
+    cursor: ew-resize;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+}
+
+.before-after-slider img {
+    user-select: none;
+    pointer-events: none;
+}
+
+.before-image {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    width: 50%;
+}
+
+.slider-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: white;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.slider-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    background: white;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.section-spacing {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+@media (min-width: 1024px) {
+    .section-spacing {
+        padding-top: 7rem;
+        padding-bottom: 7rem;
+    }
+}
+
+#logo-img {
+    transition: filter 0.35s ease;
+    will-change: filter;
+    filter: brightness(0) invert(1);
+}
+
+#navbar.scrolled .hamburger span {
+    background: #1C2B24;
+}
+
+.hamburger span {
+    background: white;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+#navbar.scrolled .hamburger span {
+    background: #1C2B24;
+}
+
+#navbar {
+    background: transparent;
+}
+
+#navbar.scrolled {
+    background: rgba(255,255,255,0.96);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    backdrop-filter: blur(14px);
+}
+
+.menu-overlay {
+    right: 0;
+    left: auto;
+    width: 25vw;
+    min-width: 320px;
+    max-width: 420px;
+    background: rgba(28, 43, 36, 0.9);
+    padding: 3rem 2rem;
+}
+
+@media (max-width: 640px) {
+    .menu-overlay {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+.menu-overlay.hidden-menu {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.menu-overlay.visible-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+
+
+</style>
+</head>
+
+<body class="bg-white">
+
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out">    <div class="w-full px-8 lg:px-14 py-6 flex items-center justify-between">
+        <a href="../index.html" class="block">
+            <img id="logo-img" src="../images/logo.png" alt="Okanagan Inspired Construction Logo" class="h-12 lg:h-16 w-auto">
+        </a>
+
+        <button id="menu-toggle" class="hamburger relative w-8 h-6 flex flex-col justify-between items-end z-50 group cursor-pointer">
+            <span class="block w-full h-0.5 transition-colors duration-300"></span>
+            <span class="block w-full h-0.5 transition-colors duration-300"></span>
+            <span class="block w-full h-0.5 transition-colors duration-300"></span>
+        </button>
+    </div>
+</header>
+
+<div id="menu-overlay" class="menu-overlay hidden-menu fixed top-0 right-0 bottom-0 z-40 bg-forest flex items-center justify-center">
+    <nav class="text-center">
+        <ul class="space-y-8">
+            <li class="menu-item">
+                <a href="../index.html" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Home</a>
+            </li>
+            <li class="menu-item">
+                <a href="../about.html" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">About</a>
+            </li>
+            <li class="menu-item">
+                <a href="../index.html#projects" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Projects</a>
+            </li>
+            <li class="menu-item">
+                <a href="../index.html#contact" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Contact</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<!-- HERO -->
+
+<section id="hero-section" class="relative h-screen overflow-hidden">
+
+    <img
+    src="../images/Lakeside Getaway/After - prof web/Exterior/Draper-exterior-5.jpg"
+    class="absolute inset-0 w-full h-full object-cover"
+>
+
+    <div class="absolute inset-0 bg-gradient-to-b from-black/15 via-black/12 to-black/10"></div>
+
+    <div class="relative z-10 h-full flex items-start justify-center text-center px-6 pt-24 lg:pt-32">
+
+        <div class="max-w-4xl">
+
+            <p class="text-white/70 uppercase tracking-[0.3em] text-sm mb-6">
+                Featured Project
+            </p>
+
+            <h1 class="text-white text-6xl lg:text-8xl font-medium leading-none mb-8">
+                Lakeside<br>Getaway
+            </h1>
+
+            <p class="text-white/80 text-lg lg:text-xl font-light leading-relaxed max-w-2xl mx-auto">
+                A complete transformation of a dated Okanagan lake home into a refined family retreat inspired by timeless coastal architecture.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- PROJECT SPECS -->
+
+<section class="py-20 border-b border-black/5">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-12">
+
+            <div>
+                <p class="text-gold uppercase tracking-[0.28em] text-xs mb-5">
+                    Location
+                </p>
+
+                <p class="text-charcoal/70 text-base leading-relaxed font-light">
+                    Okanagan Lake
+                </p>
+            </div>
+
+            <div>
+                <p class="text-gold uppercase tracking-[0.28em] text-xs mb-5">
+                    Scope
+                </p>
+
+                <p class="text-charcoal/70 text-base leading-relaxed font-light">
+                    Full Interior & Exterior Renovation
+                </p>
+            </div>
+
+            <div>
+                <p class="text-gold uppercase tracking-[0.28em] text-xs mb-5">
+                    Features
+                </p>
+
+                <p class="text-charcoal/70 text-base leading-relaxed font-light">
+    Reclaimed 19th-century barn wood, imported iron doors from Egypt, golden ratio architecture
+</p>
+            </div>
+
+            <div>
+                <p class="text-gold uppercase tracking-[0.28em] text-xs mb-5">
+                    Style
+                </p>
+
+                <p class="text-charcoal/70 text-base leading-relaxed font-light">
+                    Hampton-Inspired Coastal
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- INTRO -->
+
+<section class="section-spacing">
+
+    <div class="max-w-5xl mx-auto px-6">
+
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+
+            <div class="fade-up">
+
+                <p class="text-gold uppercase tracking-[0.3em] text-xs mb-6">
+                    Project Overview
+                </p>
+
+                <h2 class="section-title text-forest">
+                    A full renovation designed around warmth, light, and timeless materials.
+                </h2>
+
+            </div>
+
+            <div class="fade-up">
+
+                <div class="space-y-6 text-lg text-charcoal/70 font-light leading-relaxed">
+
+                    <p>
+                        Originally built in the 1990s, this lakefront home lacked flow, warmth, and connection to its surroundings.
+                    </p>
+
+                    <p>
+                        Our team completely reimagined the space from the inside out — opening sightlines, introducing reclaimed barn wood, and refining every detail to create a calm, elevated living experience.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- EXTERIOR -->
+
+<section class="section-spacing bg-[#F8F6F2]">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="max-w-3xl mb-16 fade-up">
+
+            <p class="text-gold uppercase tracking-[0.3em] text-xs mb-4">
+                Exterior
+            </p>
+
+            <h2 class="section-title text-forest mb-6">
+                A completely reimagined exterior presence.
+            </h2>
+
+            <p class="text-charcoal/60 text-lg font-light leading-relaxed">
+                The exterior renovation introduced cleaner architectural lines, warm natural textures, and stronger connection to the lakefront surroundings.
+            </p>
+
+        </div>
+
+        <!-- SLIDER -->
+
+        <div class="before-after-slider fade-up mb-12" data-start="38">
+
+            <!-- AFTER -->
+            <img
+                src="../images/Lakeside Getaway/After - prof web/Exterior/Draper-exterior-2.jpg"
+                class="w-full h-[650px] object-cover"
+            >
+
+            <!-- BEFORE -->
+            <div class="before-image">
+                <img
+                    src="../images/Lakeside Getaway/Orginal Photos/FinchOutside2.jpg"
+                    class="w-full h-[650px] object-cover"
+                >
+            </div>
+
+            <div class="slider-line"></div>
+
+            <div class="slider-handle">
+                <div class="w-4 h-4 border-l-2 border-r-2 border-forest"></div>
+            </div>
+
+        </div>
+
+        <!-- GALLERY -->
+
+        <div class="grid lg:grid-cols-2 gap-8">
+
+            <div class="gallery-image fade-up">
+                <img src="../images/Lakeside Getaway/After - prof web/Exterior/Draper-exterior-1.jpg" class="w-full h-full object-cover">
+            </div>
+
+            <div class="gallery-image fade-up">
+                <img src="../images/Lakeside Getaway/After - prof/Exterior/Draper-exterior-5-crop2.JPG" class="w-full h-full object-cover object-right scale-110">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- LIVING ROOM -->
+
+<section class="section-spacing">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="max-w-3xl mb-16 fade-up">
+
+            <p class="text-gold uppercase tracking-[0.3em] text-xs mb-4">
+                Living Spaces
+            </p>
+
+            <h2 class="section-title text-forest mb-6">
+                Warm minimalism with handcrafted detail.
+            </h2>
+
+            <p class="text-charcoal/60 text-lg font-light leading-relaxed">
+                Reclaimed wood, natural light, and refined proportions transformed the interior into a calm, welcoming retreat.
+            </p>
+
+        </div>
+
+        <!-- SLIDER -->
+
+        <div class="before-after-slider fade-up mb-12" data-start="62">
+
+            <img
+                src="../images/Lakeside Getaway/After - prof web/Living_Space/Draper-livingroom-6.jpg"
+                class="w-full h-[650px] object-cover"
+            >
+
+            <div class="before-image">
+    <img
+        src="../images/Lakeside Getaway/Orginal Photos/great room.jpeg"
+       class="w-full h-[650px] object-cover brightness-[0.78] saturate-[0.62]"
+    >
+</div>
+
+            <div class="slider-line"></div>
+
+            <div class="slider-handle">
+                <div class="w-4 h-4 border-l-2 border-r-2 border-forest"></div>
+            </div>
+
+        </div>
+
+        <!-- GALLERY -->
+
+        <div class="grid lg:grid-cols-2 gap-8 mb-6 lg:mb-8">
+
+            <div class="gallery-image fade-up">
+                <img src="../images/Lakeside Getaway/After - prof web/Living_Space/Draper-livingroom-13.jpg" class="w-full h-full object-cover">
+            </div>
+
+            <div class="gallery-image fade-up">
+                <img src="../images/Lakeside Getaway/After - prof web/Living_Space/Draper-livingroom-14.jpg" class="w-full h-full object-cover">
+            </div>
+
+        </div>
+
+        <p class="max-w-2xl text-sm text-charcoal/50 font-light leading-relaxed">
+            A set of 19th-century iron French doors, sourced and imported from Egypt, made to fit and function within the space.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- KITCHEN -->
+
+<section class="section-spacing bg-[#F8F6F2]">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="max-w-3xl mb-16 fade-up">
+
+            <p class="text-gold uppercase tracking-[0.3em] text-xs mb-4">
+                Kitchen
+            </p>
+
+            <h2 class="section-title text-forest mb-6">
+                Built for gathering and connection.
+            </h2>
+
+            <p class="text-charcoal/60 text-lg font-light leading-relaxed">
+                The kitchen was redesigned to feel brighter, more open, and better connected to the surrounding living spaces.
+            </p>
+
+        </div>
+
+        <!-- SLIDER -->
+
+        <div class="before-after-slider fade-up mb-12" data-start="46">
+
+            <img
+                src="../images/Lakeside Getaway/After - prof web/Kitchen/Draper-kitchen-2.jpg"
+                class="w-full h-[650px] object-cover"
+            >
+
+            <div class="before-image">
+                <img
+                    src="../images/Lakeside Getaway/Orginal Photos/kitchen 2.jpeg"
+                    class="w-full h-[650px] object-cover brightness-[0.9] saturate-[0.72]"
+                >
+            </div>
+
+            <div class="slider-line"></div>
+
+            <div class="slider-handle">
+                <div class="w-4 h-4 border-l-2 border-r-2 border-forest"></div>
+            </div>
+
+        </div>
+
+        <!-- GALLERY -->
+
+        <div class="grid lg:grid-cols-3 gap-8 mb-6 lg:mb-8">
+
+            <div class="gallery-image fade-up">
+                <img src="../images/Lakeside Getaway/After - prof web/Kitchen/Draper-kitchen-9.jpg" class="w-full h-full object-cover">
+            </div>
+
+            <div class="gallery-image fade-up">
+                <img src="../images/Lakeside Getaway/After - prof web/Kitchen/Draper-kitchen-5.jpg" class="w-full h-full object-cover">
+            </div>
+
+            <div class="gallery-image fade-up">
+                <img src="../images/Lakeside Getaway/After - prof web/Kitchen/Draper-kitchen-7.jpg" class="w-full h-full object-cover">
+            </div>
+
+        </div>
+
+        <p class="max-w-2xl text-sm text-charcoal/50 font-light leading-relaxed">
+            Contemporary cabinetry is paired with a reclaimed 19th-century Egyptian iron door to bring depth and timeless character to the space.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- BREATHING SECTION -->
+
+<section class="relative overflow-hidden" style="height: 85vh;">
+
+    <img
+        src="../images/Lakeside Getaway/After - prof web/Exterior/Draper-exterior-1.jpg"
+        class="absolute inset-0 w-full h-full object-cover"
+    >
+
+</section>
+
+<!-- BATHROOMS -->
+
+<section class="py-24 lg:py-32">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="max-w-3xl mb-16 lg:mb-20 fade-up">
+
+            <p class="text-gold uppercase tracking-[0.3em] text-xs mb-4">
+                Bathrooms
+            </p>
+
+            <h2 class="section-title text-forest mb-6">
+                Spa-inspired simplicity and warmth.
+            </h2>
+
+            <p class="text-charcoal/60 text-lg font-light leading-relaxed">
+                Natural textures, custom detailing, and soft layered lighting transformed these bathrooms into calm, luxurious retreats.
+            </p>
+
+        </div>
+
+        <!-- EDITORIAL GALLERY: ASYMMETRICAL LAYOUT -->
+
+        <div class="grid lg:grid-cols-12 gap-8">
+
+            <!-- TALL LEFT IMAGE -->
+            <div class="lg:col-span-7">
+                <div class="gallery-image fade-up h-[700px]">
+                    <img 
+                        src="../images/Lakeside Getaway/After - prof web/Highlights/Draper-masterbedroom-12.jpg" 
+                        class="w-full h-full object-cover"
+                    >
+                </div>
+            </div>
+
+            <!-- STACKED RIGHT IMAGES -->
+            <div class="lg:col-span-5 flex flex-col gap-8">
+
+                <div class="gallery-image fade-up h-[330px]">
+                    <img 
+                        src="../images/Lakeside Getaway/After - prof web/Guest_Room/Draper-guestbath-2.jpg" 
+                        class="w-full h-full object-cover"
+                    >
+                </div>
+
+                <div class="gallery-image fade-up h-[330px]">
+                    <img 
+                        src="../images/Lakeside Getaway/After - prof web/Highlights/Draper-guestbath-5.jpg" 
+                        class="w-full h-full object-cover"
+                    >
+                </div>
+
+            </div>
+
+        </div>
+
+        <p class="max-w-2xl mt-8 lg:mt-10 text-sm text-charcoal/50 font-light leading-relaxed">
+            Custom millwork and carefully balanced materials give the bathroom a refined, timeless character.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="py-20 lg:py-32 bg-forest text-white text-center">
+
+    <div class="max-w-3xl mx-auto px-6">
+
+        <p class="text-gold uppercase tracking-[0.3em] text-xs mb-6">
+            Start Your Project
+        </p>
+
+        <h2 class="text-5xl lg:text-6xl font-medium leading-tight mb-8">
+            Thinking about transforming your home?
+        </h2>
+
+        <p class="text-white/70 text-lg font-light leading-relaxed mb-12">
+            We specialize in renovations and additions that blend craftsmanship, clarity, and timeless design.
+        </p>
+
+        <a
+            href="../index.html#contact"
+            class="inline-block border border-white px-10 py-5 uppercase tracking-[0.2em] text-xs hover:bg-white hover:text-forest transition-all duration-500"
+        >
+            Contact Us
+        </a>
+
+    </div>
+
+</section>
+
+<script>
+
+/* REVEAL */
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+            entry.target.classList.add('active');
+        }
+
+    });
+
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-up').forEach(el => {
+    observer.observe(el);
+});
+
+/* BEFORE AFTER */
+
+document.querySelectorAll('.before-after-slider').forEach(slider => {
+
+    const before = slider.querySelector('.before-image');
+    const handle = slider.querySelector('.slider-handle');
+    const line = slider.querySelector('.slider-line');
+
+    let isDragging = false;
+
+    const start = slider.dataset.start || 50;
+
+    before.style.width = start + "%";
+    handle.style.left = start + "%";
+    line.style.left = start + "%";
+
+    const moveSlider = (x) => {
+
+        const rect = slider.getBoundingClientRect();
+
+        let position = (x - rect.left) / rect.width;
+
+        position = Math.max(0, Math.min(1, position));
+
+        const percent = position * 100;
+
+        before.style.width = percent + "%";
+        handle.style.left = percent + "%";
+        line.style.left = percent + "%";
+    };
+
+    slider.addEventListener('mousedown', () => {
+        isDragging = true;
+    });
+
+    window.addEventListener('mouseup', () => {
+        isDragging = false;
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+
+        if (!isDragging) return;
+
+        moveSlider(e.clientX);
+
+    });
+
+    slider.addEventListener('touchstart', () => {
+        isDragging = true;
+    });
+
+    window.addEventListener('touchend', () => {
+        isDragging = false;
+    });
+
+    slider.addEventListener('touchmove', (e) => {
+
+        moveSlider(e.touches[0].clientX);
+
+    });
+
+});
+
+const menuToggle = document.getElementById('menu-toggle');
+const menuOverlay = document.getElementById('menu-overlay');
+const hamburgerLines = Array.from(document.querySelectorAll('.hamburger span'));
+const navbar = document.getElementById('navbar');
+
+function openMenu() {
+    menuOverlay.classList.remove('hidden-menu');
+    menuOverlay.classList.add('visible-menu');
+    menuToggle.classList.add('active');
+    const color = navbar.classList.contains('scrolled') ? '#1C2B24' : 'white';
+    hamburgerLines.forEach(line => line.style.backgroundColor = color);
+}
+
+function closeMenu() {
+    menuOverlay.classList.remove('visible-menu');
+    menuOverlay.classList.add('hidden-menu');
+    menuToggle.classList.remove('active');
+    updateHeaderColor();
+}
+
+menuToggle.addEventListener('click', () => {
+    if (menuOverlay.classList.contains('hidden-menu')) {
+        openMenu();
+    } else {
+        closeMenu();
+    }
+});
+
+function updateHeaderColor() {
+
+    const hero = document.getElementById('hero-section');
+
+    if (!hero) return;
+
+    const passedHero = window.scrollY > (hero.offsetHeight - 120);
+
+    if (passedHero) {
+
+        navbar.classList.add('scrolled');
+
+    } else {
+
+        navbar.classList.remove('scrolled');
+
+    }
+
+    // LOGO COLOR
+const logo = document.getElementById('logo-img');
+
+if (passedHero) {
+
+    logo.style.filter = 'brightness(0)';
+
+} else {
+
+    logo.style.filter = 'brightness(0) invert(1)';
+
+}
+
+    // HAMBURGER COLOR
+    if (!menuOverlay.classList.contains('visible-menu')) {
+
+        hamburgerLines.forEach(line => {
+
+            line.style.backgroundColor = passedHero
+                ? '#1C2B24'
+                : 'white';
+
+        });
+
+    }
+}
+
+window.addEventListener('scroll', updateHeaderColor, { passive: true });
+window.addEventListener('load', updateHeaderColor);
+
+</script>
+
+</body>
+</html>

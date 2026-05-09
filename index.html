@@ -11,6 +11,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="images/Lakeside Getaway/After - prof web/Living_Space/Draper-livingroom-7.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 
     <script>
@@ -36,7 +37,6 @@
     </script>
 
     <style>
-        /* Smooth scrolling body */
         html.lenis, html.lenis body {
             height: auto;
         }
@@ -44,46 +44,49 @@
             scroll-behavior: auto !important;
         }
        .lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;  /* was: overshoot-behavior */
-}
+            overscroll-behavior: contain;
+        }
         .lenis.lenis-stopped {
             overflow: hidden;
         }
         .lenis.lenis-scrolling iframe {
             pointer-events: none;
         }
-.before-after-slider {
-    position: relative;
-    
-    cursor: ew-resize;
-}
-
-
-.before-image {
-    width: 50%;
-}
-
-.slider-line {
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.slider-handle {
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: box-shadow 0.3s ease;
-}
-
-.slider-handle:hover {
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-        /* Luxury Process Cards */
+        .before-after-slider {
+            position: relative;
+            cursor: ew-resize;
+        }
+        .before-after-slider img {
+            user-select: none;
+            pointer-events: none;
+        }
+        .before-after-slider::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.15), transparent 40%);
+            pointer-events: none;
+        }
+        .before-image {
+            width: 50%;
+        }
+        .slider-line {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .slider-handle {
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: box-shadow 0.3s ease;
+        }
+        .slider-handle:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
         .process-card {
             position: relative;
             overflow: hidden;
             background: linear-gradient(145deg, #F9F7F4, #F2EFEA);
         }
-
         .process-card::before {
             content: "";
             position: absolute;
@@ -92,87 +95,64 @@
             opacity: 0;
             transition: opacity 0.6s ease;
         }
-
         .process-card:hover::before {
             opacity: 1;
         }
-
         .process-card:hover {
             transform: translateY(-12px) scale(1.01);
             box-shadow: 0 25px 60px rgba(0,0,0,0.08);
             border-color: rgba(196,181,157,0.4);
         }
-
         .process-card h3 {
             letter-spacing: 0.05em;
         }
-
-        /* Logo Drop Animation */
         #logo-img {
             transform: translateY(-100px);
             opacity: 0;
             transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease-out, filter 0.4s ease;
             filter: none;
         }
-        
         #logo-img.loaded {
             transform: translateY(0);
             opacity: 1;
         }
-
         #navbar.scrolled #logo-img {
             filter: invert(100%);
         }
-
-        /* CINEMATIC SLOW ZOOM OUT - Volk Homes Style */
         @keyframes heroZoomOut {
-            0% {
-                transform: scale(1.15);
-            }
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1.15); }
+            100% { transform: scale(1); }
         }
-
         .animate-hero-zoom {
-            animation: heroZoomOut 20s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: heroZoomOut 25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             will-change: transform;
         }
-
-        /* Hero Content Animations */
         .hero-from-top {
             opacity: 0;
             transform: translateY(-60px);
             transition: all 2.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .hero-from-top.loaded {
             opacity: 1;
             transform: translateY(0);
         }
-
         .hero-from-bottom {
             opacity: 0;
             transform: translateY(60px);
             transition: all 2.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .hero-from-bottom.loaded {
             opacity: 1;
             transform: translateY(0);
         }
-
         .hero-title-line {
             display: block;
             line-height: 1.0;
             margin-bottom: 0.1em;
         }
-
         .project-card h3 {
             font-size: 1.25rem;
         }
-
-        /* Lightbox fixed sizing */
         .lightbox-inner {
             width: min(90vw, 1000px);
             height: min(80vh, 700px);
@@ -181,64 +161,50 @@
             align-items: center;
             justify-content: center;
         }
-
         #lightbox-img {
             width: 100%;
             height: 100%;
             object-fit: contain;
             max-height: 650px;
         }
-
-        /* Parallax Images for other sections (NOT hero) */
         .parallax-container {
             overflow: hidden;
             position: relative;
         }
-
         .parallax-img {
             will-change: transform;
             transform: scale(1.08);
             transition: transform 0.1s linear;
         }
-
-        /* Project Card Hover */
         .project-card {
             cursor: pointer;
             overflow: hidden;
         }
-
         .project-card img {
             transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
             filter: grayscale(20%);
         }
-
         .project-card:hover img {
             transform: scale(1.08);
             filter: grayscale(0%);
         }
-
         .project-overlay {
             background: linear-gradient(to top, rgba(28, 43, 36, 0.9) 0%, rgba(28, 43, 36, 0.4) 50%, transparent 100%);
             transform: translateY(100%);
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .project-card:hover .project-overlay {
             transform: translateY(0);
         }
-
         .project-card .view-btn {
             transform: translateY(20px);
             opacity: 0;
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
         }
-
         .project-card:hover .view-btn {
             transform: translateY(0);
             opacity: 1;
         }
-
-        /* Scroll Reveal */
         .reveal {
             opacity: 0;
             transform: translateY(60px);
@@ -248,72 +214,71 @@
             opacity: 1;
             transform: translateY(0);
         }
-
         .stagger-1 { transition-delay: 0.1s; }
         .stagger-2 { transition-delay: 0.2s; }
         .stagger-3 { transition-delay: 0.3s; }
-
-        /* Menu Animation */
         .menu-overlay {
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
+    right: 0;
+    left: auto;
+    width: 25vw;
+    min-width: 320px;
+    max-width: 420px;
+    background: rgba(28, 43, 36, 0.96);
+    padding: 3rem 3rem;
+    transition:
+        opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0.6s;
+}
+        @media (max-width: 640px) {
+            .menu-overlay {
+                width: 100%;
+                min-width: auto;
+            }
         }
-        
         .menu-overlay.hidden-menu {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
-        
         .menu-overlay.visible-menu {
             opacity: 1;
             visibility: visible;
             pointer-events: all;
         }
-
         .menu-item {
             opacity: 0;
             transform: translateY(40px);
             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
         .menu-overlay.visible-menu .menu-item {
             opacity: 1;
             transform: translateY(0);
         }
-        
         .menu-overlay.visible-menu .menu-item:nth-child(1) { transition-delay: 0.1s; }
         .menu-overlay.visible-menu .menu-item:nth-child(2) { transition-delay: 0.2s; }
         .menu-overlay.visible-menu .menu-item:nth-child(3) { transition-delay: 0.3s; }
         .menu-overlay.visible-menu .menu-item:nth-child(4) { transition-delay: 0.4s; }
-
-        /* Hamburger Animation */
         .hamburger span {
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
         .hamburger.active span:nth-child(1) {
             transform: rotate(45deg) translate(5px, 5px);
         }
-        
         .hamburger.active span:nth-child(2) {
             opacity: 0;
             transform: translateX(-10px);
         }
-        
         .hamburger.active span:nth-child(3) {
             transform: rotate(-45deg) translate(7px, -6px);
         }
-
         #navbar.scrolled {
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
-
         .texture-soft {
             position: relative;
             background: linear-gradient(to bottom, #F5F3EF, #F2EFEA);
         }
-
         .texture-soft::before {
             content: "";
             position: absolute;
@@ -323,45 +288,36 @@
             background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
             z-index: 0;
         }
-
         .texture-soft > * {
             position: relative;
             z-index: 1;
         }
-
         ::-webkit-scrollbar {
             width: 8px;
         }
-        
         ::-webkit-scrollbar-track {
             background: #F5F3EF;
         }
-        
         ::-webkit-scrollbar-thumb {
             background: #1C2B24;
             border-radius: 4px;
         }
-
         .lightbox {
             transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
         .lightbox.hidden {
             opacity: 0;
             pointer-events: none;
         }
-        
         .lightbox.visible {
             opacity: 1;
             pointer-events: all;
         }
-
         .btn-luxury {
             position: relative;
             overflow: hidden;
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
         .btn-luxury::before {
             content: '';
             position: absolute;
@@ -372,10 +328,213 @@
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.6s;
         }
-        
         .btn-luxury:hover::before {
             left: 100%;
         }
+        /* ============================================
+   MOBILE OPTIMIZATION LAYER
+   (Desktop stays unchanged)
+============================================ */
+
+@media (max-width: 768px) {
+
+    /* General spacing */
+    section {
+        padding-top: 5rem !important;
+        padding-bottom: 5rem !important;
+    }
+
+    .max-w-7xl,
+    .max-w-6xl,
+    .max-w-5xl,
+    .max-w-4xl {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    /* Navigation */
+    #navbar .py-6 {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    #logo-img {
+        height: 42px !important;
+    }
+
+    /* Mobile menu */
+    .menu-overlay {
+        width: 100vw;
+        padding: 5rem 2rem 3rem;
+    }
+
+    .menu-overlay ul {
+        gap: 1.5rem;
+    }
+
+    .menu-overlay a {
+        font-size: 2.5rem !important;
+        line-height: 1.1;
+    }
+
+    /* Hero section */
+    #home {
+        min-height: 100svh;
+    }
+
+    .hero-title-line {
+        line-height: 0.95;
+    }
+
+    #home h1 {
+        font-size: clamp(3rem, 12vw, 4.5rem) !important;
+        letter-spacing: -0.03em;
+    }
+
+    #home p {
+        font-size: 1rem !important;
+        line-height: 1.7;
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #home .mb-14 {
+        margin-bottom: 2rem !important;
+    }
+
+    #home .mb-12 {
+        margin-bottom: 1.75rem !important;
+    }
+
+    #home a {
+        padding: 0.95rem 2rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+    }
+
+    /* Section headings */
+    h2 {
+        line-height: 1.1 !important;
+    }
+
+    .font-serif.text-4xl,
+    .font-serif.text-5xl,
+    .font-serif.text-6xl {
+        font-size: clamp(2.2rem, 8vw, 3.2rem) !important;
+    }
+
+    /* Body text */
+    .text-lg {
+        font-size: 1rem !important;
+        line-height: 1.8;
+    }
+
+    /* Before/After slider */
+    .before-after-slider img,
+    .before-image img {
+        height: 260px !important;
+    }
+
+    .slider-handle {
+        width: 42px;
+        height: 42px;
+    }
+
+    /* Project cards */
+    .project-card h3 {
+        font-size: 1.6rem !important;
+    }
+
+    .project-card .mt-8 {
+        margin-top: 1.25rem !important;
+    }
+
+    /* Process cards */
+    .process-card {
+        padding: 2rem !important;
+    }
+
+    .process-card p {
+        font-size: 0.95rem;
+        line-height: 1.75;
+    }
+
+    /* About stats */
+    #about .grid-cols-3 {
+        gap: 1rem;
+    }
+
+    #about .font-serif.text-5xl {
+        font-size: 2.2rem !important;
+    }
+
+    /* Testimonials */
+    .text-xl {
+        font-size: 1.1rem !important;
+        line-height: 1.8;
+    }
+
+    /* Contact section */
+    #contact h2 {
+        font-size: clamp(2.4rem, 9vw, 3.5rem) !important;
+    }
+
+    #contact .space-y-8 {
+        gap: 1.5rem;
+    }
+
+    #contact .w-14.h-14 {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    #contact .text-xl {
+        font-size: 1rem !important;
+    }
+
+    /* Form fields */
+    input,
+    textarea,
+    select {
+        font-size: 16px !important;
+        padding: 1rem !important;
+    }
+
+    textarea {
+        min-height: 140px;
+    }
+
+    button[type="submit"] {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+
+    /* Footer */
+    footer {
+        padding-top: 4rem !important;
+        padding-bottom: 4rem !important;
+    }
+
+    footer .font-serif {
+        font-size: 1.8rem !important;
+    }
+
+    /* Reduce animation intensity on mobile */
+    .project-card:hover img,
+    .process-card:hover {
+        transform: none !important;
+    }
+
+    .animate-hero-zoom {
+        animation-duration: 18s;
+    }
+
+    /* Better reveal animations on mobile */
+    .reveal {
+        transform: translateY(30px);
+    }
+}
     </style>
 </head>
 <body class="font-sans text-charcoal bg-white antialiased selection:bg-forest selection:text-white">
@@ -384,7 +543,8 @@
     <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out bg-transparent">
         <div class="w-full px-6 lg:px-12 py-6 flex items-center justify-between">
             <a href="#home" class="font-serif text-2xl lg:text-3xl font-medium tracking-tight text-white transition-colors duration-300" id="logo-text">
-                <img id="logo-img" 
+                <img
+  loading="lazy" id="logo-img" 
                      src="images/logo.png"
                      alt="Okanagan Inspired Construction Logo" 
                      class="h-12 lg:h-16 w-auto mr-2 inline-block align-middle object-contain">
@@ -399,8 +559,8 @@
     </header>
 
     <!-- Full Screen Menu -->
-    <div id="menu-overlay" class="menu-overlay hidden-menu fixed inset-0 z-40 bg-forest flex items-center justify-center">
-        <nav class="text-center">
+    <div id="menu-overlay" class="menu-overlay hidden-menu fixed top-0 right-0 bottom-0 z-40 bg-forest flex items-center justify-start">
+    <nav class="text-left w-full">
             <ul class="space-y-8">
                 <li class="menu-item">
                     <a href="#home" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Home</a>
@@ -418,46 +578,40 @@
         </nav>
     </div>
 
-    <!-- Hero Section with Cinematic Slow Zoom -->
+    <!-- Hero Section -->
     <section id="home" class="relative h-screen w-full overflow-hidden">
-        <!-- Background Image with Zoom Animation -->
         <div class="absolute inset-0 w-full h-full overflow-hidden">
-            <img id="hero-bg" 
-                 src="images/hero-banner.jpg" 
+            <img
+  loading="lazy" id="hero-bg" 
+                 src="images/Lakeside Getaway/After - prof web/Living_Space/Draper-livingroom-7.jpg" 
                  alt="Luxury Okanagan Home" 
-                 class="w-full h-full object-cover animate-hero-zoom">
-            <div class="absolute inset-0 bg-black/30"></div>
+                 class="w-full h-full object-cover animate-hero-zoom brightness-[1.08]">    
+            <div class="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/55"></div>
         </div>
 
-        <!-- Hero Content -->
-<div class="relative z-10 h-full flex flex-col justify-center items-center text-center px-6">
-    
-    <!-- Enhanced Company Name -->
-<div class="hero-from-top mb-6">
-    <p class="text-white/60 text-lg tracking-[0.3em] uppercase font-medium">
-        Okanagan Inspired Construction
-    </p>
-    <div class="w-12 h-[1px] bg-gold mt-3 mx-auto opacity-70"></div>
-</div>
-    <h1 class="font-serif text-5xl lg:text-7xl xl:text-8xl text-white font-medium mb-2 max-w-5xl">
-        <span class="hero-title-line hero-from-top">From Vision</span>
-    </h1>
-    
-    <h1 class="font-serif text-5xl lg:text-7xl xl:text-8xl text-white font-medium mb-8 max-w-5xl">
-        <span class="hero-title-line hero-from-bottom">To Reality</span>
-    </h1>
-    
-    <p class="hero-from-bottom text-white/80 text-lg lg:text-xl font-light max-w-2xl mb-12 leading-relaxed">
-    Renovations & Additions in the Okanagan<br>
-    Transforming homes with craftsmanship, clarity, and a team you can trust.
-</p>
-    
-    <a href="#projects" class="hero-from-bottom inline-block px-10 py-4 border border-white text-white hover:bg-white hover:text-forest transition-all duration-500 text-xs tracking-[0.2em] uppercase">
-        View Our Work
-    </a>
-</div>
+        <div class="relative z-10 h-full flex flex-col justify-center items-center text-center px-6">
+            <div class="hero-from-top mb-6">
+                <p class="text-white/85 text-lg tracking-[0.3em] uppercase font-medium drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+                    Okanagan Inspired Construction
+                </p>
+                <div class="w-12 h-[1px] bg-gold mt-3 mx-auto opacity-70"></div>
+            </div>
 
-        <!-- Scroll Indicator -->
+            <h1 class="font-serif text-5xl lg:text-7xl xl:text-8xl text-white font-medium mb-14 max-w-5xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]">
+    <span class="hero-title-line hero-from-top">From Vision</span>
+    <span class="hero-title-line hero-from-bottom">To Reality</span>
+</h1>
+            
+            <p class="hero-from-bottom text-white text-lg lg:text-xl font-normal max-w-2xl mb-12 leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+                Renovations & Additions in the Okanagan<br>
+                Transforming homes with craftsmanship, clarity, and a team you can trust.
+            </p>
+            
+            <a href="#projects" class="hero-from-bottom inline-block px-10 py-4 border border-white text-white hover:bg-white hover:text-forest transition-all duration-500 text-xs tracking-[0.2em] uppercase drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+                View Our Work
+            </a>
+        </div>
+
         <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce opacity-0 transition-opacity duration-1000 delay-1000" id="scroll-indicator">
             <svg class="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
@@ -466,71 +620,69 @@
     </section>
 
     <!-- Before & After Slider -->
-<section class="py-32 lg:py-40 bg-white">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-        <p class="text-gold text-xs tracking-[0.3em] uppercase mb-6 font-medium">Transformations</p>
-        <h2 class="font-serif text-4xl lg:text-6xl text-forest font-medium mb-10">
-            Before & After
-        </h2>
-        <p class="text-charcoal/60 font-light text-lg max-w-2xl mx-auto mb-20">
-            Drag to explore the transformation.
-        </p>
+    <section class="py-32 lg:py-40 bg-white">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <p class="text-gold text-xs tracking-[0.3em] uppercase mb-6 font-medium">Transformations</p>
+            <h2 class="font-serif text-4xl lg:text-6xl text-forest font-medium mb-10">
+                Before & After
+            </h2>
+            <p class="text-charcoal/60 font-light text-lg max-w-2xl mx-auto mb-20">
+                Drag to explore the transformation.
+            </p>
 
-            <div class="before-after-slider reveal relative w-full max-w-4xl mx-auto overflow-hidden">
-    
-    <!-- AFTER (base image) -->
-    <img src="images/after1.jpg" class="w-full h-[450px] object-cover select-none">
+            <div class="before-after-slider reveal relative w-full max-w-5xl mx-auto overflow-hidden rounded-[28px] shadow-2xl">    
+                <img
+  loading="lazy" src="images/Lakeside Getaway/After - prof web/Exterior/Draper-exterior-5.jpg" class="w-full h-[450px] object-cover select-none">
+                <div class="before-image absolute inset-0 overflow-hidden">
+                    <img
+  loading="lazy" src="images/Lakeside Getaway/Orginal Photos/Finch1.jpg" class="w-full h-[450px] object-cover select-none">
+                </div>
+                <div class="absolute top-4 left-4 text-white text-xs tracking-wider bg-black/40 px-3 py-1 backdrop-blur-sm">
+                    Before
+                </div>
+                <div class="absolute top-4 right-4 text-white text-xs tracking-wider bg-black/40 px-3 py-1 backdrop-blur-sm">
+                    After
+                </div>
+                <div class="slider-line absolute top-0 bottom-0 w-[2px] bg-white shadow-lg"></div>
+                <div class="slider-handle absolute top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-xl flex items-center justify-center cursor-ew-resize">
+                    <div class="w-4 h-4 border-l-2 border-r-2 border-forest"></div>
+                </div>
+            </div>
 
-    <!-- BEFORE (overlay image) -->
-    <div class="before-image absolute inset-0 overflow-hidden">
-        <img src="images/before1.jpg" class="w-full h-[450px] object-cover select-none">
-    </div>
+            <div class="mt-8 text-left max-w-2xl mx-auto">
+                <h3 class="font-serif text-2xl text-forest mb-2">Lakeside Getaway</h3>
+                <p class="text-charcoal/60 font-light leading-relaxed">
+                    A full interior and exterior transformation of a 1990s Okanagan lake home — reimagined into a refined family retreat with custom architectural details, reclaimed 19th-century barn wood, and Hampton-inspired design.
+                </p>
+                <div class="mt-6 border-l border-gold pl-6">
+                    <p class="text-sm tracking-wide uppercase text-gold mb-2">Design Detail</p>
+                    <p class="text-charcoal/60 font-light italic leading-relaxed">
+                        The architecture of the home was designed around the timeless proportions of the golden ratio — creating balance, harmony, and visual elegance throughout the space.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Labels -->
-    <div class="absolute top-4 left-4 text-white text-xs tracking-wider bg-black/40 px-3 py-1 backdrop-blur-sm">
-        Before
-    </div>
-    <div class="absolute top-4 right-4 text-white text-xs tracking-wider bg-black/40 px-3 py-1 backdrop-blur-sm">
-        After
-    </div>
-
-    <!-- Divider -->
-    <div class="slider-line absolute top-0 bottom-0 w-[2px] bg-white shadow-lg"></div>
-
-    <!-- Handle -->
-    <div class="slider-handle absolute top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-xl flex items-center justify-center cursor-ew-resize">
-        <div class="w-4 h-4 border-l-2 border-r-2 border-forest"></div>
-    </div>
-
-</div>
-<div class="mt-8 text-left max-w-2xl mx-auto">
-    <h3 class="font-serif text-2xl text-forest mb-2">
-        Full Home Renovation
-    </h3>
-    <p class="text-charcoal/60 font-light leading-relaxed">
-        Complete transformation of an outdated interior into a modern, functional living space — designed to better reflect the homeowner’s lifestyle and vision.
-    </p>
-</div>
-    </div>
-</section>
-    <!-- Featured Projects Preview -->
-    <section class="py-32 lg:py-40 texture-soft">
+    <!-- Featured Projects (Only 2) -->
+    <section id="projects" class="py-32 lg:py-40 texture-soft">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col lg:flex-row justify-between items-end mb-20 reveal">
                 <div>
                     <p class="text-gold text-xs tracking-[0.3em] uppercase mb-4 font-medium">Our Work</p>
-<h2>Renovations & Transformations</h2>
+                    <h2 class="font-serif text-4xl lg:text-6xl text-forest font-medium leading-tight">
+                        Renovations & Transformations
+                    </h2>
                 </div>
-                <a href="#projects" class="mt-6 lg:mt-0 text-forest border-b border-forest pb-1 hover:text-gold hover:border-gold transition-colors duration-500 text-xs tracking-[0.2em] uppercase">
-                    View All Projects
-                </a>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="reveal project-card group" onclick="openLightbox(0)">
+                <!-- Lakeside Getaway -->
+                <div class="reveal project-card group" onclick="window.location.href='projects/lakeside-getaway.html'">
                     <div class="parallax-container relative aspect-[4/3] overflow-hidden">
-                        <img src="images/Okanagan-Ranch.jpg" 
-                             alt="Okanagan Ranch Home" 
+                        <img
+  loading="lazy" src="images/Lakeside Getaway/After - prof web/Exterior/Draper-exterior-5.jpg" 
+                             alt="Lakeside Getaway" 
                              class="parallax-img w-full h-full object-cover">
                         <div class="project-overlay absolute inset-0 flex flex-col items-center justify-end pb-12">
                             <span class="view-btn text-white text-xs tracking-[0.2em] uppercase border border-white/50 px-8 py-3 backdrop-blur-sm hover:bg-white hover:text-forest transition-all duration-300">
@@ -539,15 +691,18 @@
                         </div>
                     </div>
                     <div class="mt-8">
-                        <h3 class="font-serif text-2xl text-forest mb-2">Okanagan Ranch Home</h3>
-                        <p class="text-charcoal/60 font-light text-sm tracking-wide">Full Home Renovation • Lake Country</p>
+                        <h3 class="font-serif text-2xl text-forest mb-2">Lakeside Getaway</h3>
+                        <p class="text-charcoal/60 font-light text-sm tracking-wide">Full Renovation & Addition • Okanagan Lake</p>
                     </div>
                 </div>
 
-                <div class="reveal stagger-1 project-card group" onclick="openLightbox(1)">
+                <!-- Mediterranean Cliffside -->
+                <div class="reveal stagger-1 project-card group" onclick="window.location.href='projects/mediterranean-cliffside.html'">
                     <div class="parallax-container relative aspect-[4/3] overflow-hidden">
-                        <img src="images/outdoor-deck.jpg" 
-                             alt="Scandinavian Lake House" 
+                        <img
+  
+  loading="lazy" src="images/Med Cliffside/Exterior/show3993446.jpg" 
+                             alt="Mediterranean Cliffside" 
                              class="parallax-img w-full h-full object-cover">
                         <div class="project-overlay absolute inset-0 flex flex-col items-center justify-end pb-12">
                             <span class="view-btn text-white text-xs tracking-[0.2em] uppercase border border-white/50 px-8 py-3 backdrop-blur-sm hover:bg-white hover:text-forest transition-all duration-300">
@@ -556,8 +711,8 @@
                         </div>
                     </div>
                     <div class="mt-8">
-                        <h3 class="font-serif text-2xl text-forest mb-2">The Lakeside Retreat</h3>
-                        <p class="text-charcoal/60 font-light text-sm tracking-wide">Full Renovation • Lake View</p>
+                        <h3 class="font-serif text-2xl text-forest mb-2">Mediterranean Cliffside</h3>
+                        <p class="text-charcoal/60 font-light text-sm tracking-wide">Custom Luxury Build • Okanagan Cliffside</p>
                     </div>
                 </div>
             </div>
@@ -569,15 +724,58 @@
         <div class="max-w-4xl mx-auto px-6 text-center">
             <p class="reveal text-gold text-sm tracking-[0.3em] uppercase mb-8 font-medium">Since 2005</p>
             <h2 class="reveal stagger-1 font-serif text-3xl lg:text-5xl xl:text-6xl text-forest font-medium leading-tight mb-8">
-    Renovations done right — with experience you can trust.
-</h2>
-
-<p class="reveal stagger-2 text-charcoal/60 text-lg leading-relaxed font-light max-w-2xl mx-auto">
-    From full remodels to complex additions, we specialize in transforming homes with precision, adaptability, and a deep understanding of what our clients truly want.
-</p>
+                Renovations done right — with experience you can trust.
+            </h2>
+            <p class="reveal stagger-2 text-charcoal/60 text-lg leading-relaxed font-light max-w-2xl mx-auto">
+                From full remodels to complex additions, we specialize in transforming homes with precision, adaptability, and a deep understanding of what our clients truly want.
+            </p>
         </div>
     </section>
 
+    <!-- Trust section -->
+<section class="py-20 bg-[#F9F7F4] border-y border-black/5">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+
+      <div>
+        <p class="text-gold text-xs tracking-[0.25em] uppercase mb-4">
+          Communication
+        </p>
+        <h3 class="font-serif text-2xl text-forest mb-4">
+          Clear & Transparent
+        </h3>
+        <p class="text-charcoal/60 font-light leading-relaxed">
+          We keep clients informed throughout every stage of the project — no surprises, no disappearing act.
+        </p>
+      </div>
+
+      <div>
+        <p class="text-gold text-xs tracking-[0.25em] uppercase mb-4">
+          Experience
+        </p>
+        <h3 class="font-serif text-2xl text-forest mb-4">
+          Problem Solvers
+        </h3>
+        <p class="text-charcoal/60 font-light leading-relaxed">
+          Renovations rarely go exactly as planned. Our experience allows us to adapt quickly and keep projects moving.
+        </p>
+      </div>
+
+      <div>
+        <p class="text-gold text-xs tracking-[0.25em] uppercase mb-4">
+          Craftsmanship
+        </p>
+        <h3 class="font-serif text-2xl text-forest mb-4">
+          Built With Care
+        </h3>
+        <p class="text-charcoal/60 font-light leading-relaxed">
+          From structural work to finishing details, we approach every home with precision and pride.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
     <!-- Process Section -->
     <section class="py-24 lg:py-32 bg-white">
         <div class="max-w-6xl mx-auto px-6 text-center">
@@ -620,87 +818,6 @@
         </div>
     </section>
 
-    <!-- Projects Gallery -->
-    <section id="projects" class="py-32 lg:py-40 texture-soft">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-20 reveal">
-                <p class="text-gold text-xs tracking-[0.3em] uppercase mb-6 font-medium">Our Work</p>
-                <h2 class="font-serif text-4xl lg:text-6xl text-forest font-medium mb-6 leading-tight">Selected Projects</h2>
-                <p class="text-charcoal/60 font-light text-lg leading-relaxed">
-                    A curated selection of custom homes and renovations showcasing our commitment to architectural excellence and craftsmanship.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="reveal project-card group" onclick="openLightbox(0)">
-                    <div class="parallax-container relative aspect-[4/5] overflow-hidden mb-6">
-                        <img src="images/Okanagan-Ranch.jpg" alt="Okanagan Ranch Home" class="parallax-img w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 flex items-center justify-center">
-                            <span class="view-btn text-white text-xs tracking-[0.2em] uppercase border border-white/50 px-6 py-3 backdrop-blur-sm">View</span>
-                        </div>
-                    </div>
-                    <h3 class="font-serif text-2xl text-forest mb-1">Okanagan Ranch Home</h3>
-                    <p class="text-sm text-charcoal/50 font-light tracking-wide">Custom Build • 2023</p>
-                </div>
-
-                <div class="reveal stagger-1 project-card group" onclick="openLightbox(1)">
-                    <div class="parallax-container relative aspect-[4/5] overflow-hidden mb-6">
-                        <img src="images/outdoor-deck.jpg" alt="Lakeside Retreat" class="parallax-img w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 flex items-center justify-center">
-                            <span class="view-btn text-white text-xs tracking-[0.2em] uppercase border border-white/50 px-6 py-3 backdrop-blur-sm">View</span>
-                        </div>
-                    </div>
-                    <h3 class="font-serif text-2xl text-forest mb-1">Lakeside Retreat</h3>
-                    <p class="text-sm text-charcoal/50 font-light tracking-wide">Renovation • 2022</p>
-                </div>
-
-                <div class="reveal stagger-2 project-card group" onclick="openLightbox(2)">
-                    <div class="parallax-container relative aspect-[4/5] overflow-hidden mb-6">
-                        <img src="images/westside.jpg" alt="Minimalist Villa" class="parallax-img w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 flex items-center justify-center">
-                            <span class="view-btn text-white text-xs tracking-[0.2em] uppercase border border-white/50 px-6 py-3 backdrop-blur-sm">View</span>
-                        </div>
-                    </div>
-                    <h3 class="font-serif text-2xl text-forest mb-1">Westside Contemporary</h3>
-                    <p class="text-sm text-charcoal/50 font-light tracking-wide">Custom Build • 2023</p>
-                </div>
-
-                <div class="reveal project-card group" onclick="openLightbox(3)">
-                    <div class="parallax-container relative aspect-[4/5] overflow-hidden mb-6">
-                        <img src="images/wine_country.jpg" alt="Modern Exterior" class="parallax-img w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 flex items-center justify-center">
-                            <span class="view-btn text-white text-xs tracking-[0.2em] uppercase border border-white/50 px-6 py-3 backdrop-blur-sm">View</span>
-                        </div>
-                    </div>
-                    <h3 class="font-serif text-2xl text-forest mb-1">Lakeview Estate</h3>
-                    <p class="text-sm text-charcoal/50 font-light tracking-wide">Renovation • 2021</p>
-                </div>
-
-                <div class="reveal stagger-1 project-card group" onclick="openLightbox(4)">
-                    <div class="parallax-container relative aspect-[4/5] overflow-hidden mb-6">
-                        <img src="images/log-home.jpg" alt="Scandinavian Facade" class="parallax-img w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 flex items-center justify-center">
-                            <span class="view-btn text-white text-xs tracking-[0.2em] uppercase border border-white/50 px-6 py-3 backdrop-blur-sm">View</span>
-                        </div>
-                    </div>
-                    <h3 class="font-serif text-2xl text-forest mb-1">Wine Country Retreat</h3>
-                    <p class="text-sm text-charcoal/50 font-light tracking-wide">Custom Build • 2022</p>
-                </div>
-
-                <div class="reveal stagger-2 project-card group" onclick="openLightbox(5)">
-                    <div class="parallax-container relative aspect-[4/5] overflow-hidden mb-6">
-                        <img src="images/penticton-home.jpg" alt="Modern Architecture" class="parallax-img w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 flex items-center justify-center">
-                            <span class="view-btn text-white text-xs tracking-[0.2em] uppercase border border-white/50 px-6 py-3 backdrop-blur-sm">View</span>
-                        </div>
-                    </div>
-                    <h3 class="font-serif text-2xl text-forest mb-1">Penticton Project</h3>
-                    <p class="text-sm text-charcoal/50 font-light tracking-wide">Addition • 2023</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- About Section -->
     <section id="about" class="py-16 lg:py-20 bg-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-6">
@@ -711,14 +828,14 @@
                         Built on experience.<br>Driven by craftsmanship.
                     </h2>
                     <div class="space-y-6 text-charcoal/70 font-light leading-relaxed text-lg">
-    <p>
-        Our strength comes from experience — and the ability to adapt when things don’t go as planned.
-        With decades of combined construction knowledge, Bruce and our team are known for finding solutions others can’t.
-    </p>
-    <p>
-        Clients often tell us they feel relieved knowing their project is in the right hands. That trust is what leads many to expand their projects once work begins — confident that we’ll bring their vision to life the right way.
-    </p>
-</div>
+                        <p>
+                            Our strength comes from experience — and the ability to adapt when things don't go as planned.
+                            With decades of combined construction knowledge, Bruce and our team are known for finding solutions others can't.
+                        </p>
+                        <p>
+                            Clients often tell us they feel relieved knowing their project is in the right hands. That trust is what leads many to expand their projects once work begins — confident that we'll bring their vision to life the right way.
+                        </p>
+                    </div>
                     <div class="mt-12">
                         <a href="about.html" class="inline-block px-10 py-4 border border-forest text-forest hover:bg-forest hover:text-white transition-all duration-500 text-xs tracking-[0.2em] uppercase">Meet the Team</a>
                     </div>
@@ -739,7 +856,9 @@
                 </div>
                 <div class="reveal relative lg:pl-12">
                     <div class="parallax-container aspect-[3/4] overflow-hidden">
-                        <img src="images/general-construction.jpg" alt="Custom Home Okanagan" class="parallax-img w-full h-full object-cover">
+                        <img
+  
+  loading="lazy" src="images/Med Cliffside/Exterior/show3993445.jpg" alt="Custom Home Okanagan" class="parallax-img w-full h-full object-cover">
                     </div>
                 </div>
             </div>
@@ -757,15 +876,15 @@
             <div class="space-y-12">
                 <div class="reveal">
                     <p class="text-xl text-charcoal/70 font-light leading-relaxed mb-6">
-    "We felt incredibly fortunate to find Bruce and his team. Their experience and ability to adapt gave us total confidence throughout the entire renovation."
-</p>
+                        "We felt incredibly fortunate to find Bruce and his team. Their experience and ability to adapt gave us total confidence throughout the entire renovation."
+                    </p>
                     <p class="text-sm text-charcoal/50 tracking-wide">— Homeowner, Kelowna</p>
                 </div>
 
                 <div class="reveal stagger-1">
                     <p class="text-xl text-charcoal/70 font-light leading-relaxed mb-6">
-    "What started as a small project turned into a full transformation — we trusted them completely and kept adding more."
-</p>
+                        "What started as a small project turned into a full transformation — we trusted them completely and kept adding more."
+                    </p>
                     <p class="text-sm text-charcoal/50 tracking-wide">— Client, Lake Country</p>
                 </div>
             </div>
@@ -783,9 +902,7 @@
                     <h2 class="font-serif text-4xl lg:text-5xl xl:text-6xl font-medium leading-tight mb-6">
                         Start your renovation or addition.
                     </h2>
-                    <p class="text-white/60 font-light text-lg mb-12 leading-relaxed max-w-md">
-                        We typically respond within 24 hours. Tell us about your project and we'll take it from there.
-                    </p>                    
+                                      
                     <p class="text-white/60 font-light text-lg mb-12 leading-relaxed max-w-md">
                         Every great build starts with a conversation. Whether you have detailed plans or just a rough idea, we'd love to hear about your project.
                     </p>
@@ -831,50 +948,161 @@
                 </div>
 
                 <div class="reveal stagger-1">
-                    <form class="space-y-6" onsubmit="event.preventDefault(); alert('Thank you for your message. We will be in touch shortly.');">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-white/40 text-xs mb-3 uppercase tracking-wider">Name</label>
-                                <input type="text" required class="w-full bg-white/5 border border-white/10 px-5 py-4 text-white placeholder-white/20 focus:outline-none focus:border-gold transition-colors duration-300 font-light" placeholder="Your name">
-                            </div>
-                            <div>
-                                <label class="block text-white/40 text-xs mb-3 uppercase tracking-wider">Email</label>
-                                <input type="email" required class="w-full bg-white/5 border border-white/10 px-5 py-4 text-white placeholder-white/20 focus:outline-none focus:border-gold transition-colors duration-300 font-light" placeholder="your@email.com">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-white/40 text-xs mb-3 uppercase tracking-wider">Project Type</label>
-                            <select class="w-full bg-white/5 border border-white/10 px-5 py-4 text-white focus:outline-none focus:border-gold transition-colors duration-300 font-light cursor-pointer">
-                                <option value="" class="text-charcoal">Select a service</option>
-                                <option value="new-build" class="text-charcoal">New Custom Build</option>
-                                <option value="renovation" class="text-charcoal">Major Renovation</option>
-                                <option value="addition" class="text-charcoal">Home Addition</option>
-                                <option value="commercial" class="text-charcoal">Commercial Project</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-white/40 text-xs mb-3 uppercase tracking-wider">Message</label>
-                            <textarea rows="5" required class="w-full bg-white/5 border border-white/10 px-5 py-4 text-white placeholder-white/20 focus:outline-none focus:border-gold transition-colors duration-300 font-light resize-none" placeholder="Tell us about your project..."></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-gold text-forest py-5 text-xs tracking-[0.2em] uppercase font-medium hover:bg-white transition-all duration-500 mt-4">
-                            Send Message
-                        </button>
-                    </form>
-                </div>
-            </div>
+<form 
+    id="contact-form"
+    action="https://api.web3forms.com/submit" 
+    method="POST"
+    class="space-y-6"
+>
+
+    <!-- Web3Forms Access Key -->
+    <input 
+        type="hidden" 
+        name="access_key" 
+        value="4bfafa65-2834-40d8-a198-bcaa984856a0"
+    >
+
+    <!-- Email Subject -->
+<input 
+    type="hidden" 
+    name="subject" 
+    value="New Website Lead"
+>
+
+<input 
+    type="hidden" 
+    name="from_name" 
+    value="Okanagan Inspired Construction Website"
+>
+
+    <!-- Spam Protection -->
+    <input 
+        type="checkbox" 
+        name="botcheck" 
+        class="hidden" 
+        style="display: none;"
+    >
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <div>
+            <label class="block text-white/40 text-xs mb-3 uppercase tracking-wider">
+                Name
+            </label>
+
+            <input 
+                type="text"
+                name="name"
+                required
+                placeholder="Your name"
+                class="w-full bg-white/5 border border-white/10 px-5 py-4 text-white placeholder-white/20 focus:outline-none focus:border-gold transition-colors duration-300 font-light"
+            >
         </div>
+
+        <div>
+            <label class="block text-white/40 text-xs mb-3 uppercase tracking-wider">
+                Email
+            </label>
+
+            <input 
+                type="email"
+                name="email"
+                required
+                placeholder="your@email.com"
+                class="w-full bg-white/5 border border-white/10 px-5 py-4 text-white placeholder-white/20 focus:outline-none focus:border-gold transition-colors duration-300 font-light"
+            >
+        </div>
+
+    </div>
+
+    <div>
+        <label class="block text-white/40 text-xs mb-3 uppercase tracking-wider">
+            Project Type
+        </label>
+
+        <select 
+            name="project_type"
+            class="w-full bg-white/5 border border-white/10 px-5 py-4 text-white focus:outline-none focus:border-gold transition-colors duration-300 font-light cursor-pointer"
+        >
+            <option value="" class="text-charcoal">
+                Select a service
+            </option>
+
+            <option value="new-build" class="text-charcoal">
+                New Custom Build
+            </option>
+
+            <option value="renovation" class="text-charcoal">
+                Major Renovation
+            </option>
+
+            <option value="addition" class="text-charcoal">
+                Home Addition
+            </option>
+
+            <option value="commercial" class="text-charcoal">
+                Commercial Project
+            </option>
+        </select>
+    </div>
+
+    <div>
+        <label class="block text-white/40 text-xs mb-3 uppercase tracking-wider">
+            Message
+        </label>
+
+        <textarea 
+            name="message"
+            rows="5"
+            required
+            placeholder="Tell us about your project..."
+            class="w-full bg-white/5 border border-white/10 px-5 py-4 text-white placeholder-white/20 focus:outline-none focus:border-gold transition-colors duration-300 font-light resize-none"
+        ></textarea>
+    </div>
+
+    <button 
+        type="submit"
+        class="w-full bg-gold text-forest py-5 text-xs tracking-[0.2em] uppercase font-medium hover:bg-white transition-all duration-500 mt-4"
+    >
+        Send Message
+    </button>
+
+</form>
     </section>
 
     <!-- Footer -->
     <footer class="bg-charcoal text-white py-16 border-t border-white/10">
+        
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-8 md:mb-0 text-center md:text-left">
-                <p class="font-serif text-3xl mb-3">Okanagan Inspired Construction</p>
-                <p class="text-white/40 text-sm font-light tracking-wide">CHBA Member • Licensed • Insured</p>
-            </div>
+           <div class="mb-8 md:mb-0 text-center md:text-left flex flex-col items-center md:items-start">
+
+    <img
+        src="images/logo.png"
+        alt="Okanagan Inspired Construction Logo"
+        class="h-16 w-auto mb-4 opacity-90"
+    >
+
+    <p class="text-white/40 text-sm font-light tracking-wide">
+        CHBA Member • Licensed • Insured
+    </p>
+
+</div>
             <div class="text-center md:text-right">
                 <p class="text-white/40 text-sm mb-2 font-light">250-864-5774 • info@okanaganconstruction.ca</p>
-                <p class="text-white/20 text-xs font-light">&copy; 2026 Okanagan Inspired Construction. All rights reserved.</p>
+               <p class="text-white/20 text-xs font-light mb-2">
+    &copy; 2026 Okanagan Inspired Construction. All rights reserved.
+</p>
+
+<p class="text-white/20 text-[11px] font-light tracking-wide">
+    Website designed & maintained by 
+    <a 
+        href="https://truenorthwebsites.com" 
+        target="_blank"
+        class="hover:text-gold transition-colors duration-300"
+    >
+        TrueNorth Websites
+    </a>
+</p>
             </div>
         </div>
     </footer>
@@ -900,13 +1128,14 @@
         </button>
         
         <div class="lightbox-inner">
-            <img id="lightbox-img" src="" alt="" class="w-full h-full object-contain">
+            <img
+  
+  loading="lazy" id="lightbox-img" src="" alt="" class="w-full h-full object-contain">
             <p id="lightbox-caption" class="text-center text-white/60 mt-6 font-light tracking-wide"></p>
         </div>
     </div>
 
     <script>
-        // Initialize Lenis Smooth Scroll
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -925,22 +1154,15 @@
         }
         requestAnimationFrame(raf);
 
-        // Register GSAP ScrollTrigger (but NOT for hero background anymore)
         gsap.registerPlugin(ScrollTrigger);
 
-        // Project Images Array for Lightbox
         const projectImages = [
-            { src: "images/Okanagan-Ranch.jpg", caption: "Okanagan Ranch Home • Custom Build" },
-            { src: "images/outdoor-deck.jpg", caption: "Lakeside Retreat • Full Renovation" },
-            { src: "images/westside.jpg", caption: "Westside Contemporary • Custom Build" },
-            { src: "images/wine_country.jpg", caption: "Lakeview Estate • Renovation" },
-            { src: "images/log-home.jpg", caption: "Log Home • Custom Build" },
-            { src: "images/penticton-home.jpg", caption: "Penticton Project • Addition" }
+            { src: "images/Lakeside Getaway/After - prof web/Exterior/Draper-exterior-5.jpg", caption: "Lakeside Getaway • Full Renovation & Addition" },
+            { src: "images/Med Cliffside/Exterior/show3993446.jpg", caption: "Mediterranean Cliffside • Custom Luxury Build" }
         ];
 
         let currentImageIndex = 0;
 
-        // Lightbox Functions
         function openLightbox(index) {
             currentImageIndex = index;
             updateLightbox();
@@ -966,49 +1188,39 @@
             document.getElementById('lightbox-img').src = projectImages[currentImageIndex].src;
             document.getElementById('lightbox-caption').textContent = projectImages[currentImageIndex].caption;
         }
-// Before/After Slider
-document.querySelectorAll('.before-after-slider').forEach(slider => {
-    const before = slider.querySelector('.before-image');
-    const handle = slider.querySelector('.slider-handle');
-    const line = slider.querySelector('.slider-line');
-    
 
-    let isDragging = false;
+        document.querySelectorAll('.before-after-slider').forEach(slider => {
+            const before = slider.querySelector('.before-image');
+            const handle = slider.querySelector('.slider-handle');
+            const line = slider.querySelector('.slider-line');
+            let isDragging = false;
 
-    const moveSlider = (x) => {
-        const rect = slider.getBoundingClientRect();
-        let position = (x - rect.left) / rect.width;
+            const moveSlider = (x) => {
+                const rect = slider.getBoundingClientRect();
+                let position = (x - rect.left) / rect.width;
+                position = Math.max(0, Math.min(1, position));
+                const percent = position * 100;
+                before.style.width = percent + "%";
+                handle.style.left = percent + "%";
+                line.style.left = percent + "%";
+            };
 
-        // Clamp between 0 and 1
-        position = Math.max(0, Math.min(1, position));
+            const startDrag = () => isDragging = true;
+            const stopDrag = () => isDragging = false;
 
-        const percent = position * 100;
+            slider.addEventListener('mousedown', startDrag);
+            window.addEventListener('mouseup', stopDrag);
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                moveSlider(e.clientX);
+            });
+            slider.addEventListener('touchstart', () => isDragging = true);
+            window.addEventListener('touchend', () => isDragging = false);
+            slider.addEventListener('touchmove', (e) => {
+                moveSlider(e.touches[0].clientX);
+            });
+        });
 
-        before.style.width = percent + "%";
-        handle.style.left = percent + "%";
-        line.style.left = percent + "%";
-    };
-
-    const startDrag = () => isDragging = true;
-    const stopDrag = () => isDragging = false;
-
-    slider.addEventListener('mousedown', startDrag);
-    window.addEventListener('mouseup', stopDrag);
-
-    slider.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        moveSlider(e.clientX);
-    });
-
-    // Touch support
-    slider.addEventListener('touchstart', () => isDragging = true);
-    window.addEventListener('touchend', () => isDragging = false);
-
-    slider.addEventListener('touchmove', (e) => {
-        moveSlider(e.touches[0].clientX);
-    });
-});
-        // Menu Functions
         const menuToggle = document.getElementById('menu-toggle');
         const menuOverlay = document.getElementById('menu-overlay');
         const logoText = document.getElementById('logo-text');
@@ -1023,7 +1235,6 @@ document.querySelectorAll('.before-after-slider').forEach(slider => {
             menuOverlay.classList.add('visible-menu');
             menuToggle.classList.add('active');
             lenis.stop();
-            
             hamburgerLines.forEach(line => line.classList.remove('bg-forest'));
             hamburgerLines.forEach(line => line.classList.add('bg-white'));
         }
@@ -1044,18 +1255,15 @@ document.querySelectorAll('.before-after-slider').forEach(slider => {
             }
         });
 
-        // Header Scroll Effect
         const navbar = document.getElementById('navbar');
 
         function updateHeaderColor() {
             const currentScroll = window.pageYOffset;
-            
             if (currentScroll > 100) {
                 navbar.classList.add('bg-white/90', 'shadow-sm', 'scrolled');
                 navbar.classList.remove('bg-transparent');
                 logoText.classList.remove('text-white');
                 logoText.classList.add('text-forest');
-                
                 if (!menuOverlay.classList.contains('visible-menu')) {
                     hamburgerLines.forEach(line => {
                         line.classList.remove('bg-white');
@@ -1067,7 +1275,6 @@ document.querySelectorAll('.before-after-slider').forEach(slider => {
                 navbar.classList.add('bg-transparent');
                 logoText.classList.add('text-white');
                 logoText.classList.remove('text-forest');
-                
                 if (!menuOverlay.classList.contains('visible-menu')) {
                     hamburgerLines.forEach(line => {
                         line.classList.add('bg-white');
@@ -1079,14 +1286,12 @@ document.querySelectorAll('.before-after-slider').forEach(slider => {
 
         window.addEventListener('scroll', updateHeaderColor, { passive: true });
 
-        // Parallax Effect (only for project images, NOT hero)
         function handleParallax() {
             const parallaxElements = document.querySelectorAll('.parallax-img');
             parallaxElements.forEach(el => {
                 const container = el.closest('.parallax-container');
                 const rect = container.getBoundingClientRect();
                 const speed = 0.02;
-                
                 if (rect.top < window.innerHeight && rect.bottom > 0) {
                     const yPos = (rect.top * speed);
                     el.style.transform = `translateY(${yPos}px) scale(1.08)`;
@@ -1096,7 +1301,6 @@ document.querySelectorAll('.before-after-slider').forEach(slider => {
 
         window.addEventListener('scroll', handleParallax, { passive: true });
 
-        // Scroll Reveal Animation
         const observerOptions = {
             root: null,
             rootMargin: '0px',
@@ -1116,7 +1320,6 @@ document.querySelectorAll('.before-after-slider').forEach(slider => {
             observer.observe(element);
         });
 
-        // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeLightbox();
@@ -1135,21 +1338,38 @@ document.querySelectorAll('.before-after-slider').forEach(slider => {
                 closeLightbox();
             }
         });
+const form = document.getElementById('contact-form');
 
-        // PAGE LOAD ANIMATIONS
+form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            alert('Thank you! We will be in touch shortly.');
+            form.reset();
+        } else {
+            alert('Something went wrong. Please try again.');
+        }
+
+    } catch (error) {
+        alert('Something went wrong. Please try again.');
+    }
+});
         window.addEventListener('load', () => {
-            // GROUP 1: From Top (slower delay + duration)
             setTimeout(() => {
                 document.getElementById('logo-img').classList.add('loaded');
                 document.querySelectorAll('.hero-from-top').forEach(el => el.classList.add('loaded'));
             }, 900);
-
-            // GROUP 2: From Bottom
             setTimeout(() => {
                 document.querySelectorAll('.hero-from-bottom').forEach(el => el.classList.add('loaded'));
             }, 1700);
-
-            // Scroll indicator
             setTimeout(() => {
                 document.getElementById('scroll-indicator').style.opacity = '1';
             }, 2300);
