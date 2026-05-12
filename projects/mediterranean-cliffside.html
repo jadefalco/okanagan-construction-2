@@ -128,11 +128,11 @@ h1,h2,h3 {
 .menu-overlay {
     right: 0;
     left: auto;
-    width: 25vw;
-    min-width: 320px;
-    max-width: 420px;
+    width: 22vw;
+    min-width: 300px;
+    max-width: 360px;
     background: rgba(28, 43, 36, 0.9);
-    padding: 3rem 2rem;
+    padding: 2.5rem 2rem;
 }
 
 @media (max-width: 640px) {
@@ -176,21 +176,25 @@ h1,h2,h3 {
 </header>
 
 <div id="menu-overlay" class="menu-overlay hidden-menu fixed top-0 right-0 bottom-0 z-40 bg-forest flex items-center justify-center">
-    <nav class="text-center">
-        <ul class="space-y-8">
+    <nav class="text-center w-full">
+        <ul class="space-y-6">
             <li class="menu-item">
-                <a href="../index.html" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Home</a>
+                <a href="../index.html" class="font-serif text-3xl lg:text-5xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Home</a>
             </li>
             <li class="menu-item">
-                <a href="../about.html" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">About</a>
+                <a href="../about.html" class="font-serif text-3xl lg:text-5xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">About</a>
             </li>
             <li class="menu-item">
-                <a href="../index.html#projects" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Projects</a>
+                <a href="../index.html#projects" class="font-serif text-3xl lg:text-5xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Projects</a>
             </li>
             <li class="menu-item">
-                <a href="../index.html#contact" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Contact</a>
+                <a href="../index.html#contact" class="font-serif text-3xl lg:text-5xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Contact</a>
             </li>
         </ul>
+        <div class="mt-12 pt-8 border-t border-white/10">
+            <p class="text-white/40 text-xs tracking-wider uppercase mb-2">Get in touch</p>
+            <a href="tel:250-864-5774" class="text-white/70 text-sm hover:text-gold transition-colors duration-300">250-864-5774</a>
+        </div>
     </nav>
 </div>
 
@@ -200,6 +204,7 @@ h1,h2,h3 {
 
     <img
     src="../images/Med Cliffside/Interior/show3993445.png"
+    alt="Mediterranean cliffside great room with exposed beams and lake views"
     class="absolute inset-0 w-full h-full object-cover object-top"
 >
 
@@ -346,7 +351,8 @@ Mediterranean architecture anchored into the Okanagan cliffs.
         <div class="gallery-image fade-up mb-8">
             <img 
                 src="../images/Med Cliffside/Exterior/1231089_600424323342831_1242145905_n.jpg" 
-                class="w-full h-[700px] object-cover"
+                alt="Mediterranean cliffside home exterior with natural stone and layered textures"
+                class="w-full h-[420px] md:h-[700px] object-cover"
             >
         </div>
 
@@ -357,6 +363,7 @@ Mediterranean architecture anchored into the Okanagan cliffs.
             <div class="gallery-image fade-up">
                 <img 
                     src="../images/Med Cliffside/Exterior/20140505_131025.jpeg" 
+                    alt="Cliffside home exterior overlooking Okanagan Lake"
                     class="w-full h-full object-cover"
                 >
             </div>
@@ -364,6 +371,7 @@ Mediterranean architecture anchored into the Okanagan cliffs.
             <div class="gallery-image fade-up">
                 <img 
                     src="../images/Med Cliffside/Exterior/565038_600424443342819_831062533_n.jpg" 
+                    alt="Detailed view of Mediterranean exterior stonework and architectural elements"
                     class="w-full h-full object-cover"
                 >
             </div>
@@ -406,9 +414,10 @@ Mediterranean architecture anchored into the Okanagan cliffs.
 
             <!-- TALL LEFT IMAGE -->
             <div class="lg:col-span-7">
-                <div class="gallery-image fade-up h-[700px]">
+                <div class="gallery-image fade-up h-[420px] md:h-[700px]">
                     <img 
                         src="../images/Med Cliffside/Interior/show3993469.jpg" 
+                        alt="Spacious living room with warm wood tones and expansive lake views"
                         class="w-full h-full object-cover"
                     >
                 </div>
@@ -416,9 +425,10 @@ Mediterranean architecture anchored into the Okanagan cliffs.
 
             <!-- STACKED RIGHT IMAGE -->
             <div class="lg:col-span-5 flex flex-col justify-start">
-                <div class="gallery-image fade-up h-[700px]">
+                <div class="gallery-image fade-up h-[420px] md:h-[700px]">
                     <img 
                         src="../images/Med Cliffside/Interior/1009930_600423936676203_1508538106_n.jpg" 
+                        alt="Living space with custom detailing and panoramic Okanagan Lake views"
                         class="w-full h-full object-cover"
                     >
                 </div>
@@ -457,7 +467,8 @@ Mediterranean architecture anchored into the Okanagan cliffs.
         <div class="gallery-image fade-up mb-8">
             <img 
                 src="../images/Med Cliffside/Interior/show3993447.jpg" 
-                class="w-full h-[700px] object-cover"
+                alt="Gourmet kitchen with layered natural materials and artisan-inspired detailing"
+                class="w-full h-[420px] md:h-[700px] object-cover"
             >
         </div>
 
@@ -468,6 +479,7 @@ Mediterranean architecture anchored into the Okanagan cliffs.
             <div class="gallery-image fade-up">
                 <img 
                     src="../images/Med Cliffside/Interior/show3993459.jpg" 
+                    alt="Kitchen detail with warm wood cabinetry and natural stone surfaces"
                     class="w-full h-full object-cover"
                 >
             </div>
@@ -475,6 +487,7 @@ Mediterranean architecture anchored into the Okanagan cliffs.
             <div class="gallery-image fade-up">
                 <img 
                     src="../images/Med Cliffside/Interior/show3993460.jpg" 
+                    alt="Kitchen view showcasing custom millwork and timeless textures"
                     class="w-full h-full object-cover"
                 >
             </div>
@@ -491,10 +504,11 @@ Mediterranean architecture anchored into the Okanagan cliffs.
 
 <!-- CINEMATIC BREAK -->
 
-<section class="relative overflow-hidden" style="height: 80vh;">
+<section class="relative overflow-hidden h-[50vh] md:h-[80vh]">
 
     <img
         src="../images/Med Cliffside/Interior/show3993469.jpg"
+        alt="Cinematic view of Mediterranean living space with Okanagan Lake backdrop"
         class="absolute inset-0 w-full h-full object-cover"
     >
 
@@ -530,7 +544,8 @@ Mediterranean architecture anchored into the Okanagan cliffs.
         <div class="gallery-image fade-up mb-8">
             <img 
                 src="../images/Med Cliffside/Interior/76820_600423746676222_1162567912_n.jpg" 
-                class="w-full h-[85vh] object-cover"
+                alt="Spa-inspired bathroom with natural stone and warm handcrafted textures"
+                class="w-full h-[50vh] md:h-[85vh] object-cover"
             >
         </div>
 
@@ -541,6 +556,7 @@ Mediterranean architecture anchored into the Okanagan cliffs.
             <div class="gallery-image fade-up">
                 <img 
                     src="../images/Med Cliffside/Interior/578474_600424783342785_1476461897_n.jpg" 
+                    alt="Bathroom detail with custom millwork and layered natural stone"
                     class="w-full h-full object-cover"
                 >
             </div>
@@ -548,6 +564,7 @@ Mediterranean architecture anchored into the Okanagan cliffs.
             <div class="gallery-image fade-up">
                 <img 
                     src="../images/Med Cliffside/Interior/996824_600424070009523_1224111733_n.jpg" 
+                    alt="Calming bathroom retreat with warm textures and refined fixtures"
                     class="w-full h-full object-cover"
                 >
             </div>
@@ -587,7 +604,8 @@ Each level of the home was engineered to maximize lake views while preserving th
         <div class="gallery-image fade-up mb-8">
             <img
                 src="../images/Med Cliffside/Exterior/20140430_202853.jpg"
-                class="w-full h-[700px] object-cover"
+                alt="Custom home built into the Okanagan cliffside with unobstructed lake views"
+                class="w-full h-[420px] md:h-[700px] object-cover"
             >
         </div>
 
@@ -595,8 +613,8 @@ Each level of the home was engineered to maximize lake views while preserving th
 
             <div class="gallery-image fade-up">
                 <img
-                    src="../images/Med Cliffside/Exterior/IMG_0154.JPG"
-                    class="w-full h-[520px] object-cover"
+                    src="../images/Med Cliffside/Exterior/img_0154.JPG"
+                    class="w-full h-[320px] md:h-[520px] object-cover"
                     alt="Cliffside exterior detail"
                 >
             </div>
@@ -604,7 +622,7 @@ Each level of the home was engineered to maximize lake views while preserving th
             <div class="gallery-image fade-up">
                 <img
                     src="../images/Med Cliffside/Exterior/20140501_195428.jpeg"
-                    class="w-full h-[320px] object-cover"
+                    class="w-full h-[280px] md:h-[320px] object-cover"
                     alt="Lake view from cliffside home"
                 >
             </div>

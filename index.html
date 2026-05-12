@@ -220,11 +220,11 @@
         .menu-overlay {
     right: 0;
     left: auto;
-    width: 25vw;
-    min-width: 320px;
-    max-width: 420px;
+    width: 22vw;
+    min-width: 300px;
+    max-width: 360px;
     background: rgba(28, 43, 36, 0.96);
-    padding: 3rem 3rem;
+    padding: 2.5rem 2.5rem;
     transition:
         opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
         visibility 0.6s;
@@ -561,20 +561,24 @@
     <!-- Full Screen Menu -->
     <div id="menu-overlay" class="menu-overlay hidden-menu fixed top-0 right-0 bottom-0 z-40 bg-forest flex items-center justify-start">
     <nav class="text-left w-full">
-            <ul class="space-y-8">
+            <ul class="space-y-6">
                 <li class="menu-item">
-                    <a href="#home" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Home</a>
+                    <a href="#home" class="font-serif text-3xl lg:text-5xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Home</a>
                 </li>
                 <li class="menu-item">
-                    <a href="about.html" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">About</a>
+                    <a href="about.html" class="font-serif text-3xl lg:text-5xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">About</a>
                 </li>
                 <li class="menu-item">
-                    <a href="#projects" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Projects</a>
+                    <a href="#projects" class="font-serif text-3xl lg:text-5xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Projects</a>
                 </li>
                 <li class="menu-item">
-                    <a href="#contact" class="font-serif text-4xl lg:text-6xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Contact</a>
+                    <a href="#contact" class="font-serif text-3xl lg:text-5xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Contact</a>
                 </li>
             </ul>
+            <div class="mt-12 pt-8 border-t border-white/10">
+                <p class="text-white/40 text-xs tracking-wider uppercase mb-2">Get in touch</p>
+                <a href="tel:250-864-5774" class="text-white/70 text-sm hover:text-gold transition-colors duration-300">250-864-5774</a>
+            </div>
         </nav>
     </div>
 
@@ -632,10 +636,10 @@
 
             <div class="before-after-slider reveal relative w-full max-w-5xl mx-auto overflow-hidden rounded-[28px] shadow-2xl">    
                 <img
-  loading="lazy" src="images/Lakeside Getaway/After - prof web/Exterior/Draper-exterior-5.jpg" class="w-full h-[450px] object-cover scale-125 select-none">
+  loading="lazy" src="images/Lakeside Getaway/After - prof web/Exterior/Draper-exterior-5.jpg" alt="Renovated lakeside home exterior with modern coastal architecture" class="w-full h-[280px] md:h-[450px] object-cover scale-125 select-none">
                 <div class="before-image absolute inset-0 overflow-hidden">
                     <img
-  loading="lazy" src="images/Lakeside Getaway/Orginal Photos/Finch1.jpg" class="w-full h-[450px] object-cover select-none">
+  loading="lazy" src="images/Lakeside Getaway/Orginal Photos/Finch1.jpg" alt="Original 1990s lakeside home before renovation" class="w-full h-[280px] md:h-[450px] object-cover select-none">
                 </div>
                 <div class="absolute top-4 left-4 text-white text-xs tracking-wider bg-black/40 px-3 py-1 backdrop-blur-sm">
                     Before
