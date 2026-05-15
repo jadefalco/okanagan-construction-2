@@ -61,12 +61,27 @@ h1,h2,h3 {
 }
 
 .gallery-image {
+    position: relative;
     overflow: hidden;
     border-radius: 28px;
+    contain: layout paint;
+    isolation: isolate;
 }
 
 .gallery-image img {
+    display: block;
+    width: 100%;
+    height: auto;
     transition: transform 1.2s cubic-bezier(0.16,1,0.3,1);
+}
+
+.gallery-img-fill {
+    position: absolute;
+    inset: -4px;
+    width: calc(100% + 8px);
+    height: calc(100% + 8px);
+    object-fit: cover;
+    display: block;
 }
 
 .gallery-image:hover img {
@@ -343,29 +358,36 @@ Mediterranean architecture anchored into the Okanagan cliffs.
 
         <!-- FEATURE IMAGE -->
 
-        <div class="gallery-image fade-up mb-8">
-            <img 
-                src="../images/Med Cliffside/Exterior/1231089_600424323342831_1242145905_n.jpg" 
-                class="w-full h-[700px] object-cover"
-            >
+        <div class="fade-up mb-8">
+            <div class="gallery-image h-[700px]">
+                <img 
+                    src="../images/Med Cliffside/Exterior/1231089_600424323342831_1242145905_n.jpg" 
+                    alt="Mediterranean cliffside exterior"
+                    class="gallery-img-fill"
+                >
+            </div>
         </div>
 
         <!-- SUPPORTING IMAGES -->
 
         <div class="grid lg:grid-cols-2 gap-8 mb-6 lg:mb-8">
 
-            <div class="gallery-image fade-up">
-                <img 
-                    src="../images/Med Cliffside/Exterior/20140505_131025.jpeg" 
-                    class="w-full h-full object-cover"
-                >
+            <div class="fade-up">
+                <div class="gallery-image">
+                    <img 
+                        src="../images/Med Cliffside/Exterior/20140505_131025.jpeg" 
+                        alt="Exterior architectural detail"
+                    >
+                </div>
             </div>
 
-            <div class="gallery-image fade-up">
-                <img 
-                    src="../images/Med Cliffside/Exterior/565038_600424443342819_831062533_n.jpg" 
-                    class="w-full h-full object-cover"
-                >
+            <div class="fade-up">
+                <div class="gallery-image">
+                    <img 
+                        src="../images/Med Cliffside/Exterior/565038_600424443342819_831062533_n.jpg" 
+                        alt="Exterior view"
+                    >
+                </div>
             </div>
 
         </div>
@@ -406,21 +428,27 @@ Mediterranean architecture anchored into the Okanagan cliffs.
 
             <!-- TALL LEFT IMAGE -->
             <div class="lg:col-span-7">
-                <div class="gallery-image fade-up h-[700px]">
-                    <img 
-                        src="../images/Med Cliffside/Interior/show3993469.jpg" 
-                        class="w-full h-full object-cover"
-                    >
+                <div class="fade-up h-[700px]">
+                    <div class="gallery-image h-full">
+                        <img 
+                            src="../images/Med Cliffside/Interior/show3993469.jpg" 
+                            alt="Living space interior"
+                            class="gallery-img-fill"
+                        >
+                    </div>
                 </div>
             </div>
 
             <!-- STACKED RIGHT IMAGE -->
             <div class="lg:col-span-5 flex flex-col justify-start">
-                <div class="gallery-image fade-up h-[700px]">
-                    <img 
-                        src="../images/Med Cliffside/Interior/1009930_600423936676203_1508538106_n.jpg" 
-                        class="w-full h-full object-cover"
-                    >
+                <div class="fade-up h-[700px]">
+                    <div class="gallery-image h-full">
+                        <img 
+                            src="../images/Med Cliffside/Interior/1009930_600423936676203_1508538106_n.jpg" 
+                            alt="Interior detail"
+                            class="gallery-img-fill"
+                        >
+                    </div>
                 </div>
             </div>
 
@@ -454,29 +482,36 @@ Mediterranean architecture anchored into the Okanagan cliffs.
 
         <!-- FEATURE IMAGE -->
 
-        <div class="gallery-image fade-up mb-8">
-            <img 
-                src="../images/Med Cliffside/Interior/show3993447.jpg" 
-                class="w-full h-[700px] object-cover"
-            >
+        <div class="fade-up mb-8">
+            <div class="gallery-image h-[700px]">
+                <img 
+                    src="../images/Med Cliffside/Interior/show3993447.jpg" 
+                    alt="Kitchen design"
+                    class="gallery-img-fill"
+                >
+            </div>
         </div>
 
         <!-- SUPPORTING IMAGES -->
 
         <div class="grid lg:grid-cols-2 gap-8 mb-6 lg:mb-8">
 
-            <div class="gallery-image fade-up">
-                <img 
-                    src="../images/Med Cliffside/Interior/show3993459.jpg" 
-                    class="w-full h-full object-cover"
-                >
+            <div class="fade-up">
+                <div class="gallery-image">
+                    <img 
+                        src="../images/Med Cliffside/Interior/show3993459.jpg" 
+                        alt="Kitchen cabinetry"
+                    >
+                </div>
             </div>
 
-            <div class="gallery-image fade-up">
-                <img 
-                    src="../images/Med Cliffside/Interior/show3993460.jpg" 
-                    class="w-full h-full object-cover"
-                >
+            <div class="fade-up">
+                <div class="gallery-image">
+                    <img 
+                        src="../images/Med Cliffside/Interior/show3993460.jpg" 
+                        alt="Kitchen detail"
+                    >
+                </div>
             </div>
 
         </div>
@@ -527,29 +562,36 @@ Mediterranean architecture anchored into the Okanagan cliffs.
 
         <!-- FEATURE IMAGE -->
 
-        <div class="gallery-image fade-up mb-8">
-            <img 
-                src="../images/Med Cliffside/Interior/76820_600423746676222_1162567912_n.jpg" 
-                class="w-full h-[85vh] object-cover"
-            >
+        <div class="fade-up mb-8">
+            <div class="gallery-image h-[85vh]">
+                <img 
+                    src="../images/Med Cliffside/Interior/76820_600423746676222_1162567912_n.jpg" 
+                    alt="Spa-inspired bathroom"
+                    class="gallery-img-fill"
+                >
+            </div>
         </div>
 
         <!-- SUPPORTING IMAGES -->
 
         <div class="grid lg:grid-cols-2 gap-8 mb-6 lg:mb-8">
 
-            <div class="gallery-image fade-up">
-                <img 
-                    src="../images/Med Cliffside/Interior/578474_600424783342785_1476461897_n.jpg" 
-                    class="w-full h-full object-cover"
-                >
+            <div class="fade-up">
+                <div class="gallery-image">
+                    <img 
+                        src="../images/Med Cliffside/Interior/578474_600424783342785_1476461897_n.jpg" 
+                        alt="Bathroom stone detail"
+                    >
+                </div>
             </div>
 
-            <div class="gallery-image fade-up">
-                <img 
-                    src="../images/Med Cliffside/Interior/996824_600424070009523_1224111733_n.jpg" 
-                    class="w-full h-full object-cover"
-                >
+            <div class="fade-up">
+                <div class="gallery-image">
+                    <img 
+                        src="../images/Med Cliffside/Interior/996824_600424070009523_1224111733_n.jpg" 
+                        alt="Bathroom retreat"
+                    >
+                </div>
             </div>
 
         </div>
@@ -584,29 +626,36 @@ Each level of the home was engineered to maximize lake views while preserving th
 
         </div>
 
-        <div class="gallery-image fade-up mb-8">
-            <img
-                src="../images/Med Cliffside/Exterior/20140430_202853.jpg"
-                class="w-full h-[700px] object-cover"
-            >
+        <div class="fade-up mb-8">
+            <div class="gallery-image h-[700px]">
+                <img
+                    src="../images/Med Cliffside/Exterior/20140430_202853.jpg"
+                    alt="Cliffside construction"
+                    class="gallery-img-fill"
+                >
+            </div>
         </div>
 
        <div class="grid lg:grid-cols-2 gap-8 mb-6 lg:mb-8 items-start">
 
-            <div class="gallery-image fade-up">
-                <img
-                    src="../images/Med Cliffside/Exterior/IMG_0154.JPG"
-                    class="w-full h-[520px] object-cover"
-                    alt="Cliffside exterior detail"
-                >
+            <div class="fade-up">
+                <div class="gallery-image h-[520px]">
+                    <img
+                        src="../images/Med Cliffside/Exterior/IMG_0154.JPG"
+                        alt="Cliffside exterior detail"
+                        class="gallery-img-fill"
+                    >
+                </div>
             </div>
 
-            <div class="gallery-image fade-up">
-                <img
-                    src="../images/Med Cliffside/Exterior/20140501_195428.jpeg"
-                    class="w-full h-[320px] object-cover"
-                    alt="Lake view from cliffside home"
-                >
+            <div class="fade-up">
+                <div class="gallery-image h-[320px]">
+                    <img
+                        src="../images/Med Cliffside/Exterior/20140501_195428.jpeg"
+                        alt="Lake view from cliffside home"
+                        class="gallery-img-fill"
+                    >
+                </div>
             </div>
 
         </div>
