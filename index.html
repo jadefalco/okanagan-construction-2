@@ -992,6 +992,13 @@
     value="Okanagan Inspired Construction Website"
 >
 
+<input 
+    type="hidden" 
+    name="replyto" 
+    value="" 
+    id="replyto-field"
+>
+
     <!-- Spam Protection -->
     <input 
         type="checkbox" 
@@ -1355,10 +1362,13 @@
                 closeLightbox();
             }
         });
-        const form = document.getElementById('contact-form');
+const form = document.getElementById('contact-form');
 
 form.addEventListener('submit', async function(e) {
     e.preventDefault();
+
+    document.getElementById('replyto-field').value = form.querySelector('input[name="email"]').value;
+
     const formData = new FormData(form);
 
     try {
@@ -1367,23 +1377,29 @@ form.addEventListener('submit', async function(e) {
             body: formData
         });
 
-        // DEBUG: log the raw response
-        const responseText = await response.text();
-        console.log('Status:', response.status);
-        console.log('Response:', responseText);
-
         if (response.ok) {
             alert('Thank you! We will be in touch shortly.');
             form.reset();
         } else {
-            alert('Server error ' + response.status + '. Check console for details.');
+            alert('Something went wrong. Please try again.');
         }
 
     } catch (error) {
-        console.error('Fetch failed:', error);
-        alert('Network error: ' + error.message);
+        alert('Something went wrong. Please try again.');
     }
 });
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('logo-img').classList.add('loaded');
+                document.querySelectorAll('.hero-from-top').forEach(el => el.classList.add('loaded'));
+            }, 900);
+            setTimeout(() => {
+                document.querySelectorAll('.hero-from-bottom').forEach(el => el.classList.add('loaded'));
+            }, 1700);
+            setTimeout(() => {
+                document.getElementById('scroll-indicator').style.opacity = '1';
+            }, 2300);
+        });
     </script>
 </body>
 </html>
