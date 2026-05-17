@@ -53,11 +53,15 @@
             pointer-events: none;
         }
         .before-after-slider {
-            position: relative;
-            cursor: ew-resize;
-            contain: layout paint;
-            isolation: isolate;
-        }
+    position: relative;
+    cursor: ew-resize;
+    contain: layout paint;
+    isolation: isolate;
+    aspect-ratio: 16 / 10;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
         .before-after-slider > img,
         .before-image img {
             position: absolute;
@@ -441,16 +445,7 @@
         line-height: 1.8;
     }
 
-    /* Before/After slider */
-    .before-after-slider img,
-    .before-image img {
-        height: 260px !important;
-    }
-
-    .slider-handle {
-        width: 42px;
-        height: 42px;
-    }
+   
 
     /* Project cards */
     .project-card h3 {
