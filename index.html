@@ -122,6 +122,13 @@
         .process-card h3 {
             letter-spacing: 0.05em;
         }
+        .hero-whisper {
+    opacity: 0;
+    transition: opacity 1.8s ease-out;
+}
+.hero-whisper.loaded {
+    opacity: 1;
+}
         #logo-img {
             transform: translateY(-100px);
             opacity: 0;
@@ -633,7 +640,17 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
             </svg>
         </div>
+
+                              <!-- Trust Stats - ghost whisper -->
+                       <div class="hero-whisper absolute bottom-8 left-0 right-0 z-20 text-center">
+                <p class="text-[11px] text-white/40 tracking-[0.25em] uppercase font-light">
+                    25 years of Okanagan craftsmanship
+                </p>
+            </div>
+    
     </section>
+
+         
 
     <!-- Before & After Slider -->
     <section class="py-32 lg:py-40 bg-white">
@@ -1172,6 +1189,7 @@
             touchMultiplier: 2,
             infinite: false,
         });
+   
 
         function raf(time) {
             lenis.raf(time);
@@ -1389,7 +1407,7 @@ form.addEventListener('submit', async function(e) {
         alert('Something went wrong. Please try again.');
     }
 });
-        window.addEventListener('load', () => {
+                window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('logo-img').classList.add('loaded');
                 document.querySelectorAll('.hero-from-top').forEach(el => el.classList.add('loaded'));
@@ -1400,6 +1418,9 @@ form.addEventListener('submit', async function(e) {
             setTimeout(() => {
                 document.getElementById('scroll-indicator').style.opacity = '1';
             }, 2300);
+            setTimeout(() => {
+                document.querySelector('.hero-whisper')?.classList.add('loaded');
+            }, 3000);
         });
     </script>
 </body>
