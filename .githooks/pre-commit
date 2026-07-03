@@ -4,4 +4,4 @@
 node scripts/generate-sitemap.js
 
 # Stage the regenerated sitemap if it changed
-git add public/sitemap.xml
+git add sitemap.xml

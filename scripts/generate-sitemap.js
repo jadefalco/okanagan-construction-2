@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const DOMAIN = 'https://www.okanaganconstruction.ca';
-const PUBLIC_DIR = path.join(process.cwd(), 'public');
+const OUTPUT_DIR = process.cwd(); // repo root
 const ROOT_DIR = process.cwd();
 
 const EXCLUDED_DIRS = new Set([
@@ -140,17 +140,17 @@ Sitemap: ${DOMAIN}/sitemap.xml
 }
 
 function main() {
-  ensureDir(PUBLIC_DIR);
+  ensureDir(OUTPUT_DIR);
 
   const sitemap = generateSitemap();
-  const sitemapPath = path.join(PUBLIC_DIR, 'sitemap.xml');
+  const sitemapPath = path.join(OUTPUT_DIR, 'sitemap.xml');
   fs.writeFileSync(sitemapPath, sitemap, 'utf8');
 
   const urlCount = (sitemap.match(/<url>/g) || []).length;
   console.log(`Generated ${path.relative(ROOT_DIR, sitemapPath)} with ${urlCount} URLs`);
 
   const robots = generateRobots();
-  const robotsPath = path.join(PUBLIC_DIR, 'robots.txt');
+  const robotsPath = path.join(OUTPUT_DIR, 'robots.txt');
   fs.writeFileSync(robotsPath, robots, 'utf8');
   console.log(`Generated ${path.relative(ROOT_DIR, robotsPath)}`);
 }
