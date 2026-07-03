@@ -82,7 +82,10 @@ function getPriority(relativePath) {
   return '0.8';
 }
 
-function getChangefreq() {
+function getChangefreq(relativePath) {
+  const urlPath = getUrlFromFile(relativePath);
+
+  if (urlPath === '/') return 'weekly';
   return 'monthly';
 }
 
@@ -113,7 +116,7 @@ function generateSitemap() {
     const lastmod = formatDate(stats.mtime);
     const loc = DOMAIN + getUrlFromFile(relativePath);
     const priority = getPriority(relativePath);
-    const changefreq = getChangefreq();
+    const changefreq = getChangefreq(relativePath);
 
     xml += '  <url>\n';
     xml += `    <loc>${escapeXml(loc)}</loc>\n`;
