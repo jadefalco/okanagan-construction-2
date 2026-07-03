@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | Okanagan Inspired Construction</title>
+    <meta name="description" content="Find answers to common questions about home renovations, additions, permits, timelines, and our construction services across the Okanagan.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: '#1C2B24',
+                        gold: '#C4B59D',
+                        cream: '#F5F3EF',
+                        charcoal: '#2C2C2C'
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Do I need a building permit for a home addition in Kelowna?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, most home additions, structural changes, and major renovations in Kelowna require a building permit from the City. We guide you through the permit process and ensure all drawings and documentation are prepared correctly."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How long does a full home renovation take?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Timelines vary based on scope, but a full home renovation typically ranges from 4 to 12 months. We provide a detailed schedule during the planning phase and keep you informed throughout construction."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can we live in the house during the renovation?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "In many cases, yes. We plan the construction sequence to minimize disruption and keep essential spaces functional for as long as possible. For extensive projects, temporary relocation may be recommended."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What areas of the Okanagan do you service?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We work throughout the Okanagan, including Kelowna, West Kelowna, Lake Country, Peachland, Summerland, Penticton, and surrounding areas."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do you handle unexpected issues during construction?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Our team has decades of experience solving the surprises that come with renovations. We communicate clearly, present options, and adjust quickly to keep your project on track without compromising quality."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do you offer design services or do I need an architect?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We offer design-build services and can manage the entire design process in-house for many projects. For larger or more complex builds, we collaborate closely with architects and designers to bring your vision to life."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is your payment schedule?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Payments are structured around project milestones and outlined clearly in your contract. This keeps the schedule transparent and aligned with the progress of your build."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Are you licensed and insured in BC?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, we are fully licensed and insured to operate in British Columbia. We are also proud members of the Canadian Home Builders' Association."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+
+        #logo-img {
+            transition: filter 0.4s ease;
+            filter: brightness(0);
+        }
+        #navbar.scrolled #logo-img {
+            filter: brightness(0);
+        }
+
+        .hamburger span {
+            background: #1C2B24;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hamburger.active span {
+            background: white;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 420px;
+            max-width: 100%;
+            min-width: 320px;
+            background: rgba(28, 43, 36, 0.96);
+            padding: 3rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
+            z-index: 40;
+        }
+        @media (max-width: 640px) {
+            .menu-overlay {
+                width: 100%;
+                min-width: auto;
+                padding: 5rem 2rem 3rem;
+                justify-content: center;
+            }
+            .menu-overlay nav {
+                text-align: center;
+            }
+        }
+        .menu-overlay.hidden-menu {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .menu-overlay.visible-menu {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+        }
+        .menu-item {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .menu-overlay.visible-menu .menu-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .menu-overlay.visible-menu .menu-item:nth-child(1) { transition-delay: 0.1s; }
+        .menu-overlay.visible-menu .menu-item:nth-child(2) { transition-delay: 0.2s; }
+        .menu-overlay.visible-menu .menu-item:nth-child(3) { transition-delay: 0.3s; }
+        .menu-overlay.visible-menu .menu-item:nth-child(4) { transition-delay: 0.4s; }
+        .menu-overlay.visible-menu .menu-item:nth-child(5) { transition-delay: 0.5s; }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(28, 43, 36, 0.12);
+        }
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            padding: 1.75rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .faq-question:hover {
+            color: #C4B59D;
+        }
+        .faq-question:focus {
+            outline: none;
+        }
+        .faq-question:focus-visible {
+            outline: 2px solid #C4B59D;
+            outline-offset: 4px;
+        }
+        .faq-icon {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .faq-icon::before,
+        .faq-icon::after {
+            content: "";
+            position: absolute;
+            background: #C4B59D;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .faq-icon::before {
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            transform: translateY(-50%);
+        }
+        .faq-icon::after {
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            transform: translateX(-50%);
+        }
+        .faq-item.open .faq-icon {
+            transform: rotate(180deg);
+        }
+        .faq-item.open .faq-icon::after {
+            transform: translateX(-50%) rotate(90deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            opacity: 0;
+        }
+        .faq-item.open .faq-answer {
+            opacity: 1;
+        }
+        .faq-answer p {
+            padding-bottom: 1.75rem;
+        }
+
+        #navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 1px 20px rgba(0,0,0,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .menu-overlay {
+                width: 100vw;
+            }
+            .menu-overlay a {
+                font-size: 2.5rem !important;
+                line-height: 1.1;
+            }
+            .menu-overlay ul {
+                gap: 1.5rem;
+            }
+            .faq-question {
+                padding: 1.5rem 0;
+            }
+            .faq-question h3 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans text-charcoal bg-cream antialiased selection:bg-forest selection:text-white">
+
+    <!-- Navigation -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out bg-transparent">
+        <div class="w-full px-6 lg:px-12 py-6 flex items-center justify-between">
+            <a href="index.html" class="block">
+                <img id="logo-img" src="images/logo.png" alt="Okanagan Inspired Construction Logo" class="h-12 lg:h-16 w-auto">
+            </a>
+
+            <button id="menu-toggle" class="hamburger relative w-8 h-6 flex flex-col justify-between items-end z-50 group cursor-pointer" aria-label="Toggle menu" aria-expanded="false">
+                <span class="block w-full h-0.5 transition-colors duration-300"></span>
+                <span class="block w-full h-0.5 transition-colors duration-300"></span>
+                <span class="block w-full h-0.5 transition-colors duration-300"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Full Screen Menu -->
+    <div id="menu-overlay" class="menu-overlay hidden-menu">
+        <nav class="text-left w-full">
+            <ul class="space-y-8">
+                <li class="menu-item">
+                    <a href="index.html" class="font-serif text-2xl lg:text-4xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Home</a>
+                </li>
+                <li class="menu-item">
+                    <a href="about.html" class="font-serif text-2xl lg:text-4xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">About</a>
+                </li>
+                <li class="menu-item">
+                    <a href="faq.html" class="font-serif text-2xl lg:text-4xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">FAQ</a>
+                </li>
+                <li class="menu-item">
+                    <a href="index.html#projects" class="font-serif text-2xl lg:text-4xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Projects</a>
+                </li>
+                <li class="menu-item">
+                    <a href="index.html#contact" class="font-serif text-2xl lg:text-4xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Contact</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Hero Header -->
+    <section class="pt-40 pb-16 lg:pt-52 lg:pb-24 px-6 text-center bg-cream">
+        <div class="max-w-4xl mx-auto">
+            <p class="reveal text-gold text-xs tracking-[0.3em] uppercase mb-6 font-medium">Support</p>
+            <h1 class="reveal stagger-1 font-serif text-4xl md:text-5xl lg:text-7xl text-forest font-medium leading-tight mb-6">
+                Frequently Asked Questions
+            </h1>
+            <p class="reveal stagger-2 text-charcoal/60 text-lg lg:text-xl font-light max-w-2xl mx-auto leading-relaxed">
+                Answers to common questions about our process, timelines, permits, and what to expect when working with our team.
+            </p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 lg:py-24 px-6 bg-cream">
+        <div class="max-w-3xl mx-auto">
+            <div class="reveal space-y-0">
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <h3 class="font-serif text-lg md:text-xl text-forest font-medium pr-4">Do I need a building permit for a home addition in Kelowna?</h3>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-charcoal/70 font-light leading-relaxed">
+                            Yes, most home additions, structural changes, and major renovations in Kelowna require a building permit from the City. We guide you through the permit process and ensure all drawings and documentation are prepared correctly.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <h3 class="font-serif text-lg md:text-xl text-forest font-medium pr-4">How long does a full home renovation take?</h3>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-charcoal/70 font-light leading-relaxed">
+                            Timelines vary based on scope, but a full home renovation typically ranges from 4 to 12 months. We provide a detailed schedule during the planning phase and keep you informed throughout construction.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <h3 class="font-serif text-lg md:text-xl text-forest font-medium pr-4">Can we live in the house during the renovation?</h3>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-charcoal/70 font-light leading-relaxed">
+                            In many cases, yes. We plan the construction sequence to minimize disruption and keep essential spaces functional for as long as possible. For extensive projects, temporary relocation may be recommended.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <h3 class="font-serif text-lg md:text-xl text-forest font-medium pr-4">What areas of the Okanagan do you service?</h3>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-charcoal/70 font-light leading-relaxed">
+                            We work throughout the Okanagan, including Kelowna, West Kelowna, Lake Country, Peachland, Summerland, Penticton, and surrounding areas.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <h3 class="font-serif text-lg md:text-xl text-forest font-medium pr-4">How do you handle unexpected issues during construction?</h3>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-charcoal/70 font-light leading-relaxed">
+                            Our team has decades of experience solving the surprises that come with renovations. We communicate clearly, present options, and adjust quickly to keep your project on track without compromising quality.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <h3 class="font-serif text-lg md:text-xl text-forest font-medium pr-4">Do you offer design services or do I need an architect?</h3>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-charcoal/70 font-light leading-relaxed">
+                            We offer design-build services and can manage the entire design process in-house for many projects. For larger or more complex builds, we collaborate closely with architects and designers to bring your vision to life.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <h3 class="font-serif text-lg md:text-xl text-forest font-medium pr-4">What is your payment schedule?</h3>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-charcoal/70 font-light leading-relaxed">
+                            Payments are structured around project milestones and outlined clearly in your contract. This keeps the schedule transparent and aligned with the progress of your build.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <h3 class="font-serif text-lg md:text-xl text-forest font-medium pr-4">Are you licensed and insured in BC?</h3>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-charcoal/70 font-light leading-relaxed">
+                            Yes, we are fully licensed and insured to operate in British Columbia. We are also proud members of the Canadian Home Builders' Association.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 lg:py-28 px-6 bg-cream border-t border-forest/10">
+        <div class="reveal max-w-3xl mx-auto text-center">
+            <p class="text-gold text-xs tracking-[0.3em] uppercase mb-4 font-medium">Still Curious?</p>
+            <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl text-forest font-medium mb-6">
+                Have a question we didn't answer?
+            </h2>
+            <p class="text-charcoal/60 text-lg font-light mb-10 max-w-xl mx-auto leading-relaxed">
+                We're happy to discuss your project, timeline, or anything else on your mind.
+            </p>
+            <a href="index.html#contact" class="inline-block px-10 py-4 border border-forest text-forest hover:bg-forest hover:text-white transition-all duration-500 text-xs tracking-[0.2em] uppercase">
+                Contact Us
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-charcoal text-white py-16 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-8 md:mb-0 text-center md:text-left flex flex-col items-center md:items-start">
+                <img src="images/logo.png" alt="Okanagan Inspired Construction Logo" class="h-16 w-auto mb-4 opacity-90">
+                <p class="text-white/40 text-sm font-light tracking-wide">
+                    CHBA Member • Licensed • Insured
+                </p>
+            </div>
+            <div class="text-center md:text-right">
+                <nav class="mb-4">
+                    <a href="index.html" class="text-white/40 hover:text-gold text-sm mx-3 transition-colors duration-300">Home</a>
+                    <a href="about.html" class="text-white/40 hover:text-gold text-sm mx-3 transition-colors duration-300">About</a>
+                    <a href="faq.html" class="text-white/40 hover:text-gold text-sm mx-3 transition-colors duration-300">FAQ</a>
+                    <a href="index.html#contact" class="text-white/40 hover:text-gold text-sm mx-3 transition-colors duration-300">Contact</a>
+                </nav>
+                <p class="text-white/40 text-sm mb-2 font-light">250-864-5774 • info@okanaganconstruction.ca</p>
+                <p class="text-white/20 text-xs font-light mb-2">
+                    &copy; 2026 Okanagan Inspired Construction. All rights reserved.
+                </p>
+                <p class="text-white/20 text-[11px] font-light tracking-wide">
+                    Website designed & maintained by
+                    <a href="https://truenorthwebsites.com" target="_blank" class="hover:text-gold transition-colors duration-300">
+                        TrueNorth Websites
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const navbar = document.getElementById('navbar');
+
+        function openMenu() {
+            menuOverlay.classList.remove('hidden-menu');
+            menuOverlay.classList.add('visible-menu');
+            menuToggle.classList.add('active');
+            menuToggle.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            menuOverlay.classList.remove('visible-menu');
+            menuOverlay.classList.add('hidden-menu');
+            menuToggle.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        }
+
+        menuToggle.addEventListener('click', () => {
+            if (menuOverlay.classList.contains('hidden-menu')) {
+                openMenu();
+            } else {
+                closeMenu();
+            }
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+
+            question.addEventListener('click', () => {
+                const isOpen = item.classList.contains('open');
+
+                // Close all others
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('open');
+                        otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                        otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                    }
+                });
+
+                if (isOpen) {
+                    item.classList.remove('open');
+                    question.setAttribute('aria-expanded', 'false');
+                    answer.style.maxHeight = null;
+                } else {
+                    item.classList.add('open');
+                    question.setAttribute('aria-expanded', 'true');
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                }
+            });
+        });
+
+        // Reveal animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

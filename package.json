@@ -1,0 +1,10 @@
+{
+  "name": "okanagan-construction",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Okanagan Inspired Construction static website",
+  "scripts": {
+    "build": "node scripts/generate-sitemap.js",
+    "sitemap": "node scripts/generate-sitemap.js"
+  }
+}

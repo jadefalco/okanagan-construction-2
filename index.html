@@ -281,6 +281,7 @@
         .menu-overlay.visible-menu .menu-item:nth-child(2) { transition-delay: 0.2s; }
         .menu-overlay.visible-menu .menu-item:nth-child(3) { transition-delay: 0.3s; }
         .menu-overlay.visible-menu .menu-item:nth-child(4) { transition-delay: 0.4s; }
+        .menu-overlay.visible-menu .menu-item:nth-child(5) { transition-delay: 0.5s; }
         .hamburger span {
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -586,16 +587,19 @@
     <nav class="text-left w-full">
             <ul class="space-y-8">
                 <li class="menu-item">
-                    <a href="#home" class="font-serif text-2xl lg:text-4xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Home</a>
+                    <a href="index.html" class="font-serif text-2xl lg:text-4xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Home</a>
                 </li>
                 <li class="menu-item">
                     <a href="about.html" class="font-serif text-2xl lg:text-4xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">About</a>
                 </li>
                 <li class="menu-item">
-                    <a href="#projects" class="font-serif text-2xl lg:text-4xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Projects</a>
+                    <a href="faq.html" class="font-serif text-2xl lg:text-4xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">FAQ</a>
                 </li>
                 <li class="menu-item">
-                    <a href="#contact" class="font-serif text-2xl lg:text-4xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Contact</a>
+                    <a href="index.html#projects" class="font-serif text-2xl lg:text-4xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Projects</a>
+                </li>
+                <li class="menu-item">
+                    <a href="index.html#contact" class="font-serif text-2xl lg:text-4xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">Contact</a>
                 </li>
             </ul>
         </nav>
@@ -1114,37 +1118,30 @@
 
     <!-- Footer -->
     <footer class="bg-charcoal text-white py-16 border-t border-white/10">
-        
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
-           <div class="mb-8 md:mb-0 text-center md:text-left flex flex-col items-center md:items-start">
-
-    <img
-        src="images/logo.png"
-        alt="Okanagan Inspired Construction Logo"
-        class="h-16 w-auto mb-4 opacity-90"
-    >
-
-    <p class="text-white/40 text-sm font-light tracking-wide">
-        CHBA Member • Licensed • Insured
-    </p>
-
-</div>
+            <div class="mb-8 md:mb-0 text-center md:text-left flex flex-col items-center md:items-start">
+                <img src="images/logo.png" alt="Okanagan Inspired Construction Logo" class="h-16 w-auto mb-4 opacity-90">
+                <p class="text-white/40 text-sm font-light tracking-wide">
+                    CHBA Member • Licensed • Insured
+                </p>
+            </div>
             <div class="text-center md:text-right">
+                <nav class="mb-4">
+                    <a href="index.html" class="text-white/40 hover:text-gold text-sm mx-3 transition-colors duration-300">Home</a>
+                    <a href="about.html" class="text-white/40 hover:text-gold text-sm mx-3 transition-colors duration-300">About</a>
+                    <a href="faq.html" class="text-white/40 hover:text-gold text-sm mx-3 transition-colors duration-300">FAQ</a>
+                    <a href="#contact" class="text-white/40 hover:text-gold text-sm mx-3 transition-colors duration-300">Contact</a>
+                </nav>
                 <p class="text-white/40 text-sm mb-2 font-light">250-864-5774 • info@okanaganconstruction.ca</p>
-               <p class="text-white/20 text-xs font-light mb-2">
-    &copy; 2026 Okanagan Inspired Construction. All rights reserved.
-</p>
-
-<p class="text-white/20 text-[11px] font-light tracking-wide">
-    Website designed & maintained by 
-    <a 
-        href="https://truenorthwebsites.com" 
-        target="_blank"
-        class="hover:text-gold transition-colors duration-300"
-    >
-        TrueNorth Websites
-    </a>
-</p>
+                <p class="text-white/20 text-xs font-light mb-2">
+                    &copy; 2026 Okanagan Inspired Construction. All rights reserved.
+                </p>
+                <p class="text-white/20 text-[11px] font-light tracking-wide">
+                    Website designed & maintained by
+                    <a href="https://truenorthwebsites.com" target="_blank" class="hover:text-gold transition-colors duration-300">
+                        TrueNorth Websites
+                    </a>
+                </p>
             </div>
         </div>
     </footer>
