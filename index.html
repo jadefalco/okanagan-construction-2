@@ -4,7 +4,35 @@
     <meta charset="UTF-8">
       <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Okanagan Inspired Construction | Luxury Custom Homes</title>
+    <meta name="description" content="Luxury custom homes and renovations in Kelowna and the Okanagan by Okanagan Inspired Construction. Craftsmanship, clarity, and trusted results.">
+    <title>Okanagan Inspired Construction | Luxury Custom Homes Kelowna</title>
+    <link rel="canonical" href="https://www.okanaganconstruction.ca/">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Okanagan Inspired Construction",
+        "url": "https://www.okanaganconstruction.ca/",
+        "email": "info@okanaganconstruction.ca",
+        "telephone": "+1-250-864-5774",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "2027 Fisher Rd",
+            "addressLocality": "Kelowna",
+            "addressRegion": "BC",
+            "postalCode": "V1W 2H1",
+            "addressCountry": "CA"
+        },
+        "areaServed": [
+            { "@type": "City", "name": "Kelowna" },
+            { "@type": "City", "name": "West Kelowna" },
+            { "@type": "City", "name": "Lake Country" },
+            { "@type": "City", "name": "Peachland" },
+            { "@type": "City", "name": "Summerland" },
+            { "@type": "City", "name": "Penticton" }
+        ]
+    }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -315,6 +343,43 @@
         .texture-soft > * {
             position: relative;
             z-index: 1;
+        }
+        /* Testimonial carousel */
+        .testimonial-track {
+            display: grid;
+        }
+        .testimonial-slide {
+            grid-area: 1 / 1;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.9s ease;
+            pointer-events: none;
+        }
+        .testimonial-slide.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .testimonial-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 9999px;
+            background: rgba(44, 44, 44, 0.15);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .testimonial-dot:hover {
+            background: rgba(44, 44, 44, 0.3);
+        }
+        .testimonial-dot.active {
+            background: #C4B59D;
+            transform: scale(1.25);
+        }
+        .testimonial-dot:focus-visible {
+            outline: 2px solid #C4B59D;
+            outline-offset: 3px;
         }
         ::-webkit-scrollbar {
             width: 8px;
@@ -703,6 +768,54 @@
         </div>
     </section>
 
+    <!-- Testimonials -->
+    <section class="py-24 lg:py-32 texture-soft">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <p class="text-gold text-xs tracking-[0.3em] uppercase mb-6 font-medium">Client Experience</p>
+            <h2 class="font-serif text-4xl lg:text-5xl text-forest font-medium mb-16">
+                What our clients say
+            </h2>
+
+            <div class="reveal">
+                <div class="testimonial-carousel relative max-w-3xl mx-auto" role="region" aria-roledescription="carousel" aria-label="Client testimonials">
+                    <div class="testimonial-track grid">
+                        <div class="testimonial-slide active" role="group" aria-roledescription="slide" aria-label="Testimonial 1 of 4">
+                            <p class="text-xl text-charcoal/70 font-light leading-relaxed mb-6">
+                                "We had a fantastic experience working with Okanagan Inspired Construction, from the initial consultation to the final touches. The quality of work and attention to detail was exceptional, and the project was completed on time."
+                            </p>
+                            <p class="text-sm text-charcoal/50 tracking-wide">— Rick McMillan, Homeowner</p>
+                        </div>
+                        <div class="testimonial-slide" role="group" aria-roledescription="slide" aria-label="Testimonial 2 of 4" aria-hidden="true">
+                            <p class="text-xl text-charcoal/70 font-light leading-relaxed mb-6">
+                                "The removal of our existing oven, reconfiguring the space, and installing the new combination oven was outstanding — all at a very fair price. We couldn't more highly recommend this team for any project, big or small."
+                            </p>
+                            <p class="text-sm text-charcoal/50 tracking-wide">— Dr. Brad Almond</p>
+                        </div>
+                        <div class="testimonial-slide" role="group" aria-roledescription="slide" aria-label="Testimonial 3 of 4" aria-hidden="true">
+                            <p class="text-xl text-charcoal/70 font-light leading-relaxed mb-6">
+                                "Backed by years of experience, Okanagan Inspired Construction are professional, reputable, and truly invested in client satisfaction. They are and always will be my first and only call for any construction needs."
+                            </p>
+                            <p class="text-sm text-charcoal/50 tracking-wide">— Megan Graham</p>
+                        </div>
+                        <div class="testimonial-slide" role="group" aria-roledescription="slide" aria-label="Testimonial 4 of 4" aria-hidden="true">
+                            <p class="text-xl text-charcoal/70 font-light leading-relaxed mb-6">
+                                "Incredible workmanship, incredible service and incredible people. Bruce and his team have gone above and beyond — I can't recommend them highly enough."
+                            </p>
+                            <p class="text-sm text-charcoal/50 tracking-wide">— Joanne Clement</p>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-dots flex items-center justify-center gap-3 mt-10" role="tablist" aria-label="Select testimonial">
+                        <button type="button" class="testimonial-dot active" role="tab" aria-selected="true" aria-label="Show testimonial 1 of 4" data-index="0"></button>
+                        <button type="button" class="testimonial-dot" role="tab" aria-selected="false" aria-label="Show testimonial 2 of 4" data-index="1"></button>
+                        <button type="button" class="testimonial-dot" role="tab" aria-selected="false" aria-label="Show testimonial 3 of 4" data-index="2"></button>
+                        <button type="button" class="testimonial-dot" role="tab" aria-selected="false" aria-label="Show testimonial 4 of 4" data-index="3"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Featured Projects (Only 2) -->
     <section id="projects" class="py-32 lg:py-40 texture-soft">
         <div class="max-w-7xl mx-auto px-6">
@@ -904,31 +1017,6 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="py-24 lg:py-32 texture-soft">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <p class="text-gold text-xs tracking-[0.3em] uppercase mb-6 font-medium">Client Experience</p>
-            <h2 class="font-serif text-4xl lg:text-5xl text-forest font-medium mb-16">
-                What our clients say
-            </h2>
-
-            <div class="space-y-12">
-                <div class="reveal">
-                    <p class="text-xl text-charcoal/70 font-light leading-relaxed mb-6">
-                        "We felt incredibly fortunate to find Bruce and his team. Their experience and ability to adapt gave us total confidence throughout the entire renovation."
-                    </p>
-                    <p class="text-sm text-charcoal/50 tracking-wide">— Homeowner, Kelowna</p>
-                </div>
-
-                <div class="reveal stagger-1">
-                    <p class="text-xl text-charcoal/70 font-light leading-relaxed mb-6">
-                        "What started as a small project turned into a full transformation — we trusted them completely and kept adding more."
-                    </p>
-                    <p class="text-sm text-charcoal/50 tracking-wide">— Client, Lake Country</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="py-32 lg:py-40 bg-forest text-white relative overflow-hidden">
@@ -979,10 +1067,25 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-white/40 text-xs mb-1 uppercase tracking-wider">Location</p>
-                                <p class="text-xl font-light">Kelowna, BC • Serving the Okanagan</p>
+                                <p class="text-white/40 text-xs mb-1 uppercase tracking-wider">Address</p>
+                                <a href="https://maps.google.com/?q=2027+Fisher+Rd,+Kelowna,+BC+V1W+2H1,+Canada" target="_blank" rel="noopener noreferrer" class="text-xl font-light hover:text-gold transition-colors duration-300">
+                                    2027 Fisher Rd<br>Kelowna, BC V1W 2H1
+                                </a>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="mt-12 w-full aspect-video rounded-[28px] overflow-hidden border border-white/10">
+                        <iframe
+                            src="https://maps.google.com/maps?q=2027+Fisher+Rd,+Kelowna,+BC+V1W+2H1,+Canada&output=embed"
+                            width="100%"
+                            height="100%"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Okanagan Inspired Construction office location map">
+                        </iframe>
                     </div>
                 </div>
 
@@ -1169,7 +1272,7 @@
         <div class="lightbox-inner">
             <img
   
-  loading="lazy" id="lightbox-img" src="" alt="" class="w-full h-full object-contain">
+  loading="lazy" id="lightbox-img" src="" alt="Enlarged project photo" class="w-full h-full object-contain">
             <p id="lightbox-caption" class="text-center text-white/60 mt-6 font-light tracking-wide"></p>
         </div>
     </div>
@@ -1359,6 +1462,51 @@
         document.querySelectorAll('.reveal').forEach((element) => {
             observer.observe(element);
         });
+
+        (function () {
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.testimonial-dot');
+            if (!slides.length || !dots.length) return;
+
+            let current = 0;
+            let intervalId = null;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    const isActive = i === index;
+                    slide.classList.toggle('active', isActive);
+                    slide.setAttribute('aria-hidden', String(!isActive));
+                });
+                dots.forEach((dot, i) => {
+                    const isActive = i === index;
+                    dot.classList.toggle('active', isActive);
+                    dot.setAttribute('aria-selected', String(isActive));
+                });
+                current = index;
+            }
+
+            function nextSlide() {
+                showSlide((current + 1) % slides.length);
+            }
+
+            function startAutoplay() {
+                intervalId = setInterval(nextSlide, 6000);
+            }
+
+            function stopAutoplay() {
+                clearInterval(intervalId);
+            }
+
+            dots.forEach((dot) => {
+                dot.addEventListener('click', () => {
+                    showSlide(parseInt(dot.dataset.index, 10));
+                    stopAutoplay();
+                    startAutoplay();
+                });
+            });
+
+            startAutoplay();
+        })();
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
