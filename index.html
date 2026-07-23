@@ -1132,9 +1132,9 @@
         style="display: none;"
     >
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-8 gap-6">
 
-        <div>
+        <div class="lg:col-span-2">
             <label class="block text-white/40 text-xs mb-3 uppercase tracking-wider">
                 Name
             </label>
@@ -1148,7 +1148,7 @@
             >
         </div>
 
-        <div>
+        <div class="lg:col-span-3">
             <label class="block text-white/40 text-xs mb-3 uppercase tracking-wider">
                 Email
             </label>
@@ -1158,6 +1158,23 @@
                 name="email"
                 required
                 placeholder="your@email.com"
+                class="w-full bg-white/5 border border-white/10 px-5 py-4 text-white placeholder-white/20 focus:outline-none focus:border-gold transition-colors duration-300 font-light"
+            >
+        </div>
+
+        <div class="lg:col-span-3">
+            <label for="phone" class="block text-white/40 text-xs mb-3 uppercase tracking-wider">
+                Phone Number <span aria-hidden="true">*</span>
+            </label>
+
+            <input 
+                id="phone"
+                type="tel"
+                name="phone"
+                autocomplete="tel"
+                inputmode="tel"
+                required
+                placeholder="(250) 555-1234"
                 class="w-full bg-white/5 border border-white/10 px-5 py-4 text-white placeholder-white/20 focus:outline-none focus:border-gold transition-colors duration-300 font-light"
             >
         </div>
