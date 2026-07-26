@@ -204,10 +204,63 @@
             opacity: 1;
             transform: translateY(0);
         }
-        .hero-title-line {
+        .hero-heading-stack {
+            display: grid;
+            justify-items: center;
+        }
+        .hero-heading-stack > * {
+            grid-area: 1 / 1;
+        }
+        /* Hero headline: large serif H1 scales up and fades in on load. */
+        @keyframes heroH1In {
+            0% { opacity: 0; transform: scale(0.98); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .hero-h1 {
+            opacity: 0;
+            animation: heroH1In 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        /* Eyebrow tagline: whispers in after the headline lands. */
+        @keyframes heroEyebrowLineIn {
+            0% { opacity: 0; transform: translateY(-20px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes heroDividerIn {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 0.7; transform: translateY(0); }
+        }
+        .hero-eyebrow-line {
             display: block;
-            line-height: 1.0;
-            margin-bottom: 0.1em;
+            opacity: 0;
+        }
+        .hero-eyebrow-line--top {
+            transform: translateY(-20px) scale(0.95);
+            animation: heroEyebrowLineIn 2.2s cubic-bezier(0.16, 1, 0.3, 1) 2.5s forwards;
+        }
+        .hero-eyebrow-line--bottom {
+            transform: translateY(20px) scale(0.95);
+            animation: heroEyebrowLineIn 2.2s cubic-bezier(0.16, 1, 0.3, 1) 3.7s forwards;
+        }
+        .hero-divider {
+            opacity: 0;
+            animation: heroDividerIn 2.2s cubic-bezier(0.16, 1, 0.3, 1) 2.5s forwards;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-h1 {
+                opacity: 1;
+                transform: scale(1);
+                animation: none;
+            }
+            .hero-eyebrow-line {
+                animation: none;
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            .hero-divider {
+                opacity: 0.7;
+                transform: translateY(0);
+                animation: none;
+            }
         }
         .project-card h3 {
             font-size: 1.25rem;
@@ -489,13 +542,13 @@
         min-height: 100svh;
     }
 
-    .hero-title-line {
+    .hero-heading-stack {
         line-height: 0.95;
     }
 
     #home h1 {
-        font-size: clamp(3rem, 12vw, 4.5rem) !important;
-        letter-spacing: -0.03em;
+        font-size: clamp(2.5rem, 9vw, 3.5rem) !important;
+        letter-spacing: -0.02em;
     }
 
     #home p {
@@ -693,15 +746,15 @@
         <div class="relative z-10 h-full flex flex-col justify-center items-center text-center px-6">
             <div class="hero-from-top mb-6">
                 <p class="text-white/85 text-lg tracking-[0.3em] uppercase font-medium drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
-                    Okanagan Inspired Construction
+                    <span class="hero-eyebrow-line hero-eyebrow-line--top">From Vision</span>
+                    <span class="hero-eyebrow-line hero-eyebrow-line--bottom">to Reality</span>
                 </p>
-                <div class="w-12 h-[1px] bg-gold mt-3 mx-auto opacity-70"></div>
+                <div class="hero-divider w-12 h-[1px] bg-gold mt-3 mx-auto"></div>
             </div>
 
-            <h1 class="font-serif text-5xl lg:text-7xl xl:text-8xl text-white font-medium mb-14 max-w-5xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]">
-    <span class="hero-title-line hero-from-top">From Vision</span>
-    <span class="hero-title-line hero-from-bottom">To Reality</span>
-</h1>
+            <h1 class="hero-h1 font-serif text-4xl lg:text-5xl xl:text-6xl text-white font-medium leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] max-w-6xl mx-auto mb-14">
+                Renovation Contractors &amp; Custom Home Builders in Kelowna
+            </h1>
             
             <p class="hero-from-bottom text-white text-lg lg:text-xl font-normal max-w-2xl mb-12 leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
                 Renovations & Additions in the Okanagan<br>
