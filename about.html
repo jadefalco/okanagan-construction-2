@@ -153,6 +153,81 @@ tailwind.config = {
     pointer-events: all;
 }
 
+
+/* --- Services submenu (shared nav addition) --- */
+.menu-overlay {
+    overflow-y: auto;
+}
+.menu-overlay > nav {
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 100%;
+}
+.menu-overlay.visible-menu .menu-item:nth-child(6) { transition-delay: 0.6s; }
+.menu-services-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+    font-weight: inherit;
+}
+.menu-chevron {
+    width: 1rem;
+    height: 1rem;
+    flex: none;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.menu-services-toggle[aria-expanded="true"] .menu-chevron {
+    transform: rotate(180deg);
+}
+.menu-submenu {
+    display: none;
+}
+.menu-submenu.open {
+    display: block;
+    margin-top: 1.25rem;
+    padding-left: 1.25rem;
+    border-left: 1px solid rgba(196, 181, 157, 0.35);
+    animation: menuSubmenuIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes menuSubmenuIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.menu-overlay .submenu-link {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem !important;
+    line-height: 1.4;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+}
+.menu-overlay .submenu-link:hover,
+.menu-overlay .submenu-link:focus-visible {
+    color: #C4B59D;
+}
+.menu-overlay .submenu-link--all {
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 0.35rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid rgba(196, 181, 157, 0.2);
+}
+.menu-overlay .submenu-link--all:hover,
+.menu-overlay .submenu-link--all:focus-visible {
+    color: #C4B59D;
+}
+@media (prefers-reduced-motion: reduce) {
+    .menu-chevron { transition: none; }
+    .menu-submenu.open { animation: none; }
+}
 </style>
 </head>
 
@@ -182,6 +257,23 @@ tailwind.config = {
                 </li>
                 <li class="menu-item">
                     <a href="about.html" class="font-serif text-2xl lg:text-4xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">About</a>
+                </li>
+                <li class="menu-item">
+                    <button type="button" class="menu-services-toggle font-serif text-2xl lg:text-4xl text-white hover:text-gold transition-colors duration-300" aria-expanded="false" aria-controls="services-submenu" onclick="this.setAttribute('aria-expanded', this.nextElementSibling.classList.toggle('open'))">
+                        Services
+                        <svg class="menu-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <ul id="services-submenu" class="menu-submenu">
+                        <li><a href="services/index.html" class="submenu-link submenu-link--all" onclick="closeMenu()">All Services</a></li>
+                        <li><a href="services/kitchen-renovations.html" class="submenu-link" onclick="closeMenu()">Kitchen Renovations</a></li>
+                        <li><a href="services/bathroom-renovations.html" class="submenu-link" onclick="closeMenu()">Bathroom Renovations</a></li>
+                        <li><a href="services/home-additions.html" class="submenu-link" onclick="closeMenu()">Home Additions</a></li>
+                        <li><a href="services/custom-home-builds.html" class="submenu-link" onclick="closeMenu()">Custom Home Builds</a></li>
+                        <li><a href="services/basement-renovations.html" class="submenu-link" onclick="closeMenu()">Basement Renovations</a></li>
+                        <li><a href="services/deck-building.html" class="submenu-link" onclick="closeMenu()">Deck Building</a></li>
+                    </ul>
                 </li>
                 <li class="menu-item">
                     <a href="faq.html" class="font-serif text-2xl lg:text-4xl text-white hover:text-gold transition-colors duration-300" onclick="closeMenu()">FAQ</a>
@@ -309,6 +401,7 @@ With a career rooted in framing and structural work, his deep understanding of b
             <nav class="mb-4">
                 <a href="index.html" class="text-white/40 hover:text-gold text-sm mx-3 transition-colors duration-300">Home</a>
                 <a href="about.html" class="text-white/40 hover:text-gold text-sm mx-3 transition-colors duration-300">About</a>
+                    <a href="services/index.html" class="text-white/40 hover:text-gold text-sm mx-3 transition-colors duration-300">Services</a>
                 <a href="faq.html" class="text-white/40 hover:text-gold text-sm mx-3 transition-colors duration-300">FAQ</a>
                 <a href="index.html#contact" class="text-white/40 hover:text-gold text-sm mx-3 transition-colors duration-300">Contact</a>
             </nav>
